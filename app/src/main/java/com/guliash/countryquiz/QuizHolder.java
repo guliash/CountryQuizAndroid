@@ -3,6 +3,8 @@ package com.guliash.countryquiz;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
@@ -16,6 +18,9 @@ import android.widget.Scroller;
 
 public class QuizHolder extends FrameLayout {
 
+    private static final String SUPER_STATE_EXTRA = "super_state";
+    private static final String CURRENT_VIEW_INDEX_EXTRA = "current_view_index";
+
     private static final float OPACITY_FACTOR = 0.3f;
 
     private static final float WIDTH_THRESHOLD = 0.5f;
@@ -27,7 +32,7 @@ public class QuizHolder extends FrameLayout {
     private static final long SWIPE_DURATION = 250;
 
     private GestureDetectorCompat mDetector;
-    private int mCurrentViewIndex;
+    private int mCurrentViewIndex = 0;
     private boolean mSwiping;
     private boolean swipedAfterFling;
     private boolean mReverting;
@@ -51,7 +56,24 @@ public class QuizHolder extends FrameLayout {
     private void init() {
         mScroller = new Scroller(getContext());
         mDetector = new GestureDetectorCompat(getContext(), mGestureListener);
-        mCurrentViewIndex = 0;
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(SUPER_STATE_EXTRA, super.onSaveInstanceState());
+        bundle.putInt(CURRENT_VIEW_INDEX_EXTRA, mCurrentViewIndex);
+        return bundle;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (state instanceof Bundle) {
+            Bundle bundle = (Bundle) state;
+            mCurrentViewIndex = bundle.getInt(CURRENT_VIEW_INDEX_EXTRA);
+            state = bundle.getParcelable(SUPER_STATE_EXTRA);
+        }
+        super.onRestoreInstanceState(state);
     }
 
     @Override
