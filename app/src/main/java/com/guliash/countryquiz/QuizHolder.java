@@ -8,6 +8,7 @@ import android.os.Parcelable;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -20,16 +21,22 @@ public class QuizHolder extends FrameLayout {
     private static final String SUPER_STATE_EXTRA = "super_state";
     private static final String CURRENT_VIEW_INDEX_EXTRA = "current_view_index";
 
-    private static final float OPACITY_FACTOR = 0.3f;
+    /**
+     * How much opacity should be decreased before view is not visible
+     */
+    private static final float OPACITY_FACTOR = 0.5f;
 
-    private static final float SCALE_FACTOR = 0.2f;
+    /**
+     * How much scale should be decreased before view is not visible
+     */
+    private static final float SCALE_FACTOR = 0.5f;
 
     /**
      * Layout width fraction after which a view is considered to be swiped
      */
     private static final float SWIPE_THRESHOLD = 0.4f;
 
-    private static final long SWIPE_DURATION = 250;
+    private static final long SWIPE_DURATION = 250L;
 
     private GestureDetectorCompat mDetector;
     private int mCurrentViewIndex = 0;
@@ -116,7 +123,8 @@ public class QuizHolder extends FrameLayout {
         mDetector.onTouchEvent(event);
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                return true;
+                //because we can touch while swiping and produce fling and everything could go wrong
+                return !mSwiping;
             case MotionEvent.ACTION_UP:
                 if (currentChildExceedsSwipeThreshold() || swipedAfterFling) {
                     swipeCurrentChild();
@@ -125,8 +133,7 @@ public class QuizHolder extends FrameLayout {
                     revertCurrentChild();
                     revertAnotherChild();
                 }
-                return true;
-
+                break;
         }
         return super.onTouchEvent(event);
     }
@@ -158,7 +165,6 @@ public class QuizHolder extends FrameLayout {
 
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-
             if (mSwiping || mReverting) {
                 return false;
             }
@@ -174,15 +180,15 @@ public class QuizHolder extends FrameLayout {
     private void updateCurrentChild(float distanceX, float distanceY) {
         final View currentChild = getCurrentChild();
 
-        float swipeThreshold = getSwipeThreshold();
+        float moveDistance = getMoveDistance();
 
-        float newScale = ViewCompat.getScaleX(currentChild) - SCALE_FACTOR * distanceX / swipeThreshold;
+        float newScale = ViewCompat.getScaleX(currentChild) - SCALE_FACTOR * distanceX / moveDistance;
         newScale = Math.min(Math.max(0, newScale), 1);
 
         float newTranslationX = ViewCompat.getTranslationX(currentChild) - distanceX;
         newTranslationX = Math.min(0, newTranslationX);
 
-        float newAlpha = ViewCompat.getAlpha(currentChild) - OPACITY_FACTOR * distanceX / swipeThreshold;
+        float newAlpha = ViewCompat.getAlpha(currentChild) - OPACITY_FACTOR * distanceX / moveDistance;
         newAlpha = Math.min(1, newAlpha);
 
         ViewCompat.setScaleX(currentChild, newScale);
@@ -194,21 +200,26 @@ public class QuizHolder extends FrameLayout {
     private void updateAnotherChild(float distanceX, float distanceY) {
         final View anotherChild = getAnotherChild();
 
-        float swipeThreshold = getSwipeThreshold();
+        float moveDistance = getMoveDistance();
 
-        float newScale = ViewCompat.getScaleX(anotherChild) + SCALE_FACTOR * distanceX / swipeThreshold;
-        newScale = Math.min(newScale, 1);
+        float newScale = ViewCompat.getScaleX(anotherChild) + SCALE_FACTOR * distanceX / moveDistance;
+        newScale = Math.min(1, Math.max(newScale, 1 - SCALE_FACTOR));
 
         float newTranslationX = ViewCompat.getTranslationX(anotherChild) - distanceX;
         newTranslationX = Math.max(0, newTranslationX);
+        Log.e("TAG", ViewCompat.getScaleX(anotherChild) + " " + newScale + " " + newTranslationX);
 
-        float newAlpha = ViewCompat.getAlpha(anotherChild) + OPACITY_FACTOR * distanceX / swipeThreshold;
-        newAlpha = Math.min(1, newAlpha);
+        float newAlpha = ViewCompat.getAlpha(anotherChild) + OPACITY_FACTOR * distanceX / moveDistance;
+        newAlpha = Math.min(1, Math.max(newAlpha, 1 - OPACITY_FACTOR));
 
         ViewCompat.setScaleX(anotherChild, newScale);
         ViewCompat.setScaleY(anotherChild, newScale);
         ViewCompat.setTranslationX(anotherChild, newTranslationX);
         ViewCompat.setAlpha(anotherChild, newAlpha);
+    }
+
+    private float getMoveDistance() {
+        return getWidth() / 2 + getCurrentChild().getWidth() / 2;
     }
 
     private boolean currentChildExceedsSwipeThreshold() {
@@ -228,7 +239,9 @@ public class QuizHolder extends FrameLayout {
         mSwiping = true;
         currentChild
                 .animate()
-                .alpha(0f)
+                .alpha(1 - OPACITY_FACTOR)
+                .scaleX(1 - SCALE_FACTOR)
+                .scaleY(1 - SCALE_FACTOR)
                 .x(-currentChild.getWidth())
                 .setDuration(SWIPE_DURATION)
                 .setListener(new AnimatorListenerAdapter() {
@@ -240,6 +253,7 @@ public class QuizHolder extends FrameLayout {
     }
 
     private void onViewSwiped() {
+        Log.e("TAG", "ON VIEW SWIPED");
         mSwiping = false;
         swipedAfterFling = false;
         changeCurrentView();
@@ -283,7 +297,7 @@ public class QuizHolder extends FrameLayout {
                 .x(getWidth())
                 .scaleY(1 - SCALE_FACTOR)
                 .scaleX(1 - SCALE_FACTOR)
-                .alpha(0f)
+                .alpha(1 - OPACITY_FACTOR)
                 .setListener(null)
                 .setDuration(SWIPE_DURATION);
     }
@@ -291,7 +305,7 @@ public class QuizHolder extends FrameLayout {
     private void moveBackAnotherChild() {
         final View anotherChild = getAnotherChild();
         ViewCompat.setX(anotherChild, getWidth());
-        ViewCompat.setAlpha(anotherChild, 0);
+        ViewCompat.setAlpha(anotherChild, 1 - OPACITY_FACTOR);
         ViewCompat.setScaleX(anotherChild, 1 - SCALE_FACTOR);
         ViewCompat.setScaleY(anotherChild, 1 - SCALE_FACTOR);
     }
