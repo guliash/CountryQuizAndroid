@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -23,11 +22,12 @@ public class QuizHolder extends FrameLayout {
 
     private static final float OPACITY_FACTOR = 0.3f;
 
-    private static final float WIDTH_THRESHOLD = 0.5f;
-
     private static final float SCALE_FACTOR = 0.2f;
 
-    private static final float SWIPE_THRESHOLD = 0.7f;
+    /**
+     * Layout width fraction after which a view is considered to be swiped
+     */
+    private static final float SWIPE_THRESHOLD = 0.4f;
 
     private static final long SWIPE_DURATION = 250;
 
@@ -118,8 +118,7 @@ public class QuizHolder extends FrameLayout {
             case MotionEvent.ACTION_DOWN:
                 return true;
             case MotionEvent.ACTION_UP:
-                Log.e("TAG ", "ACTION UP");
-                if (exceedsSwipeThreshold() || swipedAfterFling) {
+                if (currentChildExceedsSwipeThreshold() || swipedAfterFling) {
                     swipeCurrentChild();
                     moveInAnotherChild();
                 } else {
@@ -151,7 +150,7 @@ public class QuizHolder extends FrameLayout {
                     Integer.MIN_VALUE, Integer.MAX_VALUE);
             float diff = currentChild.getX() - mScroller.getFinalX();
 
-            if (Math.abs(ViewCompat.getTranslationX(getCurrentChild())) + diff > SWIPE_THRESHOLD * getWidthThreshold()) {
+            if (exceedsSwipeThreshold(Math.abs(ViewCompat.getTranslationX(getCurrentChild())) + diff)) {
                 swipedAfterFling = true;
             }
             return super.onFling(e1, e2, velocityX, velocityY);
@@ -175,15 +174,15 @@ public class QuizHolder extends FrameLayout {
     private void updateCurrentChild(float distanceX, float distanceY) {
         final View currentChild = getCurrentChild();
 
-        float widthThreshold = getWidthThreshold();
+        float swipeThreshold = getSwipeThreshold();
 
-        float newScale = ViewCompat.getScaleX(currentChild) - SCALE_FACTOR * distanceX / widthThreshold;
+        float newScale = ViewCompat.getScaleX(currentChild) - SCALE_FACTOR * distanceX / swipeThreshold;
         newScale = Math.min(Math.max(0, newScale), 1);
 
         float newTranslationX = ViewCompat.getTranslationX(currentChild) - distanceX;
         newTranslationX = Math.min(0, newTranslationX);
 
-        float newAlpha = ViewCompat.getAlpha(currentChild) - OPACITY_FACTOR * distanceX / widthThreshold;
+        float newAlpha = ViewCompat.getAlpha(currentChild) - OPACITY_FACTOR * distanceX / swipeThreshold;
         newAlpha = Math.min(1, newAlpha);
 
         ViewCompat.setScaleX(currentChild, newScale);
@@ -195,15 +194,15 @@ public class QuizHolder extends FrameLayout {
     private void updateAnotherChild(float distanceX, float distanceY) {
         final View anotherChild = getAnotherChild();
 
-        float widthThreshold = getWidthThreshold();
+        float swipeThreshold = getSwipeThreshold();
 
-        float newScale = ViewCompat.getScaleX(anotherChild) + SCALE_FACTOR * distanceX / widthThreshold;
+        float newScale = ViewCompat.getScaleX(anotherChild) + SCALE_FACTOR * distanceX / swipeThreshold;
         newScale = Math.min(newScale, 1);
 
         float newTranslationX = ViewCompat.getTranslationX(anotherChild) - distanceX;
         newTranslationX = Math.max(0, newTranslationX);
 
-        float newAlpha = ViewCompat.getAlpha(anotherChild) + OPACITY_FACTOR * distanceX / widthThreshold;
+        float newAlpha = ViewCompat.getAlpha(anotherChild) + OPACITY_FACTOR * distanceX / swipeThreshold;
         newAlpha = Math.min(1, newAlpha);
 
         ViewCompat.setScaleX(anotherChild, newScale);
@@ -212,12 +211,16 @@ public class QuizHolder extends FrameLayout {
         ViewCompat.setAlpha(anotherChild, newAlpha);
     }
 
-    private boolean exceedsSwipeThreshold() {
-        return Math.abs(ViewCompat.getTranslationX(getCurrentChild())) > SWIPE_THRESHOLD * getWidthThreshold();
+    private boolean currentChildExceedsSwipeThreshold() {
+        return Math.abs(ViewCompat.getTranslationX(getCurrentChild())) > getSwipeThreshold();
     }
 
-    private float getWidthThreshold() {
-        return getWidth() * WIDTH_THRESHOLD;
+    private boolean exceedsSwipeThreshold(float x) {
+        return Math.abs(x) > getSwipeThreshold();
+    }
+
+    private float getSwipeThreshold() {
+        return getWidth() * SWIPE_THRESHOLD;
     }
 
     private void swipeCurrentChild() {
