@@ -61,6 +61,7 @@ public class QuizHolder extends FrameLayout {
     }
 
     private void init() {
+        inflate(getContext(), R.layout.quiz_cards, this);
         mScroller = new Scroller(getContext());
         mDetector = new GestureDetectorCompat(getContext(), mGestureListener);
     }
