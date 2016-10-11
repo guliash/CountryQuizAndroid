@@ -1,4 +1,4 @@
-package com.guliash.countryquiz;
+package com.guliash.countryquiz.quiz.view;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

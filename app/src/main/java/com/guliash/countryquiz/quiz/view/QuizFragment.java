@@ -1,4 +1,4 @@
-package com.guliash.countryquiz;
+package com.guliash.countryquiz.quiz.view;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.guliash.countryquiz.R;
 
 import java.util.Random;
 
