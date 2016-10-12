@@ -3,6 +3,7 @@ package com.guliash.countryquiz.di;
 import android.content.Context;
 
 import com.guliash.countryquiz.App;
+import com.guliash.countryquiz.R;
 import com.guliash.countryquiz.provider.FakeProvider;
 import com.guliash.countryquiz.quiz.provider.Provider;
 
@@ -29,7 +30,7 @@ public class FakeAppModule {
     @Provides
     @Singleton
     public Provider provideQuizzesProvider(Context context) {
-        return new FakeProvider(context);
+        return new FakeProvider(context, R.raw.test);
     }
 
 }

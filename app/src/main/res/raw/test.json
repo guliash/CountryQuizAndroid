@@ -1,0 +1,52 @@
+[
+  {
+    "id": "1",
+    "name": "Great Sphinx of Giza",
+    "link": "https://en.wikipedia.org/wiki/Great_Sphinx_of_Giza",
+    "type": "statue",
+    "answers": ["Egypt", "Russia", "USA", "China"],
+    "answer": "Egypt",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Great_Sphinx_of_Giza_May_2015.JPG/1024px-Great_Sphinx_of_Giza_May_2015.JPG",
+    "attribution": "By MusikAnimal - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=40954313"
+  },
+  {
+    "id": "2",
+    "name": "Leshan Giant Buddha",
+    "link": "https://en.wikipedia.org/wiki/Leshan_Giant_Buddha",
+    "type": "statue",
+    "answers": ["Vietnam", "Thailand", "China", "India"],
+    "answer": "China",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Leshan_Buddha_Statue_View.JPG/800px-Leshan_Buddha_Statue_View.JPG",
+    "copyright": "By Ariel Steiner - Own work, CC BY-SA 2.5, https://commons.wikimedia.org/w/index.php?curid=1662053"
+  },
+  {
+    "id": "3",
+    "name": "Bagrati Cathedral",
+    "link": "https://en.wikipedia.org/wiki/Bagrati_Cathedral",
+    "type": "building",
+    "answers": ["Germany", "Georgia", "Sweden", "Finland"],
+    "answer": "Georgia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/2014_Kutaisi%2C_Katedra_Bagrati_%2804%29.jpg/1024px-2014_Kutaisi%2C_Katedra_Bagrati_%2804%29.jpg",
+    "copyright": "By Photo: Marcin Konsek / Wikimedia Commons, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=50071758"
+  },
+  {
+    "id": "4",
+    "name": "Kizhi Pogost",
+    "link": "https://en.wikipedia.org/wiki/Kizhi_Pogost",
+    "type": "building",
+    "answers": ["Russia", "Finland", "Estonia", "Latvia"],
+    "answer": "Russia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Kizhi_church_1.jpg/800px-Kizhi_church_1.jpg",
+    "copyright": "By User:MatthiasKabel - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=996616"
+  },
+  {
+    "id": "5",
+    "name": "El Castillo",
+    "link": "https://en.wikipedia.org/wiki/El_Castillo,_Chichen_Itza",
+    "type": "building",
+    "answers": ["Mexico", "Brazil", "Chile", "Argentina"],
+    "answer": "Mexico",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Chichen_Itza_3.jpg/1280px-Chichen_Itza_3.jpg",
+    "copyright": "By Daniel Schwen - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=7647000"
+  }
+]
