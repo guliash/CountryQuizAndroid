@@ -12,4 +12,4 @@ jdk:
   - oraclejdk8
 
 script:
-   - ./gradlew build testFakeDebugUnitTest
+   - ./gradlew testFakeDebugUnitTest
