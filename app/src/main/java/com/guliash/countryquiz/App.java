@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 
 import com.guliash.countryquiz.di.AppComponent;
-import com.guliash.countryquiz.di.ProdAppComponent;
 import com.guliash.countryquiz.di.AppFactory;
 
 import timber.log.Timber;
@@ -19,7 +18,6 @@ public class App extends Application {
         if(BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
-
         setAppComponent(AppFactory.createAppComponent(this));
     }
 
