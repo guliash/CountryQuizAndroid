@@ -8,6 +8,8 @@ import com.guliash.countryquiz.quiz.FakeProvider;
 import com.guliash.countryquiz.quiz.Game;
 import com.guliash.countryquiz.quiz.GameImp;
 import com.guliash.countryquiz.quiz.Provider;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import javax.inject.Singleton;
 
@@ -39,6 +41,14 @@ public class FakeAppModule {
     @Singleton
     public Game provideGame(Provider provider) {
         return new GameImp(provider);
+    }
+
+    @Provides
+    @Singleton
+    public ImageLoader provideImageLoader(Context context) {
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context).build();
+        ImageLoader.getInstance().init(config);
+        return ImageLoader.getInstance();
     }
 
 }

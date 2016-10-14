@@ -34,6 +34,9 @@ public class QuizFragment extends BaseFragment implements QuizContract.View {
     @Inject
     QuizPresenter presenter;
 
+    @Inject
+    ImageLoader imageLoader;
+
     public static QuizFragment newInstance() {
         Bundle bundle = new Bundle();
 
@@ -75,9 +78,8 @@ public class QuizFragment extends BaseFragment implements QuizContract.View {
 
     @Override
     public void showQuiz(Quiz quiz) {
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getContext()).build();
-        ImageLoader.getInstance().init(config);
-        ImageLoader.getInstance().displayImage(quiz.getImageUrl(), image);
+        Timber.d("SHOW QUIZ");
+        imageLoader.displayImage(quiz.getImageUrl(), image);
     }
 
     @Override
