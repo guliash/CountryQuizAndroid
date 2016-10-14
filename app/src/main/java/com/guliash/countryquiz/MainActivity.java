@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.guliash.countryquiz.core.BaseActivity;
 import com.guliash.countryquiz.quiz.Provider;
 import com.guliash.countryquiz.quiz.QuizAdapter;
 import com.guliash.countryquiz.quiz.QuizPagerTransformer;
@@ -14,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.quiz_pager)
     ViewPager viewPager;
