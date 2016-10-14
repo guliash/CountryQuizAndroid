@@ -1,7 +1,4 @@
-package com.guliash.countryquiz.quiz.game;
-
-import com.guliash.countryquiz.quiz.models.Quiz;
-import com.guliash.countryquiz.quiz.provider.Provider;
+package com.guliash.countryquiz.quiz;
 
 import java.util.List;
 

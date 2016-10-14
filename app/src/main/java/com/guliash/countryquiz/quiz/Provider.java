@@ -1,8 +1,8 @@
-package com.guliash.countryquiz.quiz.provider;
+package com.guliash.countryquiz.quiz;
 
 import android.support.annotation.Nullable;
 
-import com.guliash.countryquiz.quiz.models.Quiz;
+import com.guliash.countryquiz.quiz.Quiz;
 
 import java.util.List;
 

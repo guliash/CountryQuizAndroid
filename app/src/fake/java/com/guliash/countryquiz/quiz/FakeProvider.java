@@ -1,21 +1,13 @@
-package com.guliash.countryquiz.provider;
+package com.guliash.countryquiz.quiz;
 
 import android.content.Context;
-import android.location.Criteria;
 import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.guliash.countryquiz.R;
-import com.guliash.countryquiz.quiz.models.Quiz;
-import com.guliash.countryquiz.quiz.provider.Provider;
 import com.guliash.countryquiz.utils.IOUtils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;

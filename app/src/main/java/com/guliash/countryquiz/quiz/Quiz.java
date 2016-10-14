@@ -1,4 +1,4 @@
-package com.guliash.countryquiz.quiz.models;
+package com.guliash.countryquiz.quiz;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -72,6 +72,11 @@ public class Quiz {
 
     public String getAttribution() {
         return attribution;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof Quiz) && ((Quiz)obj).getId().equals(getId());
     }
 
     @Override

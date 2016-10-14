@@ -1,4 +1,4 @@
-package com.guliash.countryquiz.quiz.view;
+package com.guliash.countryquiz.quiz;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,7 +12,7 @@ public class QuizAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return QuizFragment.newInstance(String.valueOf(position));
+        return QuizFragment.newInstance();
     }
 
     @Override

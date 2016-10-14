@@ -4,8 +4,10 @@ import android.content.Context;
 
 import com.guliash.countryquiz.App;
 import com.guliash.countryquiz.R;
-import com.guliash.countryquiz.provider.FakeProvider;
-import com.guliash.countryquiz.quiz.provider.Provider;
+import com.guliash.countryquiz.quiz.FakeProvider;
+import com.guliash.countryquiz.quiz.Game;
+import com.guliash.countryquiz.quiz.GameImp;
+import com.guliash.countryquiz.quiz.Provider;
 
 import javax.inject.Singleton;
 
@@ -31,6 +33,12 @@ public class FakeAppModule {
     @Singleton
     public Provider provideQuizzesProvider(Context context) {
         return new FakeProvider(context, R.raw.test);
+    }
+
+    @Provides
+    @Singleton
+    public Game provideGame(Provider provider) {
+        return new GameImp(provider);
     }
 
 }
