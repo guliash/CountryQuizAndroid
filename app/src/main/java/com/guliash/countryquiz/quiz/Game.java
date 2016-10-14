@@ -1,6 +1,4 @@
-package com.guliash.countryquiz.quiz.game;
-
-import com.guliash.countryquiz.quiz.models.Quiz;
+package com.guliash.countryquiz.quiz;
 
 import rx.Observable;
 

@@ -1,4 +1,4 @@
-package com.guliash.countryquiz.quiz.view;
+package com.guliash.countryquiz.quiz;
 
 import android.support.v4.view.ViewPager;
 import android.view.View;

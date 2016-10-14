@@ -1,4 +1,4 @@
-package com.guliash.countryquiz.quiz.view;
+package com.guliash.countryquiz.quiz;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,35 +9,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.guliash.countryquiz.App;
 import com.guliash.countryquiz.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.Random;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
-public class QuizFragment extends Fragment {
+public class QuizFragment extends Fragment implements QuizContract.View {
 
-    private static final String TEXT = "text";
-    private static final String COLOR = "color";
-    private static final Random RND = new Random();
+    @BindView(R.id.image)
+    ImageView image;
 
-    private String text;
-    private int color;
+    @Inject
+    QuizPresenter presenter;
 
-    @BindView(R.id.text)
-    TextView textView;
-
-    @BindView(R.id.container)
-    FrameLayout container;
-
-    public static QuizFragment newInstance(String text) {
+    public static QuizFragment newInstance() {
         Bundle bundle = new Bundle();
-        bundle.putString(TEXT, text);
-        bundle.putInt(COLOR, Color.rgb(RND.nextInt(256), RND.nextInt(256), RND.nextInt(256)));
 
         QuizFragment fragment = new QuizFragment();
         fragment.setArguments(bundle);
@@ -47,9 +44,8 @@ public class QuizFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        text = getArguments().getString(TEXT);
-        color = getArguments().getInt(COLOR);
-        Timber.d("ON CREATE %d", color);
+
+        App.get(getContext()).getAppComponent().inject(this);
     }
 
     @Nullable
@@ -61,21 +57,35 @@ public class QuizFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        textView.setText(text);
-        container.setBackgroundColor(color);
-    }
-
-    @Override
     public void onDestroy() {
-        Log.e("TAG", "ON DESTROY " + text);
         super.onDestroy();
     }
 
     @Override
     public void onDestroyView() {
-        Log.e("TAG", "ON DESTROY VIEW");
         super.onDestroyView();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.attachView(this);
+    }
+
+    @Override
+    public void showQuiz(Quiz quiz) {
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getContext()).build();
+        ImageLoader.getInstance().init(config);
+        ImageLoader.getInstance().displayImage(quiz.getImageUrl(), image);
+    }
+
+    @Override
+    public void showRightGuessed(String answer) {
+
+    }
+
+    @Override
+    public void showWrongGuessed(String answer) {
+
     }
 }

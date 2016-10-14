@@ -18,6 +18,7 @@ public class App extends Application {
         if(BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
+        Timber.e("Application#onCreate");
         setAppComponent(AppFactory.createAppComponent(this));
     }
 

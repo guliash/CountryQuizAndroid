@@ -1,9 +1,7 @@
-package com.guliash.countryquiz.provider;
+package com.guliash.countryquiz.quiz;
 
 import com.guliash.countryquiz.BuildConfig;
 import com.guliash.countryquiz.R;
-import com.guliash.countryquiz.quiz.models.Quiz;
-import com.guliash.countryquiz.quiz.provider.Provider;
 
 import junit.framework.Assert;
 
