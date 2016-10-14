@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.guliash.countryquiz.App;
 import com.guliash.countryquiz.R;
+import com.guliash.countryquiz.core.BaseFragment;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -25,7 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
-public class QuizFragment extends Fragment implements QuizContract.View {
+public class QuizFragment extends BaseFragment implements QuizContract.View {
 
     @BindView(R.id.image)
     ImageView image;
