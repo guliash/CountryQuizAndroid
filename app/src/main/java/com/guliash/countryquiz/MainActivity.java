@@ -1,8 +1,11 @@
 package com.guliash.countryquiz;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 
 import com.guliash.countryquiz.core.BaseActivity;
 import com.guliash.countryquiz.quiz.Provider;
@@ -37,6 +40,7 @@ public class MainActivity extends BaseActivity {
         viewPager.setAdapter(new QuizAdapter(getSupportFragmentManager()));
         viewPager.setOffscreenPageLimit(2);
         viewPager.setPageTransformer(true, new QuizPagerTransformer());
+
     }
 
 }
