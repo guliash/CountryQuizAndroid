@@ -26,6 +26,11 @@ public class GameImp implements Game {
         });
     }
 
+    @Override
+    public Observable<Quiz> get(String id) {
+        return Observable.just(provider.getQuizById(id));
+    }
+
     private Quiz currentQuiz() {
         return quizzes.get(currentQuizIndex);
     }

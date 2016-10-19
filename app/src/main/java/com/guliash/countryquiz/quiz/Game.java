@@ -6,6 +6,8 @@ public interface Game {
 
     Observable<Quiz> next();
 
+    Observable<Quiz> get(String id);
+
     boolean answer(String answer);
 
 }

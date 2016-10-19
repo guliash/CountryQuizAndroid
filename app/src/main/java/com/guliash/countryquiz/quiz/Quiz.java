@@ -18,7 +18,7 @@ public class Quiz {
     @SerializedName("type")
     private String type;
 
-    @SerializedName("answers")
+    @SerializedName("answerViews")
     private List<String> answers;
 
     @SerializedName("answer")

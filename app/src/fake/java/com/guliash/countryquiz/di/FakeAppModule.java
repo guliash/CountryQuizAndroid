@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.guliash.countryquiz.App;
 import com.guliash.countryquiz.R;
+import com.guliash.countryquiz.image.AUILImageManager;
+import com.guliash.countryquiz.image.ImageManager;
 import com.guliash.countryquiz.quiz.FakeProvider;
 import com.guliash.countryquiz.quiz.Game;
 import com.guliash.countryquiz.quiz.GameImp;
@@ -49,6 +51,12 @@ public class FakeAppModule {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context).build();
         ImageLoader.getInstance().init(config);
         return ImageLoader.getInstance();
+    }
+
+    @Provides
+    @Singleton
+    public ImageManager provideImageManager(ImageLoader imageLoader) {
+        return new AUILImageManager(imageLoader);
     }
 
 }

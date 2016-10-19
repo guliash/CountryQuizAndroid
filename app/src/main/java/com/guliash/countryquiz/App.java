@@ -2,9 +2,6 @@ package com.guliash.countryquiz;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.CoordinatorLayout;
-import android.widget.RadioGroup;
 
 import com.guliash.countryquiz.di.AppComponent;
 import com.guliash.countryquiz.di.AppFactory;

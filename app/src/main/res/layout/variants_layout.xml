@@ -15,43 +15,60 @@
         android:scaleType="center"
         android:src="@drawable/ic_chevron_up_black_36dp"/>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/answer1"
-            style="@style/AnswerButton"
-            android:layout_width="0dp"
+        <ProgressBar
+            android:id="@+id/answers_progress"
+            style="@style/ProgressStyle"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:id="@+id/answers_root"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/answer2"
-            style="@style/AnswerButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+                <Button
+                    android:id="@+id/answer1"
+                    style="@style/AnswerButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
 
-        <Button
-            android:id="@+id/answer3"
-            style="@style/AnswerButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/answer2"
+                    style="@style/AnswerButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            </LinearLayout>
 
-        <Button
-            android:id="@+id/answer4"
-            style="@style/AnswerButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/answer3"
+                    style="@style/AnswerButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/answer4"
+                    style="@style/AnswerButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
 </LinearLayout>

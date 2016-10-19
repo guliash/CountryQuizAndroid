@@ -25,10 +25,21 @@ public class FakeProvider implements Provider {
 
     @Override
     public List<Quiz> getQuizzesByCriteria(@Nullable QuizCriteria criteria) {
-        if(quizzes == null) {
+        loadQuizzesIfNeed();
+        return filterQuizzes(quizzes, criteria);
+    }
+
+    @Nullable
+    @Override
+    public Quiz getQuizById(String id) {
+        loadQuizzesIfNeed();
+        return findQuiz(quizzes, id);
+    }
+
+    private void loadQuizzesIfNeed() {
+        if (quizzes == null) {
             quizzes = readQuizzesFromStream(context.getResources().openRawResource(resourceId));
         }
-        return filterQuizzes(quizzes, criteria);
     }
 
     private static List<Quiz> readQuizzesFromStream(InputStream inputStream) {
@@ -37,13 +48,14 @@ public class FakeProvider implements Provider {
     }
 
     private static List<Quiz> readQuizzesFromJson(String json) {
-        Type type = new TypeToken<List<Quiz>>(){}.getType();
+        Type type = new TypeToken<List<Quiz>>() {
+        }.getType();
         return new Gson().fromJson(json, type);
     }
 
     private static List<Quiz> filterQuizzes(List<Quiz> quizzes, QuizCriteria criteria) {
         List<Quiz> result = new ArrayList<>();
-        if(criteria == null) {
+        if (criteria == null) {
             result.addAll(quizzes);
         } else {
             for (Quiz quiz : quizzes) {
@@ -53,5 +65,15 @@ public class FakeProvider implements Provider {
             }
         }
         return result;
+    }
+
+    @Nullable
+    private static Quiz findQuiz(List<Quiz> quizzes, String id) {
+        for (Quiz quiz : quizzes) {
+            if (quiz.getId().equals(id)) {
+                return quiz;
+            }
+        }
+        return null;
     }
 }

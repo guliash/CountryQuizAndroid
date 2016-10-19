@@ -1,20 +1,33 @@
 package com.guliash.countryquiz.quiz;
 
+import android.graphics.Bitmap;
+
 import com.guliash.countryquiz.core.BasePresenter;
 import com.guliash.countryquiz.core.BaseView;
 
 public interface QuizContract {
 
     interface View extends BaseView {
-        void showQuiz(Quiz quiz);
+        void showQuiz(Quiz quiz, Bitmap image);
 
-        void showRightGuessed(String answer);
+        void showLoading();
 
-        void showWrongGuessed(String answer);
+        void hideLoading();
+
+        void selectAnswer(String answer);
+
+        void showRightGuessed();
+
+        void showWrongGuessed();
     }
 
     abstract class Presenter extends BasePresenter<View> {
-        abstract void check(String answer);
+        abstract void onCheck();
+
+        abstract void onAnswerSelected(String answer);
+
+        abstract void onAnswerDeselected();
+
     }
 
 }

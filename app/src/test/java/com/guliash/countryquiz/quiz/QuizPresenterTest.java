@@ -1,6 +1,10 @@
 package com.guliash.countryquiz.quiz;
 
+import android.graphics.Bitmap;
+
 import com.guliash.countryquiz.RxTester;
+import com.guliash.countryquiz.image.ImageManager;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,14 +36,20 @@ public class QuizPresenterTest extends RxTester {
     @Mock
     Game game;
 
+    @Mock
+    ImageManager imageManager;
+
+    @Mock
+    Bitmap bitmap;
+
     @Before
     public void setup() {
-
         MockitoAnnotations.initMocks(this);
 
-        when(game.next()).thenReturn(Observable.from(QUIZZES));
+        presenter = new QuizPresenter(game, imageManager);
 
-        presenter = new QuizPresenter(game);
+        when(game.next()).thenReturn(Observable.from(QUIZZES));
+        when(imageManager.loadImage(anyString())).thenReturn(Observable.just(bitmap));
     }
 
     @Test
@@ -47,14 +57,14 @@ public class QuizPresenterTest extends RxTester {
         presenter.attachView(view);
 
         verify(game).next();
-        verify(view).showQuiz(QUIZZES[0]);
+        verify(view).showQuiz(QUIZZES[0], bitmap);
     }
 
     @Test
     public void check_normal_verifiesAnswer() {
         presenter.attachView(view);
-        presenter.check(QUIZZES[0].getAnswer());
-
+        presenter.onAnswerSelected(QUIZZES[0].getAnswer());
+        presenter.onCheck();
         verify(game).answer(QUIZZES[0].getAnswer());
     }
 }

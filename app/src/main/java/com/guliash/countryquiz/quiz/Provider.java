@@ -2,8 +2,6 @@ package com.guliash.countryquiz.quiz;
 
 import android.support.annotation.Nullable;
 
-import com.guliash.countryquiz.quiz.Quiz;
-
 import java.util.List;
 
 public interface Provider {
@@ -22,5 +20,7 @@ public interface Provider {
     }
 
     List<Quiz> getQuizzesByCriteria(@Nullable QuizCriteria criteria);
+
+    @Nullable Quiz getQuizById(String id);
 
 }

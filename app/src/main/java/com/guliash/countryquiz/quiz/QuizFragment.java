@@ -1,5 +1,6 @@
 package com.guliash.countryquiz.quiz;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,12 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.guliash.countryquiz.App;
 import com.guliash.countryquiz.R;
 import com.guliash.countryquiz.core.BaseFragment;
 import com.guliash.countryquiz.utils.Preconditions;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -26,17 +27,14 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
-import timber.log.Timber;
 
 public class QuizFragment extends BaseFragment implements QuizContract.View {
 
     private static final String ANSWERS_HIDDEN_EXTRA = "collapse";
-    private static final String SELECTED_EXTRA = "selected";
-
     private static final int NOT_SELECTED = 0;
 
     @BindView(R.id.image)
-    ImageView image;
+    ImageView imageView;
 
     @BindView(R.id.answers_container)
     ViewGroup variantsContainer;
@@ -44,19 +42,22 @@ public class QuizFragment extends BaseFragment implements QuizContract.View {
     @BindView(R.id.toggle_answers)
     ImageView toggleAnswersView;
 
+    @BindView(R.id.answers_root)
+    ViewGroup answersRoot;
+
+    @BindView(R.id.answers_progress)
+    ProgressBar answersProgressBar;
+
     @Inject
     QuizPresenter presenter;
 
-    @Inject
-    ImageLoader imageLoader;
-
     @BindViews({R.id.answer1, R.id.answer2, R.id.answer3, R.id.answer4})
-    List<Button> answers;
-    //TODO Better create something like viewmodel
+    List<Button> answerViews;
 
     private boolean areAnswersHidden;
+    private int selectedAnswerViewId;
+
     private BottomSheetBehavior answersViewBehavior;
-    private int selectedAnswerId;
 
     public static QuizFragment newInstance() {
         Bundle bundle = new Bundle();
@@ -74,10 +75,8 @@ public class QuizFragment extends BaseFragment implements QuizContract.View {
 
         if (savedInstanceState == null) {
             areAnswersHidden = true;
-            selectedAnswerId = NOT_SELECTED;
         } else {
             areAnswersHidden = savedInstanceState.getBoolean(ANSWERS_HIDDEN_EXTRA);
-            selectedAnswerId = savedInstanceState.getInt(SELECTED_EXTRA);
         }
     }
 
@@ -91,21 +90,23 @@ public class QuizFragment extends BaseFragment implements QuizContract.View {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        setupVariantsPanel();
-
-        if (selectedAnswerId != NOT_SELECTED) {
-            selectAnswer(selectedAnswerId);
-        }
+        setupAnswersPanelListeners();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(ANSWERS_HIDDEN_EXTRA, areAnswersHidden);
-        outState.putInt(SELECTED_EXTRA, selectedAnswerId);
+        presenter.onSaveInstanceState(outState);
     }
 
-    private void setupVariantsPanel() {
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        presenter.onRestoreInstanceState(savedInstanceState);
+    }
+
+    private void setupAnswersPanelListeners() {
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) variantsContainer.getLayoutParams();
         answersViewBehavior = (BottomSheetBehavior) params.getBehavior();
 
@@ -127,16 +128,12 @@ public class QuizFragment extends BaseFragment implements QuizContract.View {
             }
         });
 
-        updateAnswersViewState();
-        Timber.e(selectedAnswerId + " " + areAnswersHidden);
-        if (selectedAnswerId != NOT_SELECTED) {
-            selectAnswer(selectedAnswerId);
-        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        updateAnswersViewState();
         presenter.attachView(this);
     }
 
@@ -147,54 +144,12 @@ public class QuizFragment extends BaseFragment implements QuizContract.View {
     }
 
     @OnClick(R.id.toggle_answers)
-    void onToggleAnswers() {
+    void onToggleAnswersViewClick() {
         if (areAnswersHidden) {
             showAnswersView();
         } else {
             hideAnswersView();
         }
-    }
-
-    @OnLongClick({R.id.answer1, R.id.answer2, R.id.answer3, R.id.answer4})
-    boolean onAnswerLongClick(View view) {
-        onAnswerSelectionEvent(view.getId());
-        return true;
-    }
-
-    private void onAnswerSelectionEvent(int id) {
-        final int prevAnswer = selectedAnswerId;
-        if (prevAnswer == id) {
-            deselectAnswer();
-        } else if (prevAnswer == NOT_SELECTED) {
-            selectAnswer(id);
-        } else {
-            deselectAnswer();
-            selectAnswer(id);
-        }
-
-    }
-
-    private void selectAnswer(int id) {
-        selectedAnswerId = id;
-        findAnswerView(selectedAnswerId).setSelected(true);
-    }
-
-    private void deselectAnswer() {
-        Preconditions.notEquals(selectedAnswerId, NOT_SELECTED);
-        findAnswerView(selectedAnswerId).setSelected(false);
-        selectedAnswerId = NOT_SELECTED;
-    }
-
-    private View findAnswerView(int id) {
-        Preconditions.notEquals(id, NOT_SELECTED);
-
-        for (View view : answers) {
-            if (view.getId() == id) {
-                return view;
-            }
-        }
-
-        throw new AssertionError("View not found");
     }
 
     private void showAnswersView() {
@@ -223,31 +178,102 @@ public class QuizFragment extends BaseFragment implements QuizContract.View {
         toggleAnswersView.setImageResource(R.drawable.ic_chevron_up_black_36dp);
     }
 
+    @OnLongClick({R.id.answer1, R.id.answer2, R.id.answer3, R.id.answer4})
+    boolean onAnswerViewLongClick(View view) {
+        onAnswerSelectionEvent(view.getId());
+        return true;
+    }
+
+    private void onAnswerSelectionEvent(int id) {
+        final int prevAnswer = selectedAnswerViewId;
+        if (prevAnswer == id) {
+            deselectAnswer();
+        } else if (prevAnswer == NOT_SELECTED) {
+            selectAnswer(id);
+        } else {
+            deselectAnswer();
+            selectAnswer(id);
+        }
+    }
+
+    private void selectAnswer(int id) {
+        selectedAnswerViewId = id;
+        View view = findAnswerView(selectedAnswerViewId);
+        view.setSelected(true);
+        presenter.onAnswerSelected((String) view.getTag(R.id.answer_tag));
+    }
+
+    private void deselectAnswer() {
+        Preconditions.notEquals(selectedAnswerViewId, NOT_SELECTED);
+        findAnswerView(selectedAnswerViewId).setSelected(false);
+        selectedAnswerViewId = NOT_SELECTED;
+        presenter.onAnswerDeselected();
+    }
+
     @Override
-    public void showQuiz(Quiz quiz) {
-        Timber.d("SHOW QUIZ");
-        loadImage(quiz);
+    public void showQuiz(Quiz quiz, Bitmap image) {
+        showImage(image);
         showAnswers(quiz);
     }
 
-    private void loadImage(Quiz quiz) {
-        imageLoader.displayImage(quiz.getImageUrl(), image);
+    private void showImage(Bitmap image) {
+        imageView.setImageBitmap(image);
     }
 
     private void showAnswers(Quiz quiz) {
-        Preconditions.equals(quiz.getAnswers().size(), answers.size());
-        for (int i = 0, size = answers.size(); i < size; i++) {
-            answers.get(i).setText(quiz.getAnswers().get(i));
+        Preconditions.equals(quiz.getAnswers().size(), answerViews.size());
+        for (int i = 0, size = answerViews.size(); i < size; i++) {
+            Button button = answerViews.get(i);
+            String answer = quiz.getAnswers().get(i);
+            button.setTag(R.id.answer_tag, answer);
+            button.setText(answer);
         }
     }
 
     @Override
-    public void showRightGuessed(String answer) {
+    public void showLoading() {
+        answersRoot.setVisibility(View.GONE);
+        answersProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        answersRoot.setVisibility(View.VISIBLE);
+        answersProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void selectAnswer(String answer) {
+        onAnswerSelectionEvent(findAnswerView(answer).getId());
+    }
+
+    @Override
+    public void showRightGuessed() {
 
     }
 
     @Override
-    public void showWrongGuessed(String answer) {
+    public void showWrongGuessed() {
 
+    }
+
+    private View findAnswerView(int id) {
+        for (View view : answerViews) {
+            if (view.getId() == id) {
+                return view;
+            }
+        }
+
+        throw new AssertionError("View not found");
+    }
+
+    private View findAnswerView(String answer) {
+        for (View view : answerViews) {
+            if (answer.equals(view.getTag(R.id.answer_tag))) {
+                return view;
+            }
+        }
+
+        throw new AssertionError("View not found");
     }
 }
