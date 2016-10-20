@@ -4,7 +4,9 @@ import android.graphics.Bitmap;
 
 import com.guliash.countryquiz.RxTester;
 import com.guliash.countryquiz.image.ImageManager;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.guliash.countryquiz.quiz.game.Game;
+import com.guliash.countryquiz.quiz.model.Quiz;
+import com.guliash.countryquiz.quiz.presentation.QuizPresenter;
 
 import org.junit.Before;
 import org.junit.Test;

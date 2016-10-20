@@ -26,12 +26,11 @@ android {
     }
 
     productFlavors {
-        fake {
-            applicationIdSuffix ".fake"
+        stub {
+            applicationIdSuffix ".stub"
         }
-
-        prod {
-            applicationIdSuffix ".prod"
+        realtime {
+            applicationIdSuffix ".realtime"
         }
     }
 

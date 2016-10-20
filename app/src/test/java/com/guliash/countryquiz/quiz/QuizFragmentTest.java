@@ -2,15 +2,13 @@ package com.guliash.countryquiz.quiz;
 
 import com.guliash.countryquiz.BuildConfig;
 import com.guliash.countryquiz.RxTester;
+import com.guliash.countryquiz.quiz.view.QuizFragment;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.RuleChain;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
 
 import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.*;
 
@@ -18,8 +16,8 @@ import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.*;
 @Config(constants = BuildConfig.class, sdk = 21)
 public class QuizFragmentTest extends RxTester {
 
-
     private QuizFragment quizFragment;
+
 
     @Before
     public void setup() {
@@ -28,8 +26,7 @@ public class QuizFragmentTest extends RxTester {
     }
 
     @Test
-    public void showQuiz_normal_showsQuiz() {
-
+    public void showQuiz_normal_answersShown() {
     }
 
 }

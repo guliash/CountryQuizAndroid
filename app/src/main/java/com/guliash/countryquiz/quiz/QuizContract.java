@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 
 import com.guliash.countryquiz.core.BasePresenter;
 import com.guliash.countryquiz.core.BaseView;
+import com.guliash.countryquiz.quiz.model.Quiz;
 
 public interface QuizContract {
 
@@ -22,11 +23,11 @@ public interface QuizContract {
     }
 
     abstract class Presenter extends BasePresenter<View> {
-        abstract void onCheck();
+        public abstract void onCheck();
 
-        abstract void onAnswerSelected(String answer);
+        public abstract void onAnswerSelected(String answer);
 
-        abstract void onAnswerDeselected();
+        public abstract void onAnswerDeselected();
 
     }
 
