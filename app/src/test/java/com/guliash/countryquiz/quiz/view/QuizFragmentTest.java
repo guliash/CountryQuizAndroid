@@ -1,4 +1,4 @@
-package com.guliash.countryquiz.quiz;
+package com.guliash.countryquiz.quiz.view;
 
 import com.guliash.countryquiz.BuildConfig;
 import com.guliash.countryquiz.RxTester;

@@ -1,9 +1,10 @@
-package com.guliash.countryquiz.quiz;
+package com.guliash.countryquiz.quiz.presentation;
 
 import android.graphics.Bitmap;
 
 import com.guliash.countryquiz.RxTester;
 import com.guliash.countryquiz.image.ImageManager;
+import com.guliash.countryquiz.quiz.QuizContract;
 import com.guliash.countryquiz.quiz.game.Game;
 import com.guliash.countryquiz.quiz.model.Quiz;
 import com.guliash.countryquiz.quiz.presentation.QuizPresenter;
