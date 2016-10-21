@@ -41,7 +41,7 @@ public class QuizFragment extends BaseFragment implements QuizContract.View {
     ImageView imageView;
 
     @BindView(R.id.answers_container)
-    ViewGroup variantsContainer;
+    ViewGroup answersContainer;
 
     @BindView(R.id.toggle_answers)
     ImageView toggleAnswersView;
@@ -111,7 +111,7 @@ public class QuizFragment extends BaseFragment implements QuizContract.View {
     }
 
     private void setupAnswersPanelListeners() {
-        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) variantsContainer.getLayoutParams();
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) answersContainer.getLayoutParams();
         answersViewBehavior = (BottomSheetBehavior) params.getBehavior();
 
         Preconditions.checkNotNull(answersViewBehavior);
@@ -238,12 +238,15 @@ public class QuizFragment extends BaseFragment implements QuizContract.View {
     public void showLoading() {
         imageView.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
+        answersContainer.setVisibility(View.GONE);
+
     }
 
     @Override
     public void hideLoading() {
         imageView.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
+        answersContainer.setVisibility(View.VISIBLE);
     }
 
     @Override
