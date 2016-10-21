@@ -1,9 +1,10 @@
 package com.guliash.countryquiz.core;
 
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,11 @@ import com.guliash.countryquiz.utils.LifecycleLogger;
 
 import timber.log.Timber;
 
-public class BaseFragment extends Fragment {
+public class BaseDialogFragment extends DialogFragment {
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        LifecycleLogger.create(this);
+    public void onCreate(Bundle savedInstanceState) {
+        LifecycleLogger.createDialog(this);
         super.onCreate(savedInstanceState);
     }
 
@@ -24,6 +25,19 @@ public class BaseFragment extends Fragment {
     public void onDestroy() {
         LifecycleLogger.destroy(this);
         super.onDestroy();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        LifecycleLogger.createView(this);
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onDestroyView() {
+        LifecycleLogger.destroyView(this);
+        super.onDestroyView();
     }
 
     @Override
@@ -36,19 +50,6 @@ public class BaseFragment extends Fragment {
     public void onDetach() {
         LifecycleLogger.detach(this);
         super.onDetach();
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LifecycleLogger.createView(this);
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
-    @Override
-    public void onDestroyView() {
-        LifecycleLogger.destroyView(this);
-        super.onDestroyView();
     }
 
     @Override
@@ -73,5 +74,23 @@ public class BaseFragment extends Fragment {
     public void onPause() {
         LifecycleLogger.pause(this);
         super.onPause();
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        LifecycleLogger.createDialog(this);
+        return super.onCreateDialog(savedInstanceState);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        LifecycleLogger.save(this);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        LifecycleLogger.restore(this);
+        super.onViewStateRestored(savedInstanceState);
     }
 }
