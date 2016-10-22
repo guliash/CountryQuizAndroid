@@ -20,7 +20,7 @@ public class GameImp implements Game {
     @Override
     public Observable<Quiz> next() {
         return Observable.fromCallable(() -> {
-            if(quizzes == null) {
+            if (quizzes == null) {
                 quizzes = quizProvider.getQuizzesByCriteria(null);
             }
             Quiz quiz = quizzes.get(currentQuizIndex);
@@ -34,12 +34,9 @@ public class GameImp implements Game {
         return Observable.just(quizProvider.getQuizById(id));
     }
 
-    private Quiz currentQuiz() {
-        return quizzes.get(currentQuizIndex);
-    }
-
     @Override
-    public boolean answer(String answer) {
-        return currentQuiz().getAnswer().equals(answer);
+    public Observable<Boolean> answer(String quizId, String answer) {
+        Quiz quiz = quizProvider.getQuizById(quizId);
+        return Observable.just(quiz.getAnswer().equals(answer));
     }
 }

@@ -1,8 +1,5 @@
 package com.guliash.countryquiz.utils;
 
-import com.guliash.countryquiz.core.BaseDialogFragment;
-
-import clojure.lang.Obj;
 import timber.log.Timber;
 
 public class LifecycleLogger {

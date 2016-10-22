@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 
 import com.guliash.countryquiz.utils.LifecycleLogger;
 
-import timber.log.Timber;
-
 public class BaseFragment extends Fragment {
 
     @Override

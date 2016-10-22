@@ -14,21 +14,10 @@ public interface QuizContract {
         void showLoading();
 
         void hideLoading();
-
-        void selectAnswer(String answer);
-
-        void showRightGuessed();
-
-        void showWrongGuessed();
     }
 
     abstract class Presenter extends BasePresenter<View> {
-        public abstract void onCheck();
-
         public abstract void onAnswerSelected(String answer);
-
-        public abstract void onAnswerDeselected();
-
     }
 
 }

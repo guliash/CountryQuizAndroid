@@ -1,6 +1,5 @@
 package com.guliash.countryquiz;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 
 import rx.Scheduler;

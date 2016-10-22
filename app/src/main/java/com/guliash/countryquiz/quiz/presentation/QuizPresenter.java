@@ -25,9 +25,6 @@ public class QuizPresenter extends QuizContract.Presenter {
     @State
     String quizId;
 
-    @State
-    String selectedAnswer;
-
     @Inject
     public QuizPresenter(Game game, ImageManager imageManager) {
         this.game = game;
@@ -80,27 +77,10 @@ public class QuizPresenter extends QuizContract.Presenter {
         }
         getView().hideLoading();
         getView().showQuiz(quiz, image);
-        if (!StringUtils.isEmpty(selectedAnswer)) {
-            getView().selectAnswer(selectedAnswer);
-        }
-    }
-
-    @Override
-    public void onCheck() {
-        Preconditions.checkNotNull(selectedAnswer);
-
-        game.answer(selectedAnswer);
     }
 
     @Override
     public void onAnswerSelected(String answer) {
-        selectedAnswer = answer;
-    }
-
-    @Override
-    public void onAnswerDeselected() {
-        Preconditions.checkNotNull(selectedAnswer);
-
-        selectedAnswer = null;
+//        selectedAnswer = answer;
     }
 }

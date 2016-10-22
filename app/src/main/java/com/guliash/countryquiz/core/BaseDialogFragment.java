@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 
 import com.guliash.countryquiz.utils.LifecycleLogger;
 
-import timber.log.Timber;
-
 public class BaseDialogFragment extends DialogFragment {
 
     @Override

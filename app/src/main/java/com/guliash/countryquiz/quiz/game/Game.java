@@ -8,8 +8,8 @@ public interface Game {
 
     Observable<Quiz> next();
 
-    Observable<Quiz> get(String id);
+    Observable<Quiz> get(String quizId);
 
-    boolean answer(String answer);
+    Observable<Boolean> answer(String quizId, String answer);
 
 }

@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.guliash.countryquiz.utils.LifecycleLogger;
 
-import timber.log.Timber;
-
 public class BaseActivity extends AppCompatActivity {
 
     @Override

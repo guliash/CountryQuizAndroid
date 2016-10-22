@@ -7,7 +7,6 @@ import com.guliash.countryquiz.image.ImageManager;
 import com.guliash.countryquiz.quiz.QuizContract;
 import com.guliash.countryquiz.quiz.game.Game;
 import com.guliash.countryquiz.quiz.model.Quiz;
-import com.guliash.countryquiz.quiz.presentation.QuizPresenter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -61,13 +60,5 @@ public class QuizPresenterTest extends RxTester {
 
         verify(game).next();
         verify(view).showQuiz(QUIZZES[0], bitmap);
-    }
-
-    @Test
-    public void check_normal_verifiesAnswer() {
-        presenter.attachView(view);
-        presenter.onAnswerSelected(QUIZZES[0].getAnswer());
-        presenter.onCheck();
-        verify(game).answer(QUIZZES[0].getAnswer());
     }
 }

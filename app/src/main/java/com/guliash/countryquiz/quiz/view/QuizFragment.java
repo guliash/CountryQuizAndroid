@@ -30,12 +30,10 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnLongClick;
 
 public class QuizFragment extends BaseFragment implements QuizContract.View {
 
     private static final String ANSWERS_HIDDEN_EXTRA = "collapse";
-    private static final int NOT_SELECTED = 0;
 
     @BindView(R.id.image)
     ImageView imageView;
@@ -59,7 +57,6 @@ public class QuizFragment extends BaseFragment implements QuizContract.View {
     List<Button> answerViews;
 
     private boolean areAnswersHidden;
-    private int selectedAnswerViewId;
 
     private BottomSheetBehavior answersViewBehavior;
 
@@ -182,36 +179,17 @@ public class QuizFragment extends BaseFragment implements QuizContract.View {
         toggleAnswersView.setImageResource(R.drawable.ic_chevron_up_black_36dp);
     }
 
-    @OnLongClick({R.id.answer1, R.id.answer2, R.id.answer3, R.id.answer4})
-    boolean onAnswerViewLongClick(View view) {
-        onAnswerSelectionEvent(view.getId());
-        return true;
+    @OnClick({R.id.answer1, R.id.answer2, R.id.answer3, R.id.answer4})
+    void onAnswerViewClick(View view) {
+        selectAnswer(view);
     }
 
-    private void onAnswerSelectionEvent(int id) {
-        final int prevAnswer = selectedAnswerViewId;
-        if (prevAnswer == id) {
-            deselectAnswer();
-        } else if (prevAnswer == NOT_SELECTED) {
-            selectAnswer(id);
-        } else {
-            deselectAnswer();
-            selectAnswer(id);
-        }
+    private void selectAnswer(View view) {
+        selectAnswer((String) view.getTag(R.id.answer_tag));
     }
 
-    private void selectAnswer(int id) {
-        selectedAnswerViewId = id;
-        View view = findAnswerView(selectedAnswerViewId);
-        view.setSelected(true);
-        presenter.onAnswerSelected((String) view.getTag(R.id.answer_tag));
-    }
-
-    private void deselectAnswer() {
-        Preconditions.notEquals(selectedAnswerViewId, NOT_SELECTED);
-        findAnswerView(selectedAnswerViewId).setSelected(false);
-        selectedAnswerViewId = NOT_SELECTED;
-        presenter.onAnswerDeselected();
+    void selectAnswer(String answer) {
+        presenter.onAnswerSelected(answer);
     }
 
     @Override
@@ -247,40 +225,5 @@ public class QuizFragment extends BaseFragment implements QuizContract.View {
         imageView.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
         answersContainer.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void selectAnswer(String answer) {
-        onAnswerSelectionEvent(findAnswerView(answer).getId());
-    }
-
-    @Override
-    public void showRightGuessed() {
-
-    }
-
-    @Override
-    public void showWrongGuessed() {
-
-    }
-
-    private View findAnswerView(int id) {
-        for (View view : answerViews) {
-            if (view.getId() == id) {
-                return view;
-            }
-        }
-
-        throw new AssertionError("View not found");
-    }
-
-    private View findAnswerView(String answer) {
-        for (View view : answerViews) {
-            if (answer.equals(view.getTag(R.id.answer_tag))) {
-                return view;
-            }
-        }
-
-        throw new AssertionError("View not found");
     }
 }
