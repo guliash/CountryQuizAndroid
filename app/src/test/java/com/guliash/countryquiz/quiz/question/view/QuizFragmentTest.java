@@ -1,4 +1,4 @@
-package com.guliash.countryquiz.quiz.view;
+package com.guliash.countryquiz.quiz.question.view;
 
 import android.graphics.Bitmap;
 import android.widget.Button;
@@ -7,7 +7,7 @@ import com.guliash.countryquiz.BuildConfig;
 import com.guliash.countryquiz.R;
 import com.guliash.countryquiz.RxTester;
 import com.guliash.countryquiz.quiz.model.Quiz;
-import com.guliash.countryquiz.quiz.presentation.QuizPresenter;
+import com.guliash.countryquiz.quiz.question.presentation.QuizPresenter;
 import com.guliash.countryquiz.quiz.provider.StubQuizProvider;
 
 import junit.framework.Assert;

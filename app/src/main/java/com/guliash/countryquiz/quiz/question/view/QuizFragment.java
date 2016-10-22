@@ -1,4 +1,4 @@
-package com.guliash.countryquiz.quiz.view;
+package com.guliash.countryquiz.quiz.question.view;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -16,10 +16,10 @@ import android.widget.ProgressBar;
 
 import com.guliash.countryquiz.R;
 import com.guliash.countryquiz.core.App;
-import com.guliash.countryquiz.core.BaseFragment;
-import com.guliash.countryquiz.quiz.QuizContract;
+import com.guliash.countryquiz.core.base.BaseFragment;
+import com.guliash.countryquiz.quiz.question.QuestionContract;
 import com.guliash.countryquiz.quiz.model.Quiz;
-import com.guliash.countryquiz.quiz.presentation.QuizPresenter;
+import com.guliash.countryquiz.quiz.question.presentation.QuizPresenter;
 import com.guliash.countryquiz.utils.Preconditions;
 
 import java.util.List;
@@ -31,7 +31,7 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class QuizFragment extends BaseFragment implements QuizContract.View {
+public class QuizFragment extends BaseFragment implements QuestionContract.View {
 
     private static final String ANSWERS_HIDDEN_EXTRA = "collapse";
 

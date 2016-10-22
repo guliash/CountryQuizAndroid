@@ -1,4 +1,4 @@
-package com.guliash.countryquiz.network;
+package com.guliash.countryquiz.utils.network;
 
 import dagger.Module;
 

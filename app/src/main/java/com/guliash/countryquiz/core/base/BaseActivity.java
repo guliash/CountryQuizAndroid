@@ -1,4 +1,4 @@
-package com.guliash.countryquiz.core;
+package com.guliash.countryquiz.core.base;
 
 import android.content.Intent;
 import android.os.Bundle;

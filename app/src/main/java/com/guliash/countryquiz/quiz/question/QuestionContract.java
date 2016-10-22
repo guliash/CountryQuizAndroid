@@ -1,12 +1,12 @@
-package com.guliash.countryquiz.quiz;
+package com.guliash.countryquiz.quiz.question;
 
 import android.graphics.Bitmap;
 
-import com.guliash.countryquiz.core.BasePresenter;
-import com.guliash.countryquiz.core.BaseView;
+import com.guliash.countryquiz.core.base.BasePresenter;
+import com.guliash.countryquiz.core.base.BaseView;
 import com.guliash.countryquiz.quiz.model.Quiz;
 
-public interface QuizContract {
+public interface QuestionContract {
 
     interface View extends BaseView {
         void showQuiz(Quiz quiz, Bitmap image);

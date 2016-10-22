@@ -1,12 +1,16 @@
-package com.guliash.countryquiz.quiz.view;
+package com.guliash.countryquiz.quiz;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
 import com.guliash.countryquiz.R;
+import com.guliash.countryquiz.quiz.answer.AnswerContract;
+import com.guliash.countryquiz.core.ActivityModule;
 import com.guliash.countryquiz.core.App;
-import com.guliash.countryquiz.core.BaseActivity;
+import com.guliash.countryquiz.core.base.BaseActivity;
 import com.guliash.countryquiz.quiz.provider.QuizProvider;
+import com.guliash.countryquiz.quiz.question.view.QuizAdapter;
+import com.guliash.countryquiz.quiz.question.view.QuizPagerTransformer;
 
 import javax.inject.Inject;
 
@@ -14,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
-public class MainActivity extends BaseActivity {
+public class QuizActivity extends BaseActivity {
 
     @BindView(R.id.quiz_pager)
     ViewPager viewPager;
@@ -29,7 +33,7 @@ public class MainActivity extends BaseActivity {
 
         ButterKnife.bind(this);
 
-        App.get(this).getAppComponent().inject(this);
+        App.get(this).getAppComponent().plus(new ActivityModule(new Navigation())).inject(this);
 
         Timber.e("PROVIDER %s", quizProvider);
 
@@ -37,6 +41,24 @@ public class MainActivity extends BaseActivity {
         viewPager.setOffscreenPageLimit(2);
         viewPager.setPageTransformer(true, new QuizPagerTransformer());
 
+    }
+
+    public class Navigation implements AnswerContract.Navigation {
+
+        @Override
+        public void answersNotSureSelected() {
+
+        }
+
+        @Override
+        public void answersTryAnotherSelected() {
+
+        }
+
+        @Override
+        public void answersNextSelected() {
+
+        }
     }
 
 }

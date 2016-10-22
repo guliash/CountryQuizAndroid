@@ -1,9 +1,9 @@
-package com.guliash.countryquiz.quiz.presentation;
+package com.guliash.countryquiz.quiz.question.presentation;
 
 import android.graphics.Bitmap;
 
-import com.guliash.countryquiz.image.ImageManager;
-import com.guliash.countryquiz.quiz.QuizContract;
+import com.guliash.countryquiz.utils.image.ImageManager;
+import com.guliash.countryquiz.quiz.question.QuestionContract;
 import com.guliash.countryquiz.quiz.game.Game;
 import com.guliash.countryquiz.quiz.model.Quiz;
 import com.guliash.countryquiz.utils.Preconditions;
@@ -16,7 +16,7 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class QuizPresenter extends QuizContract.Presenter {
+public class QuizPresenter extends QuestionContract.Presenter {
 
     private Game game;
 
@@ -32,7 +32,7 @@ public class QuizPresenter extends QuizContract.Presenter {
     }
 
     @Override
-    public void attachView(QuizContract.View view) {
+    public void attachView(QuestionContract.View view) {
         super.attachView(view);
 
         getView().showLoading();

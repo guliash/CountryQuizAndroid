@@ -25,4 +25,8 @@ public class Preconditions {
         }
     }
 
+    public static <T> T checkType(Object object, Class<T> clazz) {
+        return clazz.cast(object);
+    }
+
 }

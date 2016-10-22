@@ -1,4 +1,4 @@
-package com.guliash.countryquiz.image;
+package com.guliash.countryquiz.utils.image;
 
 import android.graphics.Bitmap;
 

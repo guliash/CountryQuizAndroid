@@ -1,5 +1,7 @@
 package com.guliash.countryquiz;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 
 import rx.Scheduler;
@@ -11,8 +13,8 @@ import rx.schedulers.Schedulers;
 
 public class RxTester {
 
-    @BeforeClass
-    public static void initHooks() {
+    @Before
+    public void initHooks() {
         RxJavaPlugins.getInstance().registerSchedulersHook(new RxJavaSchedulersHook() {
             @Override
             public Scheduler getIOScheduler() {
@@ -35,6 +37,12 @@ public class RxTester {
                 return Schedulers.immediate();
             }
         });
+    }
+
+    @After
+    public void resetHooks() {
+        RxJavaPlugins.getInstance().reset();
+        RxAndroidPlugins.getInstance().reset();
     }
 
 }
