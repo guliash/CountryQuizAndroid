@@ -3,7 +3,7 @@ package com.guliash.countryquiz.quiz.question.view;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-public class QuizPagerTransformer implements ViewPager.PageTransformer {
+public class QuestionPagerTransformer implements ViewPager.PageTransformer {
 
     private static final float MIN_SCALE = 0.8f;
     private static final float MIN_ALPHA = 0.5f;

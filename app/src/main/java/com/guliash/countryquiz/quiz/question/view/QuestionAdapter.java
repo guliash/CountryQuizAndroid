@@ -4,15 +4,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-public class QuizAdapter extends FragmentStatePagerAdapter {
+public class QuestionAdapter extends FragmentStatePagerAdapter {
 
-    public QuizAdapter(FragmentManager fm) {
+    public QuestionAdapter(FragmentManager fm) {
         super(fm);
     }
 
     @Override
     public Fragment getItem(int position) {
-        return QuizFragment.newInstance();
+        return QuestionFragment.newInstance();
     }
 
     @Override

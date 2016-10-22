@@ -4,13 +4,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.guliash.countryquiz.core.ActivityComponent;
 import com.guliash.countryquiz.utils.LifecycleLogger;
 
+import timber.log.Timber;
+
 public class BaseActivity extends AppCompatActivity {
+
+    protected ActivityComponent mComponent;
+
+    protected void injectDependencies() {
+        Timber.d("INJECT DEPENDENCIES %s", this);
+    }
+
+    public ActivityComponent getComponent() {
+        return mComponent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LifecycleLogger.create(this);
+        injectDependencies();
         super.onCreate(savedInstanceState);
     }
 

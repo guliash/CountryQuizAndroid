@@ -15,10 +15,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.guliash.countryquiz.R;
-import com.guliash.countryquiz.core.App;
+import com.guliash.countryquiz.core.base.BaseActivity;
 import com.guliash.countryquiz.core.base.BaseFragment;
-import com.guliash.countryquiz.quiz.question.QuestionContract;
 import com.guliash.countryquiz.quiz.model.Quiz;
+import com.guliash.countryquiz.quiz.question.QuestionContract;
 import com.guliash.countryquiz.quiz.question.presentation.QuizPresenter;
 import com.guliash.countryquiz.utils.Preconditions;
 
@@ -31,7 +31,7 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class QuizFragment extends BaseFragment implements QuestionContract.View {
+public class QuestionFragment extends BaseFragment implements QuestionContract.View {
 
     private static final String ANSWERS_HIDDEN_EXTRA = "collapse";
 
@@ -60,19 +60,23 @@ public class QuizFragment extends BaseFragment implements QuestionContract.View 
 
     private BottomSheetBehavior answersViewBehavior;
 
-    public static QuizFragment newInstance() {
+    public static QuestionFragment newInstance() {
         Bundle bundle = new Bundle();
 
-        QuizFragment fragment = new QuizFragment();
+        QuestionFragment fragment = new QuestionFragment();
         fragment.setArguments(bundle);
         return fragment;
     }
 
     @Override
+    protected void injectDependencies() {
+        super.injectDependencies();
+        ((BaseActivity)getActivity()).getComponent().inject(this);
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        App.get(getContext()).getAppComponent().inject(this);
 
         if (savedInstanceState == null) {
             areAnswersHidden = true;

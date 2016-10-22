@@ -10,18 +10,12 @@ import android.view.ViewGroup;
 
 import com.guliash.countryquiz.utils.LifecycleLogger;
 
+import timber.log.Timber;
+
 public class BaseFragment extends Fragment {
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        LifecycleLogger.create(this);
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onDestroy() {
-        LifecycleLogger.destroy(this);
-        super.onDestroy();
+    protected void injectDependencies() {
+        Timber.d("INJECT DEPENDENCIES %s", this);
     }
 
     @Override
@@ -34,6 +28,19 @@ public class BaseFragment extends Fragment {
     public void onDetach() {
         LifecycleLogger.detach(this);
         super.onDetach();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        LifecycleLogger.create(this);
+        injectDependencies();
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onDestroy() {
+        LifecycleLogger.destroy(this);
+        super.onDestroy();
     }
 
     @Nullable

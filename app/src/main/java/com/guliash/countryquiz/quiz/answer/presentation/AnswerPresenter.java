@@ -1,7 +1,7 @@
 package com.guliash.countryquiz.quiz.answer.presentation;
 
-import com.guliash.countryquiz.quiz.answer.AnswerContract;
 import com.guliash.countryquiz.core.base.BaseNavigation;
+import com.guliash.countryquiz.quiz.answer.AnswerContract;
 import com.guliash.countryquiz.quiz.game.Game;
 import com.guliash.countryquiz.quiz.model.Quiz;
 import com.guliash.countryquiz.utils.Preconditions;

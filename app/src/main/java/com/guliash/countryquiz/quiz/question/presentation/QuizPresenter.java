@@ -2,12 +2,12 @@ package com.guliash.countryquiz.quiz.question.presentation;
 
 import android.graphics.Bitmap;
 
-import com.guliash.countryquiz.utils.image.ImageManager;
-import com.guliash.countryquiz.quiz.question.QuestionContract;
 import com.guliash.countryquiz.quiz.game.Game;
 import com.guliash.countryquiz.quiz.model.Quiz;
+import com.guliash.countryquiz.quiz.question.QuestionContract;
 import com.guliash.countryquiz.utils.Preconditions;
 import com.guliash.countryquiz.utils.StringUtils;
+import com.guliash.countryquiz.utils.image.ImageManager;
 
 import javax.inject.Inject;
 
