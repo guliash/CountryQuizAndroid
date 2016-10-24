@@ -2,6 +2,7 @@ package com.guliash.countryquiz.quiz.question;
 
 import android.graphics.Bitmap;
 
+import com.guliash.countryquiz.core.base.BaseNavigation;
 import com.guliash.countryquiz.core.base.BasePresenter;
 import com.guliash.countryquiz.core.base.BaseView;
 import com.guliash.countryquiz.quiz.model.Quiz;
@@ -18,6 +19,10 @@ public interface QuestionContract {
 
     abstract class Presenter extends BasePresenter<View> {
         public abstract void onAnswerSelected(String answer);
+    }
+
+    interface Navigation extends BaseNavigation {
+        void questionsAnswerSelected(String quizId, String selectedAnswer);
     }
 
 }

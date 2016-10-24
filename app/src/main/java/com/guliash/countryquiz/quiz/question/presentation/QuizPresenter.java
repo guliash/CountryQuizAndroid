@@ -2,6 +2,7 @@ package com.guliash.countryquiz.quiz.question.presentation;
 
 import android.graphics.Bitmap;
 
+import com.guliash.countryquiz.core.base.BaseNavigation;
 import com.guliash.countryquiz.quiz.game.Game;
 import com.guliash.countryquiz.quiz.model.Quiz;
 import com.guliash.countryquiz.quiz.question.QuestionContract;
@@ -18,17 +19,20 @@ import rx.schedulers.Schedulers;
 
 public class QuizPresenter extends QuestionContract.Presenter {
 
-    private Game game;
+    private Game mGame;
 
-    private ImageManager imageManager;
+    private ImageManager mImageManager;
+
+    private QuestionContract.Navigation mNavigation;
 
     @State
     String quizId;
 
     @Inject
-    public QuizPresenter(Game game, ImageManager imageManager) {
-        this.game = game;
-        this.imageManager = imageManager;
+    public QuizPresenter(Game game, ImageManager imageManager, BaseNavigation navigation) {
+        mGame = game;
+        mImageManager = imageManager;
+        mNavigation = Preconditions.checkType(navigation, QuestionContract.Navigation.class);
     }
 
     @Override
@@ -43,9 +47,9 @@ public class QuizPresenter extends QuestionContract.Presenter {
     private void getGame() {
         Observable<Quiz> quizObservable;
         if (StringUtils.isEmpty(quizId)) {
-            quizObservable = game.next();
+            quizObservable = mGame.next();
         } else {
-            quizObservable = game.get(quizId);
+            quizObservable = mGame.get(quizId);
         }
         quizObservable.
                 subscribeOn(Schedulers.io())
@@ -61,7 +65,7 @@ public class QuizPresenter extends QuestionContract.Presenter {
     private void loadImage(Quiz quiz) {
         Preconditions.checkNotNull(quiz);
 
-        imageManager.loadImage(quiz.getImageUrl())
+        mImageManager.loadImage(quiz.getImageUrl())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(image -> {
@@ -80,7 +84,7 @@ public class QuizPresenter extends QuestionContract.Presenter {
     }
 
     @Override
-    public void onAnswerSelected(String answer) {
-//        selectedAnswer = answer;
+    public void onAnswerSelected(String selectedAnswer) {
+        mNavigation.questionsAnswerSelected(quizId, selectedAnswer);
     }
 }

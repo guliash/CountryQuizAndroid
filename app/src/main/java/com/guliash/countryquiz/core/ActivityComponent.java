@@ -1,6 +1,7 @@
 package com.guliash.countryquiz.core;
 
 import com.guliash.countryquiz.quiz.QuizActivity;
+import com.guliash.countryquiz.quiz.answer.view.AnswerFragment;
 import com.guliash.countryquiz.quiz.question.view.QuestionFragment;
 
 import dagger.Subcomponent;
@@ -13,4 +14,5 @@ public interface ActivityComponent {
 
     void inject(QuestionFragment fragment);
 
+    void inject(AnswerFragment fragment);
 }

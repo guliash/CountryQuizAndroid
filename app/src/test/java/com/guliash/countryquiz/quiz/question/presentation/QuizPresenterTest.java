@@ -15,6 +15,7 @@ import org.mockito.MockitoAnnotations;
 
 import rx.Observable;
 
+import static com.guliash.countryquiz.data.StubQuizzes.QUIZ1;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -34,15 +35,18 @@ public class QuizPresenterTest extends RxTester {
     ImageManager imageManager;
 
     @Mock
+    QuestionContract.Navigation navigation;
+
+    @Mock
     Bitmap bitmap;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
-        presenter = new QuizPresenter(game, imageManager);
+        presenter = new QuizPresenter(game, imageManager, navigation);
 
-        when(game.next()).thenReturn(Observable.just(StubQuizzes.QUIZ1));
+        when(game.next()).thenReturn(Observable.just(QUIZ1));
         when(imageManager.loadImage(anyString())).thenReturn(Observable.just(bitmap));
     }
 
@@ -51,6 +55,15 @@ public class QuizPresenterTest extends RxTester {
         presenter.attachView(view);
 
         verify(game).next();
-        verify(view).showQuiz(StubQuizzes.QUIZ1, bitmap);
+        verify(view).showQuiz(QUIZ1, bitmap);
+    }
+
+    @Test
+    public void answerSelected_normal_navigates() {
+        presenter.attachView(view);
+
+        presenter.onAnswerSelected(QUIZ1.getAnswer());
+
+        verify(navigation).questionsAnswerSelected(QUIZ1.getId(), QUIZ1.getAnswer());
     }
 }

@@ -8,7 +8,9 @@ import com.guliash.countryquiz.core.ActivityModule;
 import com.guliash.countryquiz.core.App;
 import com.guliash.countryquiz.core.base.BaseActivity;
 import com.guliash.countryquiz.quiz.answer.AnswerContract;
+import com.guliash.countryquiz.quiz.answer.view.AnswerFragment;
 import com.guliash.countryquiz.quiz.provider.QuizProvider;
+import com.guliash.countryquiz.quiz.question.QuestionContract;
 import com.guliash.countryquiz.quiz.question.view.QuestionAdapter;
 import com.guliash.countryquiz.quiz.question.view.QuestionPagerTransformer;
 
@@ -48,7 +50,7 @@ public class QuizActivity extends BaseActivity {
 
     }
 
-    public class Navigation implements AnswerContract.Navigation {
+    public class Navigation implements AnswerContract.Navigation, QuestionContract.Navigation {
 
         @Override
         public void answersNotSureSelected() {
@@ -63,6 +65,12 @@ public class QuizActivity extends BaseActivity {
         @Override
         public void answersNextSelected() {
 
+        }
+
+        @Override
+        public void questionsAnswerSelected(String quizId, String selectedAnswer) {
+            AnswerFragment answerFragment = AnswerFragment.newInstance(quizId, selectedAnswer);
+            answerFragment.show(getSupportFragmentManager(), null);
         }
     }
 

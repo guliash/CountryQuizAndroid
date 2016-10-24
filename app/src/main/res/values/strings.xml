@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CountryQuiz</string>
+    <string name="confirmation_answer_dialog_title">Proceed?</string>
+    <string name="cancel">cancel</string>
+    <string name="proceed">proceed</string>
+    <string name="confirmation_text">Your answer is %s. Are you sure?</string>
 </resources>

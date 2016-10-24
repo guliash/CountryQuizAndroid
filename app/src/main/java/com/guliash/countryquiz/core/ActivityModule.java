@@ -2,8 +2,6 @@ package com.guliash.countryquiz.core;
 
 import com.guliash.countryquiz.core.base.BaseNavigation;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 
@@ -16,9 +14,10 @@ public class ActivityModule {
         mNavigation = navigation;
     }
 
-    @Singleton
+    @PerActivity
     @Provides
     public BaseNavigation provideNavigation() {
         return mNavigation;
     }
+
 }

@@ -6,6 +6,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorSecondary">@color/textColorSecondary</item>
+        <item name="android:textColorTertiary">@color/textColorTertiary</item>
         <item name="android:windowBackground">@color/windowBackground</item>
     </style>
 
@@ -21,5 +24,25 @@
         <item name="android:layout_width">44dp</item>
         <item name="android:layout_height">44dp</item>
     </style>
+
+    <style name="AnswerDialog" parent="Base.Theme.AppCompat.Light.Dialog">
+        <item name="android:windowMinWidthMajor">90%</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+    </style>
+
+    <style name="DialogButton" parent="Base.TextAppearance.AppCompat.Small">
+        <item name="android:textColor">?android:attr/colorAccent</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+    </style>
+
+    <style name="SeparatorStyle">
+        <item name="android:background">@color/grey400</item>
+    </style>
+
+    <style name="DialogTitleStyle" parent="Base.TextAppearance.AppCompat.Large"/>
+
+    <style name="ConfirmationStyle" parent="Base.TextAppearance.AppCompat.Medium"/>
 
 </resources>

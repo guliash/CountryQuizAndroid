@@ -1,21 +1,28 @@
 package com.guliash.countryquiz.core.base;
 
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.guliash.countryquiz.utils.LifecycleLogger;
 
+import timber.log.Timber;
+
 public class BaseDialogFragment extends DialogFragment {
+
+    protected void injectDependencies() {
+        Timber.d("INJECT DEPENDENCIES %s", this);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         LifecycleLogger.createDialog(this);
+        injectDependencies();
         super.onCreate(savedInstanceState);
     }
 
