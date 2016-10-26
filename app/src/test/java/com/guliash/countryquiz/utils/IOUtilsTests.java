@@ -3,7 +3,6 @@ package com.guliash.countryquiz.utils;
 import junit.framework.Assert;
 
 import org.junit.Test;
-import org.mockito.internal.matchers.Null;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

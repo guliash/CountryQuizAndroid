@@ -13,6 +13,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import timber.log.Timber;
+
 public class StubQuizProvider implements QuizProvider {
     private Context context;
     private int resourceId;
