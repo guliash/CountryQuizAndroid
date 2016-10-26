@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.guliash.countryquiz.utils.FragmentUtils;
 import com.guliash.countryquiz.utils.LifecycleLogger;
 
 import timber.log.Timber;
@@ -17,6 +18,10 @@ public class BaseDialogFragment extends DialogFragment {
 
     protected void injectDependencies() {
         Timber.d("INJECT DEPENDENCIES %s", this);
+    }
+
+    protected <T> T getListener(Class<T> clazz) {
+        return FragmentUtils.getListener(this, clazz);
     }
 
     @Override
@@ -85,6 +90,12 @@ public class BaseDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LifecycleLogger.createDialog(this);
         return super.onCreateDialog(savedInstanceState);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        LifecycleLogger.viewCreated(this);
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override

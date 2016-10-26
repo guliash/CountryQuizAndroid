@@ -1,16 +1,15 @@
 package com.guliash.countryquiz.utils;
 
-import android.support.annotation.Nullable;
-
 import java.util.Locale;
 
 public class Preconditions {
 
-    public static <T> T checkNotNull(@Nullable T obj) {
-        if(obj == null) {
-            throw new NullPointerException();
+    public static void checkNotNull(Object... objects) {
+        for(Object object : objects) {
+            if(object == null) {
+                throw new NullPointerException();
+            }
         }
-        return obj;
     }
 
     public static void equals(int a, int b) {

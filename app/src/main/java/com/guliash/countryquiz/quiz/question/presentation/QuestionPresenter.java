@@ -2,7 +2,6 @@ package com.guliash.countryquiz.quiz.question.presentation;
 
 import android.graphics.Bitmap;
 
-import com.guliash.countryquiz.core.base.BaseNavigation;
 import com.guliash.countryquiz.quiz.game.Game;
 import com.guliash.countryquiz.quiz.model.Quiz;
 import com.guliash.countryquiz.quiz.question.QuestionContract;
@@ -17,39 +16,39 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class QuizPresenter extends QuestionContract.Presenter {
+public class QuestionPresenter extends QuestionContract.Presenter {
 
     private Game mGame;
 
     private ImageManager mImageManager;
 
-    private QuestionContract.Navigation mNavigation;
+    @State
+    String mQuizId;
 
     @State
-    String quizId;
+    String mSelectedAnswer;
 
     @Inject
-    public QuizPresenter(Game game, ImageManager imageManager, BaseNavigation navigation) {
+    public QuestionPresenter(Game game, ImageManager imageManager) {
         mGame = game;
         mImageManager = imageManager;
-        mNavigation = Preconditions.checkType(navigation, QuestionContract.Navigation.class);
     }
 
     @Override
     public void attachView(QuestionContract.View view) {
         super.attachView(view);
 
-        getView().showLoading();
+        getView().showQuizLoading();
 
         getGame();
     }
 
     private void getGame() {
         Observable<Quiz> quizObservable;
-        if (StringUtils.isEmpty(quizId)) {
+        if (StringUtils.isEmpty(mQuizId)) {
             quizObservable = mGame.next();
         } else {
-            quizObservable = mGame.get(quizId);
+            quizObservable = mGame.get(mQuizId);
         }
         quizObservable.
                 subscribeOn(Schedulers.io())
@@ -58,7 +57,7 @@ public class QuizPresenter extends QuestionContract.Presenter {
     }
 
     private void onQuizLoaded(Quiz quiz) {
-        this.quizId = quiz.getId();
+        this.mQuizId = quiz.getId();
         loadImage(quiz);
     }
 
@@ -79,12 +78,48 @@ public class QuizPresenter extends QuestionContract.Presenter {
         if (isDetached()) {
             return;
         }
-        getView().hideLoading();
+        getView().hideQuizLoading();
         getView().showQuiz(quiz, image);
     }
 
     @Override
     public void onAnswerSelected(String selectedAnswer) {
-        mNavigation.questionsAnswerSelected(quizId, selectedAnswer);
+        if (!isDetached()) {
+            mSelectedAnswer = selectedAnswer;
+            getView().showConfirmation(selectedAnswer);
+        }
+    }
+
+    @Override
+    public void onAnswerConfirmed() {
+        mGame.answer(mQuizId, mSelectedAnswer)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> {
+                    if(result) {
+                        sendCorrectAnswer();
+                    } else {
+                        sendWrongAnswer();
+                    }
+                }, error -> {
+                    //TODO error handling
+                });
+    }
+
+    private void sendCorrectAnswer() {
+        if (!isDetached()) {
+            getView().showCorrectAnswer(mQuizId);
+        }
+    }
+
+    private void sendWrongAnswer() {
+        if (!isDetached()) {
+            getView().showWrongAnswer(mSelectedAnswer);
+        }
+    }
+
+    @Override
+    public void onAnswerNotConfirmed() {
+
     }
 }

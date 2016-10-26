@@ -1,12 +1,13 @@
 package com.guliash.countryquiz.quiz.answer.view;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.NestedScrollView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.guliash.countryquiz.R;
@@ -24,49 +25,36 @@ import butterknife.ButterKnife;
 public class AnswerFragment extends BaseDialogFragment implements AnswerContract.View {
 
     static final String QUIZ_ID_EXTRA = "quiz_id";
-    static final String SELECTED_ANSWER_EXTRA = "selected_answer";
+
+    public interface Provider {
+        Callbacks provideAnswerCallbacks();
+    }
+
+    public interface Callbacks {
+        void onNextSelected(String tag);
+    }
 
     @Inject
-    AnswerPresenter presenter;
-
-    @BindView(R.id.title)
-    TextView titleView;
-
-    @BindView(R.id.dialog)
-    ViewGroup dialog;
+    AnswerPresenter mPresenter;
 
     @BindView(R.id.content_scroll)
-    NestedScrollView contentScrollView;
+    NestedScrollView mContentScrollView;
 
     @BindView(R.id.line_top)
-    View lineTop;
+    View mLineTop;
 
     @BindView(R.id.line_bottom)
-    View lineBottom;
+    View mLineBottom;
 
-    @BindView(R.id.positive_button)
-    Button positiveButton;
+    @BindView(R.id.description)
+    TextView mDescription;
 
-    @BindView(R.id.negative_button)
-    Button negativeButton;
+    private Callbacks mCallbacks;
 
-    @BindView(R.id.confirmation_text)
-    TextView confirmationText;
-
-    @BindView(R.id.confirmation_content)
-    ViewGroup confirmationContent;
-
-    @BindView(R.id.correct_content)
-    ViewGroup correctAnswerContent;
-
-    @BindView(R.id.wrong_content)
-    ViewGroup wrongAnswerContent;
-
-    public static AnswerFragment newInstance(String quizId, String selectedAnswer) {
+    public static AnswerFragment newInstance(String quizId) {
 
         Bundle args = new Bundle();
         args.putString(QUIZ_ID_EXTRA, quizId);
-        args.putString(SELECTED_ANSWER_EXTRA, selectedAnswer);
 
         AnswerFragment fragment = new AnswerFragment();
         fragment.setArguments(args);
@@ -79,84 +67,72 @@ public class AnswerFragment extends BaseDialogFragment implements AnswerContract
         ((BaseActivity) getActivity()).getComponent().inject(this);
     }
 
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.AnswerDialog);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mCallbacks = getListener(Provider.class).provideAnswerCallbacks();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
+    @NonNull
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        super.onCreateDialog(savedInstanceState);
 
-        return inflater.inflate(R.layout.answer_dialog, container, false);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.answer_dialog, null, false);
+        setupView(view);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(R.string.correct_answer);
+        builder.setPositiveButton(R.string.next, (dialog, which) -> mPresenter.nextSelected());
+        builder.setNegativeButton(R.string.close, (dialog, which) -> {/*TODO*/});
+        builder.setView(view);
+        return builder.create();
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+    public void setupView(View view) {
         ButterKnife.bind(this, view);
 
-        contentScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+        mContentScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 changeVisibilityOfSeparators(scrollY);
             }
         });
 
-        dialog.getViewTreeObserver().addOnGlobalLayoutListener(() ->
-                changeVisibilityOfSeparators(contentScrollView.getScrollY()));
+        mContentScrollView.getViewTreeObserver().addOnGlobalLayoutListener(() ->
+                changeVisibilityOfSeparators(mContentScrollView.getScrollY()));
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
-        presenter.attachView(this);
+        mPresenter.attachView(this);
 
-        presenter.setData(getArguments().getString(QUIZ_ID_EXTRA),
-                getArguments().getString(SELECTED_ANSWER_EXTRA));
+        mPresenter.setData(getArguments().getString(QUIZ_ID_EXTRA));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mPresenter.detachView();
     }
 
     private void changeVisibilityOfSeparators(int scroll) {
-        lineTop.setVisibility(scroll == 0 ? View.INVISIBLE : View.VISIBLE);
-        lineBottom.setVisibility(contentScrollView.getChildAt(0).getMeasuredHeight() <=
-                contentScrollView.getMeasuredHeight() + scroll ? View.INVISIBLE : View.VISIBLE);
+        mLineTop.setVisibility(scroll == 0 ? View.INVISIBLE : View.VISIBLE);
+        mLineBottom.setVisibility(mContentScrollView.getChildAt(0).getMeasuredHeight() <=
+                mContentScrollView.getMeasuredHeight() + scroll ? View.INVISIBLE : View.VISIBLE);
     }
 
     @Override
-    public void showConfirmation(String answerToConfirm) {
-        setTitle(getString(R.string.confirmation_answer_dialog_title));
-        setNegativeText(getString(R.string.cancel));
-        setPositiveText(getString(R.string.proceed));
-
-        correctAnswerContent.setVisibility(View.GONE);
-        wrongAnswerContent.setVisibility(View.GONE);
-        confirmationContent.setVisibility(View.VISIBLE);
-
-        confirmationText.setText(getString(R.string.confirmation_text, answerToConfirm));
-    }
-
-    private void setTitle(String title) {
-        titleView.setText(title);
-    }
-
-    private void setPositiveText(String text) {
-        positiveButton.setText(text);
-    }
-
-    private void setNegativeText(String text) {
-        negativeButton.setText(text);
+    public void showQuiz(Quiz quiz) {
+        mDescription.setText(quiz.getDescription());
     }
 
     @Override
-    public void showWrongAnswer(String wrongAnswer) {
-
-    }
-
-    @Override
-    public void showCorrectAnswer(Quiz quiz) {
-
+    public void showNext() {
+        mCallbacks.onNextSelected(getTag());
     }
 }

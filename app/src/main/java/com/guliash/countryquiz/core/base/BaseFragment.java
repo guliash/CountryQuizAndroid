@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.guliash.countryquiz.utils.FragmentUtils;
 import com.guliash.countryquiz.utils.LifecycleLogger;
 
 import timber.log.Timber;
@@ -16,6 +17,10 @@ public class BaseFragment extends Fragment {
 
     protected void injectDependencies() {
         Timber.d("INJECT DEPENDENCIES %s", this);
+    }
+
+    protected <T> T getListener(Class<T> clazz) {
+        return FragmentUtils.getListener(this, clazz);
     }
 
     @Override

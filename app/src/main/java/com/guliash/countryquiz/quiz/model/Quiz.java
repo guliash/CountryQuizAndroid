@@ -30,8 +30,11 @@ public class Quiz {
     @SerializedName("attribution")
     private String attribution;
 
+    @SerializedName("description")
+    private String description;
+
     public Quiz(String id, String name, String link, String type, List<String> answers,
-                String answer, String imageUrl, String attribution) {
+                String answer, String imageUrl, String attribution, String description) {
         this.id = id;
         this.name = name;
         this.link = link;
@@ -40,6 +43,7 @@ public class Quiz {
         this.answer = answer;
         this.imageUrl = imageUrl;
         this.attribution = attribution;
+        this.description = description;
     }
 
     public String getId() {
@@ -72,6 +76,10 @@ public class Quiz {
 
     public String getAttribution() {
         return attribution;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override

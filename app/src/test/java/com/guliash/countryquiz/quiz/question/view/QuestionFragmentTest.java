@@ -8,7 +8,7 @@ import com.guliash.countryquiz.R;
 import com.guliash.countryquiz.RxTester;
 import com.guliash.countryquiz.quiz.QuizActivity;
 import com.guliash.countryquiz.quiz.model.Quiz;
-import com.guliash.countryquiz.quiz.question.presentation.QuizPresenter;
+import com.guliash.countryquiz.quiz.question.presentation.QuestionPresenter;
 import com.guliash.countryquiz.quiz.provider.StubQuizProvider;
 
 import junit.framework.Assert;
@@ -58,7 +58,7 @@ public class QuestionFragmentTest extends RxTester {
     }
 
     private void mockViewDependencies() {
-        questionFragment.presenter = Mockito.mock(QuizPresenter.class);
+        questionFragment.mPresenter = Mockito.mock(QuestionPresenter.class);
     }
 
     @Test
@@ -73,7 +73,7 @@ public class QuestionFragmentTest extends RxTester {
         Quiz quiz = quizProvider.getQuizById("1");
         questionFragment.showQuiz(quiz, testImage);
         questionFragment.selectAnswer(quiz.getAnswers().get(0));
-        Mockito.verify(questionFragment.presenter).onAnswerSelected(quiz.getAnswers().get(0));
+        Mockito.verify(questionFragment.mPresenter).onAnswerSelected(quiz.getAnswers().get(0));
     }
 
     private void assertThatAnswersCorrectlyShown(Quiz quiz) {

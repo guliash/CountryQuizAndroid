@@ -7,20 +7,19 @@ import com.guliash.countryquiz.R;
 import com.guliash.countryquiz.core.ActivityModule;
 import com.guliash.countryquiz.core.App;
 import com.guliash.countryquiz.core.base.BaseActivity;
-import com.guliash.countryquiz.quiz.answer.AnswerContract;
-import com.guliash.countryquiz.quiz.answer.view.AnswerFragment;
 import com.guliash.countryquiz.quiz.provider.QuizProvider;
-import com.guliash.countryquiz.quiz.question.QuestionContract;
 import com.guliash.countryquiz.quiz.question.view.QuestionAdapter;
+import com.guliash.countryquiz.quiz.question.view.QuestionFragment;
 import com.guliash.countryquiz.quiz.question.view.QuestionPagerTransformer;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
-public class QuizActivity extends BaseActivity {
+public class QuizActivity extends BaseActivity implements QuestionFragment.Provider {
+
+    private static final int OFF_SCREEN_PAGE_LIMIT = 2;
 
     @BindView(R.id.quiz_pager)
     ViewPager viewPager;
@@ -31,7 +30,7 @@ public class QuizActivity extends BaseActivity {
     @Override
     protected void injectDependencies() {
         super.injectDependencies();
-        mComponent = App.get(this).getAppComponent().plus(new ActivityModule(new Navigation()));
+        mComponent = App.get(this).getAppComponent().plus(new ActivityModule());
         mComponent.inject(this);
     }
 
@@ -42,36 +41,24 @@ public class QuizActivity extends BaseActivity {
 
         ButterKnife.bind(this);
 
-        Timber.e("PROVIDER %s", quizProvider);
-
         viewPager.setAdapter(new QuestionAdapter(getSupportFragmentManager()));
-        viewPager.setOffscreenPageLimit(2);
+        viewPager.setOffscreenPageLimit(OFF_SCREEN_PAGE_LIMIT);
         viewPager.setPageTransformer(true, new QuestionPagerTransformer());
-
     }
 
-    public class Navigation implements AnswerContract.Navigation, QuestionContract.Navigation {
-
-        @Override
-        public void answersNotSureSelected() {
-
-        }
-
-        @Override
-        public void answersTryAnotherSelected() {
-
-        }
-
-        @Override
-        public void answersNextSelected() {
-
-        }
-
-        @Override
-        public void questionsAnswerSelected(String quizId, String selectedAnswer) {
-            AnswerFragment answerFragment = AnswerFragment.newInstance(quizId, selectedAnswer);
-            answerFragment.show(getSupportFragmentManager(), null);
-        }
+    @Override
+    public QuestionFragment.Callbacks provideQuestionCallbacks() {
+        return mQuestionCallbacks;
     }
 
+    private int getNextItemIndex() {
+        return viewPager.getCurrentItem() + 1;
+    }
+
+    private QuestionFragment.Callbacks mQuestionCallbacks = new QuestionFragment.Callbacks() {
+        @Override
+        public void onNextSelected(String tag) {
+            viewPager.setCurrentItem(getNextItemIndex(), true);
+        }
+    };
 }

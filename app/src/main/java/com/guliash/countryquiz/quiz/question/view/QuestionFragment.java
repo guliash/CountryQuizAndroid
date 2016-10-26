@@ -1,5 +1,6 @@
 package com.guliash.countryquiz.quiz.question.view;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,9 +18,11 @@ import android.widget.ProgressBar;
 import com.guliash.countryquiz.R;
 import com.guliash.countryquiz.core.base.BaseActivity;
 import com.guliash.countryquiz.core.base.BaseFragment;
+import com.guliash.countryquiz.core.ui.ConfirmationDialog;
+import com.guliash.countryquiz.quiz.answer.view.AnswerFragment;
 import com.guliash.countryquiz.quiz.model.Quiz;
 import com.guliash.countryquiz.quiz.question.QuestionContract;
-import com.guliash.countryquiz.quiz.question.presentation.QuizPresenter;
+import com.guliash.countryquiz.quiz.question.presentation.QuestionPresenter;
 import com.guliash.countryquiz.utils.Preconditions;
 
 import java.util.List;
@@ -31,34 +34,48 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class QuestionFragment extends BaseFragment implements QuestionContract.View {
+public class QuestionFragment extends BaseFragment implements QuestionContract.View,
+        ConfirmationDialog.Provider, AnswerFragment.Provider {
 
     private static final String ANSWERS_HIDDEN_EXTRA = "collapse";
+    private static final String CONFIRMATION_TAG = "confirmation";
+    private static final String WRONG_ANSWER_TAG = "wrong";
+    private static final String CORRECT_ANSWER_TAG = "correct";
+
+    public interface Provider {
+        Callbacks provideQuestionCallbacks();
+    }
+
+    public interface Callbacks {
+        void onNextSelected(String tag);
+    }
 
     @BindView(R.id.image)
-    ImageView imageView;
+    ImageView mImageView;
 
     @BindView(R.id.answers_container)
-    ViewGroup answersContainer;
+    ViewGroup mAnswersContainer;
 
     @BindView(R.id.toggle_answers)
-    ImageView toggleAnswersView;
+    ImageView mToggleAnswersView;
 
     @BindView(R.id.progress)
-    ProgressBar progressBar;
+    ProgressBar mProgressBar;
 
     @BindView(R.id.content)
-    FrameLayout content;
+    FrameLayout mContent;
 
     @Inject
-    QuizPresenter presenter;
+    QuestionPresenter mPresenter;
 
     @BindViews({R.id.answer1, R.id.answer2, R.id.answer3, R.id.answer4})
-    List<Button> answerViews;
+    List<Button> mAnswerViews;
 
-    private boolean areAnswersHidden;
+    private boolean mAreAnswersHidden;
 
-    private BottomSheetBehavior answersViewBehavior;
+    private BottomSheetBehavior mAnswersViewBehavior;
+
+    private Callbacks mCallbacks;
 
     public static QuestionFragment newInstance() {
         Bundle bundle = new Bundle();
@@ -71,7 +88,13 @@ public class QuestionFragment extends BaseFragment implements QuestionContract.V
     @Override
     protected void injectDependencies() {
         super.injectDependencies();
-        ((BaseActivity)getActivity()).getComponent().inject(this);
+        ((BaseActivity) getActivity()).getComponent().inject(this);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mCallbacks = getListener(Provider.class).provideQuestionCallbacks();
     }
 
     @Override
@@ -79,9 +102,9 @@ public class QuestionFragment extends BaseFragment implements QuestionContract.V
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState == null) {
-            areAnswersHidden = true;
+            mAreAnswersHidden = true;
         } else {
-            areAnswersHidden = savedInstanceState.getBoolean(ANSWERS_HIDDEN_EXTRA);
+            mAreAnswersHidden = savedInstanceState.getBoolean(ANSWERS_HIDDEN_EXTRA);
         }
     }
 
@@ -101,23 +124,23 @@ public class QuestionFragment extends BaseFragment implements QuestionContract.V
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean(ANSWERS_HIDDEN_EXTRA, areAnswersHidden);
-        presenter.onSaveInstanceState(outState);
+        outState.putBoolean(ANSWERS_HIDDEN_EXTRA, mAreAnswersHidden);
+        mPresenter.onSaveInstanceState(outState);
     }
 
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        presenter.onRestoreInstanceState(savedInstanceState);
+        mPresenter.onRestoreInstanceState(savedInstanceState);
     }
 
     private void setupAnswersPanelListeners() {
-        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) answersContainer.getLayoutParams();
-        answersViewBehavior = (BottomSheetBehavior) params.getBehavior();
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) mAnswersContainer.getLayoutParams();
+        mAnswersViewBehavior = (BottomSheetBehavior) params.getBehavior();
 
-        Preconditions.checkNotNull(answersViewBehavior);
+        Preconditions.checkNotNull(mAnswersViewBehavior);
 
-        answersViewBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+        mAnswersViewBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
@@ -139,18 +162,18 @@ public class QuestionFragment extends BaseFragment implements QuestionContract.V
     public void onResume() {
         super.onResume();
         updateAnswersViewState();
-        presenter.attachView(this);
+        mPresenter.attachView(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        presenter.detachView();
+        mPresenter.detachView();
     }
 
     @OnClick(R.id.toggle_answers)
     void onToggleAnswersViewClick() {
-        if (areAnswersHidden) {
+        if (mAreAnswersHidden) {
             showAnswersView();
         } else {
             hideAnswersView();
@@ -158,15 +181,15 @@ public class QuestionFragment extends BaseFragment implements QuestionContract.V
     }
 
     private void showAnswersView() {
-        answersViewBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        mAnswersViewBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
     }
 
     private void hideAnswersView() {
-        answersViewBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        mAnswersViewBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
     private void updateAnswersViewState() {
-        if (areAnswersHidden) {
+        if (mAreAnswersHidden) {
             onAnswersHidden();
         } else {
             onAnswersShown();
@@ -174,13 +197,13 @@ public class QuestionFragment extends BaseFragment implements QuestionContract.V
     }
 
     private void onAnswersShown() {
-        areAnswersHidden = false;
-        toggleAnswersView.setImageResource(R.drawable.ic_chevron_down_black_36dp);
+        mAreAnswersHidden = false;
+        mToggleAnswersView.setImageResource(R.drawable.ic_chevron_down_black_36dp);
     }
 
     private void onAnswersHidden() {
-        areAnswersHidden = true;
-        toggleAnswersView.setImageResource(R.drawable.ic_chevron_up_black_36dp);
+        mAreAnswersHidden = true;
+        mToggleAnswersView.setImageResource(R.drawable.ic_chevron_up_black_36dp);
     }
 
     @OnClick({R.id.answer1, R.id.answer2, R.id.answer3, R.id.answer4})
@@ -193,7 +216,7 @@ public class QuestionFragment extends BaseFragment implements QuestionContract.V
     }
 
     void selectAnswer(String answer) {
-        presenter.onAnswerSelected(answer);
+        mPresenter.onAnswerSelected(answer);
     }
 
     @Override
@@ -203,13 +226,13 @@ public class QuestionFragment extends BaseFragment implements QuestionContract.V
     }
 
     private void showImage(Bitmap image) {
-        imageView.setImageBitmap(image);
+        mImageView.setImageBitmap(image);
     }
 
     private void showAnswers(Quiz quiz) {
-        Preconditions.equals(quiz.getAnswers().size(), answerViews.size());
-        for (int i = 0, size = answerViews.size(); i < size; i++) {
-            Button button = answerViews.get(i);
+        Preconditions.equals(quiz.getAnswers().size(), mAnswerViews.size());
+        for (int i = 0, size = mAnswerViews.size(); i < size; i++) {
+            Button button = mAnswerViews.get(i);
             String answer = quiz.getAnswers().get(i);
             button.setTag(R.id.answer_tag, answer);
             button.setText(answer);
@@ -217,17 +240,73 @@ public class QuestionFragment extends BaseFragment implements QuestionContract.V
     }
 
     @Override
-    public void showLoading() {
-        imageView.setVisibility(View.GONE);
-        progressBar.setVisibility(View.VISIBLE);
-        answersContainer.setVisibility(View.GONE);
+    public void showQuizLoading() {
+        mImageView.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.VISIBLE);
+        mAnswersContainer.setVisibility(View.GONE);
 
     }
 
     @Override
-    public void hideLoading() {
-        imageView.setVisibility(View.VISIBLE);
-        progressBar.setVisibility(View.GONE);
-        answersContainer.setVisibility(View.VISIBLE);
+    public void hideQuizLoading() {
+        mImageView.setVisibility(View.VISIBLE);
+        mProgressBar.setVisibility(View.GONE);
+        mAnswersContainer.setVisibility(View.VISIBLE);
     }
+
+    @Override
+    public void showConfirmation(String selectedAnswer) {
+        ConfirmationDialog.newInstance(getString(R.string.confirmation_answer_dialog_title),
+                getString(R.string.confirmation_text, selectedAnswer),
+                getString(R.string.proceed), getString(R.string.cancel))
+                .show(getChildFragmentManager(), CONFIRMATION_TAG);
+    }
+
+    @Override
+    public void showCorrectAnswer(String quizId) {
+        AnswerFragment.newInstance(quizId).show(getChildFragmentManager(), CORRECT_ANSWER_TAG);
+    }
+
+    @Override
+    public void showWrongAnswer(String selectedAnswer) {
+        ConfirmationDialog.newInstance(getString(R.string.wrong_answer),
+                getString(R.string.wrong_answer_description, selectedAnswer),
+                getString(R.string.try_again), null)
+                .show(getChildFragmentManager(), WRONG_ANSWER_TAG);
+    }
+
+    @Override
+    public ConfirmationDialog.Callbacks provideConfirmationCallbacks() {
+        return mConfirmationCallbacks;
+    }
+
+    @Override
+    public AnswerFragment.Callbacks provideAnswerCallbacks() {
+        return mAnswerFragmentCallbacks;
+    }
+
+    private ConfirmationDialog.Callbacks mConfirmationCallbacks = new ConfirmationDialog.Callbacks() {
+        @Override
+        public void onConfirmed(String tag) {
+            if(CONFIRMATION_TAG.equals(tag)) {
+                mPresenter.onAnswerConfirmed();
+            }
+        }
+
+        @Override
+        public void onNotConfirmed(String tag) {
+            if(CONFIRMATION_TAG.equals(tag)) {
+                mPresenter.onAnswerNotConfirmed();
+            }
+        }
+    };
+
+    private AnswerFragment.Callbacks mAnswerFragmentCallbacks = new AnswerFragment.Callbacks() {
+        @Override
+        public void onNextSelected(String tag) {
+            if(CORRECT_ANSWER_TAG.equals(tag)) {
+                mCallbacks.onNextSelected(getTag());
+            }
+        }
+    };
 }

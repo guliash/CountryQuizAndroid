@@ -3,7 +3,6 @@ package com.guliash.countryquiz.quiz.question.presentation;
 import android.graphics.Bitmap;
 
 import com.guliash.countryquiz.RxTester;
-import com.guliash.countryquiz.data.StubQuizzes;
 import com.guliash.countryquiz.utils.image.ImageManager;
 import com.guliash.countryquiz.quiz.question.QuestionContract;
 import com.guliash.countryquiz.quiz.game.Game;
@@ -20,10 +19,10 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class QuizPresenterTest extends RxTester {
+public class QuestionPresenterTest extends RxTester {
 
 
-    private QuizPresenter presenter;
+    private QuestionPresenter presenter;
 
     @Mock
     QuestionContract.View view;
@@ -35,16 +34,13 @@ public class QuizPresenterTest extends RxTester {
     ImageManager imageManager;
 
     @Mock
-    QuestionContract.Navigation navigation;
-
-    @Mock
     Bitmap bitmap;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
-        presenter = new QuizPresenter(game, imageManager, navigation);
+        presenter = new QuestionPresenter(game, imageManager);
 
         when(game.next()).thenReturn(Observable.just(QUIZ1));
         when(imageManager.loadImage(anyString())).thenReturn(Observable.just(bitmap));
@@ -59,11 +55,35 @@ public class QuizPresenterTest extends RxTester {
     }
 
     @Test
-    public void answerSelected_normal_navigates() {
+    public void answerSelected_normal_showsConfirmation() {
         presenter.attachView(view);
 
         presenter.onAnswerSelected(QUIZ1.getAnswer());
 
-        verify(navigation).questionsAnswerSelected(QUIZ1.getId(), QUIZ1.getAnswer());
+        verify(view).showConfirmation(QUIZ1.getAnswer());
+    }
+
+    @Test
+    public void onAnswerConfirmed_answerCorrect_showsCorrectAnswer() {
+        presenter.attachView(view);
+        when(game.answer(anyString(), anyString())).thenReturn(Observable.just(true));
+
+        presenter.onAnswerSelected(QUIZ1.getAnswer());
+
+        presenter.onAnswerConfirmed();
+
+        verify(view).showCorrectAnswer(QUIZ1.getId());
+    }
+
+    @Test
+    public void onAnswerConfirmed_answerWrong_showsWrongAnswer() {
+        presenter.attachView(view);
+        when(game.answer(anyString(), anyString())).thenReturn(Observable.just(false));
+
+        presenter.onAnswerSelected(QUIZ1.getAnswer());
+
+        presenter.onAnswerConfirmed();
+
+        verify(view).showWrongAnswer(QUIZ1.getAnswer());
     }
 }
