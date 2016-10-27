@@ -15,6 +15,7 @@ import icepick.State;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 public class QuestionPresenter extends QuestionContract.Presenter {
 
@@ -102,7 +103,7 @@ public class QuestionPresenter extends QuestionContract.Presenter {
                         sendWrongAnswer();
                     }
                 }, error -> {
-                    //TODO error handling
+                    Timber.e(error);
                 });
     }
 

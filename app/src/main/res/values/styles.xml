@@ -49,4 +49,9 @@
 
     <style name="ConfirmationStyle" parent="Base.TextAppearance.AppCompat.Medium"/>
 
+    <style name="AttributionStyle">
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
 </resources>

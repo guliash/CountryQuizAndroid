@@ -6,7 +6,6 @@ import com.guliash.countryquiz.quiz.provider.QuizProvider;
 import java.util.List;
 
 import rx.Observable;
-import timber.log.Timber;
 
 public class GameImp implements Game {
 

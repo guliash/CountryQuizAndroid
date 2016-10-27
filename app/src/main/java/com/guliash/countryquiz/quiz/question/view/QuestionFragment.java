@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.guliash.countryquiz.R;
 import com.guliash.countryquiz.core.base.BaseActivity;
@@ -58,6 +59,9 @@ public class QuestionFragment extends BaseFragment implements QuestionContract.V
 
     @BindView(R.id.toggle_answers)
     ImageView mToggleAnswersView;
+
+    @BindView(R.id.attribution)
+    TextView mAttribution;
 
     @BindView(R.id.progress)
     ProgressBar mProgressBar;
@@ -221,8 +225,13 @@ public class QuestionFragment extends BaseFragment implements QuestionContract.V
 
     @Override
     public void showQuiz(Quiz quiz, Bitmap image) {
+        showAttribution(quiz.getAttribution());
         showImage(image);
         showAnswers(quiz);
+    }
+
+    private void showAttribution(String attribution) {
+        mAttribution.setText(attribution);
     }
 
     private void showImage(Bitmap image) {
@@ -242,16 +251,18 @@ public class QuestionFragment extends BaseFragment implements QuestionContract.V
     @Override
     public void showQuizLoading() {
         mImageView.setVisibility(View.GONE);
-        mProgressBar.setVisibility(View.VISIBLE);
         mAnswersContainer.setVisibility(View.GONE);
+        mAttribution.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.VISIBLE);
 
     }
 
     @Override
     public void hideQuizLoading() {
-        mImageView.setVisibility(View.VISIBLE);
         mProgressBar.setVisibility(View.GONE);
+        mImageView.setVisibility(View.VISIBLE);
         mAnswersContainer.setVisibility(View.VISIBLE);
+        mAttribution.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -288,14 +299,14 @@ public class QuestionFragment extends BaseFragment implements QuestionContract.V
     private ConfirmationDialog.Callbacks mConfirmationCallbacks = new ConfirmationDialog.Callbacks() {
         @Override
         public void onConfirmed(String tag) {
-            if(CONFIRMATION_TAG.equals(tag)) {
+            if (CONFIRMATION_TAG.equals(tag)) {
                 mPresenter.onAnswerConfirmed();
             }
         }
 
         @Override
         public void onNotConfirmed(String tag) {
-            if(CONFIRMATION_TAG.equals(tag)) {
+            if (CONFIRMATION_TAG.equals(tag)) {
                 mPresenter.onAnswerNotConfirmed();
             }
         }
@@ -304,7 +315,7 @@ public class QuestionFragment extends BaseFragment implements QuestionContract.V
     private AnswerFragment.Callbacks mAnswerFragmentCallbacks = new AnswerFragment.Callbacks() {
         @Override
         public void onNextSelected(String tag) {
-            if(CORRECT_ANSWER_TAG.equals(tag)) {
+            if (CORRECT_ANSWER_TAG.equals(tag)) {
                 mCallbacks.onNextSelected(getTag());
             }
         }

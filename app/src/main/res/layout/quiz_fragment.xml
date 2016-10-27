@@ -10,11 +10,13 @@
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ProgressBar
+            android:id="@+id/progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/progress"/>
+            android:layout_gravity="center"/>
+
         <ImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
@@ -23,12 +25,22 @@
             tools:ignore="ContentDescription"/>
     </FrameLayout>
 
+    <TextView
+        android:id="@+id/attribution"
+        style="@style/AttributionStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        app:layout_behavior="com.guliash.countryquiz.quiz.question.view.AttributionBehavior"
+        android:background="@color/attribution_bg"/>
+
     <FrameLayout
         android:id="@+id/answers_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:behavior_hideable="false"
-        app:behavior_peekHeight="48dp"
+        app:behavior_peekHeight="@dimen/answers_panel_peek_height"
         app:layout_behavior="@string/bottom_sheet_behavior">
 
         <include layout="@layout/variants_layout"/>

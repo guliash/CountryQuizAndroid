@@ -9,4 +9,5 @@
     <color name="textColorSecondary">#8a000000</color>
     <color name="textColorTertiary">#61000000</color>
     <color name="grey400">#bdbdbd</color>
+    <color name="attribution_bg">#50ffffff</color>
 </resources>
