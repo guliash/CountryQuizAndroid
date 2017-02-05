@@ -10,11 +10,11 @@ import com.guliash.quizzes.question.view.createQuestionsPager
 class GameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
         QuizzesApplication.application(this).gameComponent = QuizzesApplication.application(this)
                 .appComponent.plus(GameModule())
+
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction().add(R.id.container, createQuestionsPager()).commit()
