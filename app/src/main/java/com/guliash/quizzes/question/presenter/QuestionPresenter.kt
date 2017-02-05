@@ -17,12 +17,18 @@ class QuestionPresenter @Inject constructor(val whichQuestion: Int, val game: Ga
                                             @Main val postScheduler: Scheduler) :
         Presenter<QuestionView>() {
 
+    private lateinit var question: Question
+
     override fun bind(view: QuestionView) {
         super.bind(view)
 
-        subscribe(question().subscribe(
-                { question -> view.showQuestion(question) },
-                { error -> view.showError("Sorry, error occurred.") })
+        subscribe(
+                question()
+                        .doOnSuccess { question -> this.question = question }
+                        .subscribe(
+                                { question -> view.showQuestion(question) },
+                                { error -> view.showError("Sorry, error occurred.") }),
+                view.answers().subscribe { game.answer(question) }
         )
     }
 

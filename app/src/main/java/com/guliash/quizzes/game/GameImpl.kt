@@ -2,9 +2,15 @@ package com.guliash.quizzes.game
 
 import com.guliash.quizzes.question.model.Answer
 import com.guliash.quizzes.question.model.Question
+import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.subjects.PublishSubject
 
 class GameImpl : Game {
+
+    private val answers: PublishSubject<Unit> = PublishSubject.create()
+
+    override fun answers(): Observable<Unit> = answers
 
     private companion object Provider {
         val questions: List<Question> = arrayListOf(
@@ -21,6 +27,6 @@ class GameImpl : Game {
     }
 
     override fun answer(question: Question) {
-
+        answers.onNext(Unit)
     }
 }

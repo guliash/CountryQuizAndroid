@@ -11,13 +11,18 @@ import android.view.ViewGroup
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.guliash.quizzes.R
+import com.guliash.quizzes.core.QuizzesApplication
+import com.guliash.quizzes.question.presenter.QuestionsPagerPresenter
+import javax.inject.Inject
 
 fun createQuestionsPager(): QuestionsPagerFragment = QuestionsPagerFragment()
 
-class QuestionsPagerFragment : Fragment() {
-
+class QuestionsPagerFragment : Fragment(), QuestionsPagerView {
     @BindView(R.id.pager)
     lateinit var pager: ViewPager
+
+    @Inject
+    lateinit var presenter: QuestionsPagerPresenter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.questions_pager, container, false)
@@ -25,10 +30,25 @@ class QuestionsPagerFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        QuizzesApplication.application(context).gameComponent!!.inject(this)
+
         ButterKnife.bind(this, view!!)
-        println(pager)
+
+        presenter.bind(this)
+
+        pager.pageMargin = context.resources.getDimensionPixelOffset(R.dimen.question_page_margin)
 
         pager.adapter = Adapter(fragmentManager)
+    }
+
+    override fun onDestroyView() {
+        presenter.unbind()
+        super.onDestroyView()
+    }
+
+    override fun showNextQuestion() {
+        pager.currentItem += 1
     }
 
     class Adapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
