@@ -4,15 +4,13 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.guliash.quizzes.R
 import com.guliash.quizzes.core.QuizzesApplication
-import com.guliash.quizzes.game.di.GameModule
 import com.guliash.quizzes.question.view.createQuestionsPager
 
 class GameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         QuizzesApplication.application(this).gameComponent = QuizzesApplication.application(this)
-                .appComponent.plus(GameModule())
-
+                .appComponent.plus()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

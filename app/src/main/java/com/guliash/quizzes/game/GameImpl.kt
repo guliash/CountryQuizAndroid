@@ -1,16 +1,14 @@
 package com.guliash.quizzes.game
 
+import com.guliash.quizzes.game.di.GameScope
 import com.guliash.quizzes.question.model.Answer
 import com.guliash.quizzes.question.model.Question
-import io.reactivex.Observable
+import com.guliash.quizzes.question.model.Verdict
 import io.reactivex.Single
-import io.reactivex.subjects.PublishSubject
+import javax.inject.Inject
 
-class GameImpl : Game {
-
-    private val answers: PublishSubject<Unit> = PublishSubject.create()
-
-    override fun answers(): Observable<Unit> = answers
+@GameScope
+class GameImpl @Inject constructor() : Game {
 
     private companion object Provider {
         val questions: List<Question> = arrayListOf(
@@ -26,7 +24,7 @@ class GameImpl : Game {
         return Single.just(questions[which % questions.size]);
     }
 
-    override fun answer(question: Question) {
-        answers.onNext(Unit)
+    override fun answer(question: Question, answer: Answer): Single<Verdict> {
+        return if (answer.correct) Single.just(Verdict(answer, true)) else Single.just(Verdict(answer, false))
     }
 }

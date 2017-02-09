@@ -1,6 +1,7 @@
 package com.guliash.quizzes.question.presenter
 
-import com.guliash.quizzes.question.game.StubGameImpl
+import com.guliash.quizzes.question.game.StubGame
+import com.guliash.quizzes.question.game.StubGamepad
 import com.guliash.quizzes.question.view.StubQuestionView
 import io.reactivex.schedulers.TestScheduler
 import org.jetbrains.spek.api.Spek
@@ -16,15 +17,17 @@ class QuestionPresenterSpec : Spek({
     describe("presenter") {
 
         var view = StubQuestionView()
-        var game = StubGameImpl()
+        var game = StubGame()
+        var gamepad = StubGamepad()
         var scheduler = TestScheduler()
-        var presenter: QuestionPresenter = QuestionPresenter(0, game, scheduler, scheduler)
+        var presenter: QuestionPresenter = QuestionPresenter(0, game, gamepad, scheduler, scheduler)
 
         beforeEachTest {
             view = StubQuestionView()
-            game = StubGameImpl()
+            game = StubGame()
+            gamepad = StubGamepad()
             scheduler = TestScheduler()
-            presenter = QuestionPresenter(0, game, scheduler, scheduler)
+            presenter = QuestionPresenter(0, game, gamepad, scheduler, scheduler)
         }
 
         on("bind") {

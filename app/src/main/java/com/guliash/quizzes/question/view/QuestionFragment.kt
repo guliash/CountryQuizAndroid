@@ -15,8 +15,10 @@ import com.guliash.quizzes.R
 import com.guliash.quizzes.core.QuizzesApplication
 import com.guliash.quizzes.core.rx.RxView
 import com.guliash.quizzes.question.di.QuestionModule
+import com.guliash.quizzes.question.model.Answer
 import com.guliash.quizzes.question.model.Question
 import com.guliash.quizzes.question.presenter.QuestionPresenter
+import io.reactivex.Completable
 import io.reactivex.Observable
 import java.util.*
 import javax.inject.Inject
@@ -93,7 +95,16 @@ class QuestionFragment : Fragment(), QuestionView {
     }
 
     override fun showError(error: String) {
+        println("Show error")
+    }
 
+    override fun showWrongAnswer(answer: Answer) {
+        println("Show wrong answer")
+    }
+
+    override fun showCorrectAnswer(answer: Answer): Completable {
+        println("Show correct answer")
+        return Completable.complete()
     }
 
 }
