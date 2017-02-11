@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Quizzes</string>
+
+    <string name="attribution" formatted="false">%s by %s is licensed under %s</string>
 </resources>

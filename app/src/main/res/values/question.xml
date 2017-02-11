@@ -4,4 +4,5 @@
     <dimen name="answerDividerHeight">1dp</dimen>
     <dimen name="answerDividerWidth">1dp</dimen>
     <color name="answerDividerColor">@color/grey600</color>
+    <color name="answerLinkColor">#448aff</color>
 </resources>

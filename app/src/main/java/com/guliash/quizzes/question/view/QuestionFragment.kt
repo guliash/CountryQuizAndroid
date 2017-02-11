@@ -2,11 +2,13 @@ package com.guliash.quizzes.question.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import butterknife.BindView
 import butterknife.BindViews
 import butterknife.ButterKnife
@@ -14,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.guliash.quizzes.R
 import com.guliash.quizzes.core.QuizzesApplication
 import com.guliash.quizzes.core.rx.RxView
+import com.guliash.quizzes.question.QuestionUtils
 import com.guliash.quizzes.question.di.QuestionModule
 import com.guliash.quizzes.question.model.Answer
 import com.guliash.quizzes.question.model.Question
@@ -40,11 +43,17 @@ class QuestionFragment : Fragment(), QuestionView {
     @BindView(R.id.image)
     lateinit var questionImageView: ImageView
 
+    @BindView(R.id.attribution)
+    lateinit var attributionTextView: TextView
+
     @BindViews(R.id.answer1, R.id.answer2, R.id.answer3, R.id.answer4)
     lateinit var answerButtons: Array<Button>
 
     @Inject
     lateinit var presenter: QuestionPresenter
+
+    @Inject
+    lateinit var utils: QuestionUtils
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,6 +71,8 @@ class QuestionFragment : Fragment(), QuestionView {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ButterKnife.bind(this, view!!)
+
+        attributionTextView.movementMethod = LinkMovementMethod.getInstance()
 
         presenter.bind(this)
     }
@@ -84,7 +95,7 @@ class QuestionFragment : Fragment(), QuestionView {
 
     override fun showQuestion(question: Question) {
         Glide.with(this)
-                .load(question.imageUrl)
+                .load(question.image.url)
                 .centerCrop()
                 .into(questionImageView)
 
@@ -92,6 +103,9 @@ class QuestionFragment : Fragment(), QuestionView {
         for ((index, answer) in question.answers.withIndex()) {
             answerButtons[index].text = answer.text
         }
+
+        attributionTextView.setText(utils.buildAttribution(question.image.attribution), TextView.BufferType.SPANNABLE)
+
     }
 
     override fun showError(error: String) {

@@ -1,3 +1,3 @@
 package com.guliash.quizzes.question.model
 
-class Verdict(val answer: Answer, val correct: Boolean)
+data class Verdict(val answer: Answer, val correct: Boolean)
