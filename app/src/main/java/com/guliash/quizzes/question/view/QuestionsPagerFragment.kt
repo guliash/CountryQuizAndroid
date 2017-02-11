@@ -37,7 +37,7 @@ class QuestionsPagerFragment : Fragment(), QuestionsPagerView {
 
         presenter.bind(this)
 
-        pager.pageMargin = context.resources.getDimensionPixelOffset(R.dimen.question_page_margin)
+        pager.pageMargin = context.resources.getDimensionPixelOffset(R.dimen.questionPageMargin)
 
         pager.adapter = Adapter(fragmentManager)
     }
