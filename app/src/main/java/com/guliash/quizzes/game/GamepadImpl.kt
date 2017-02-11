@@ -9,7 +9,6 @@ class GamepadImpl @Inject constructor() : Gamepad {
     private val nextNotifications = PublishSubject.create<Unit>()
 
     override fun needNext() {
-        println("need next")
         nextNotifications.onNext(Unit)
     }
 
