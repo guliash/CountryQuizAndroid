@@ -9,4 +9,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AnswerButton">
+        <item name="android:background">@drawable/answer_button_background</item>
+    </style>
+
 </resources>

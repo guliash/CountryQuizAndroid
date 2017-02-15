@@ -24,6 +24,4 @@ object SpanFormatter {
         }
         return ssb
     }
-
-
 }

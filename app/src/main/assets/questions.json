@@ -1,0 +1,40 @@
+[
+  {
+    "question": "Which country?",
+    "answers": [
+      {
+        "text": "Egypt",
+        "correct": true
+      },
+      {
+        "text": "China",
+        "correct": false
+      },
+      {
+        "text": "Russia",
+        "correct": false
+      },
+      {
+        "text": "Japan",
+        "correct": false
+      }
+    ],
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Great_Sphinx_Closeup.JPG/640px-Great_Sphinx_Closeup.JPG",
+      "attribution": {
+        "resource": {
+          "href": "https://commons.wikimedia.org/wiki/File:Great_Sphinx_Closeup.JPG",
+          "link": "Photo"
+        },
+        "author": {
+          "href": "https://en.wikipedia.org/wiki/User:Hamish2k",
+          "link": "Hamish2k"
+        },
+        "license": {
+          "href": "https://creativecommons.org/licenses/by-sa/3.0/deed.en",
+          "link": "CC BY-SA 3.0"
+        }
+      }
+    }
+  }
+]

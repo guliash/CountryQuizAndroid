@@ -2,6 +2,5 @@
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="?attr/colorAccent">
     <item
-        android:id="@android:id/mask"
-        android:drawable="@android:color/white" />
+        android:drawable="@color/answerBackgroundColor" />
 </ripple>

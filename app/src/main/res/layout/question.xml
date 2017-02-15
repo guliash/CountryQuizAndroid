@@ -30,9 +30,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:background="@drawable/answer_link_background"
-                tools:text="Test attribution"
-                android:padding="8dp" />
+                android:background="@color/answerAttributionBackgroundColor"
+                android:padding="8dp"
+                tools:text="Test attribution" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/answerDividerHeight"
+                android:layout_gravity="bottom"
+                android:background="@color/answerDividerColor" />
         </FrameLayout>
 
         <LinearLayout
@@ -47,10 +53,10 @@
 
                 <Button
                     android:id="@+id/answer1"
+                    style="@style/AnswerButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/answer_button_background" />
+                    android:layout_weight="1" />
 
                 <View
                     android:layout_width="@dimen/answerDividerWidth"
@@ -59,10 +65,10 @@
 
                 <Button
                     android:id="@+id/answer2"
+                    style="@style/AnswerButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/answer_button_background" />
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <View
@@ -77,10 +83,10 @@
 
                 <Button
                     android:id="@+id/answer3"
+                    style="@style/AnswerButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/answer_button_background" />
+                    android:layout_weight="1" />
 
                 <View
                     android:layout_width="@dimen/answerDividerWidth"
@@ -89,10 +95,10 @@
 
                 <Button
                     android:id="@+id/answer4"
+                    style="@style/AnswerButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/answer_button_background" />
+                    android:layout_weight="1" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
