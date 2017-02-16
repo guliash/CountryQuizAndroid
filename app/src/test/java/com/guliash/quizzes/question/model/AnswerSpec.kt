@@ -1,5 +1,6 @@
 package com.guliash.quizzes.question.model
 
+import com.guliash.quizzes.answer.model.Answer
 import junit.framework.Assert.assertEquals
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe

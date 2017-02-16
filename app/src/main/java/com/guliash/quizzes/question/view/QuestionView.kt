@@ -1,8 +1,7 @@
 package com.guliash.quizzes.question.view
 
-import com.guliash.quizzes.question.model.Answer
 import com.guliash.quizzes.question.model.Question
-import io.reactivex.Completable
+import com.guliash.quizzes.question.model.Verdict
 import io.reactivex.Observable
 
 interface QuestionView {
@@ -11,9 +10,7 @@ interface QuestionView {
 
     fun showError(error: String)
 
-    fun showWrongAnswer(answer: Answer)
-
-    fun showCorrectAnswer(answer: Answer): Completable
+    fun showVerdict(verdict: Verdict)
 
     fun answers(): Observable<Int>
 

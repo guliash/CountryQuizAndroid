@@ -8,7 +8,6 @@ import com.guliash.quizzes.game.Gamepad
 import com.guliash.quizzes.question.di.QuestionScope
 import com.guliash.quizzes.question.model.Question
 import com.guliash.quizzes.question.view.QuestionView
-import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import javax.inject.Inject
@@ -38,16 +37,7 @@ class QuestionPresenter @Inject constructor(private val whichQuestion: Int,
                             game.answer(question, question.answers[whichAnswer]).toObservable()
                         })
                         .observeOn(postScheduler)
-                        .concatMap({ verdict ->
-                            if (verdict.correct) {
-                                view.showCorrectAnswer(verdict.answer).andThen(Observable.just(verdict))
-                            } else {
-                                view.showWrongAnswer(verdict.answer)
-                                Observable.just(verdict)
-                            }
-                        })
-                        .doOnNext({ verdict -> if (verdict.correct) gamepad.needNext() })
-                        .subscribe()
+                        .subscribe({ it -> view.showVerdict(it) })
         )
     }
 

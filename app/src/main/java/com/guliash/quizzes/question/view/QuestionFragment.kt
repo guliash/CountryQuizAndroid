@@ -14,14 +14,17 @@ import butterknife.BindViews
 import butterknife.ButterKnife
 import com.bumptech.glide.Glide
 import com.guliash.quizzes.R
+import com.guliash.quizzes.answer.di.AnswerModule
+import com.guliash.quizzes.answer.di.ComponentProvider
+import com.guliash.quizzes.answer.view.createAnswerFragment
 import com.guliash.quizzes.core.QuizzesApplication
 import com.guliash.quizzes.core.rx.RxView
 import com.guliash.quizzes.question.QuestionUtils
+import com.guliash.quizzes.question.di.QuestionComponent
 import com.guliash.quizzes.question.di.QuestionModule
-import com.guliash.quizzes.question.model.Answer
 import com.guliash.quizzes.question.model.Question
+import com.guliash.quizzes.question.model.Verdict
 import com.guliash.quizzes.question.presenter.QuestionPresenter
-import io.reactivex.Completable
 import io.reactivex.Observable
 import java.util.*
 import javax.inject.Inject
@@ -36,7 +39,7 @@ fun createQuestionFragment(whichQuestion: Int): QuestionFragment {
     return fragment
 }
 
-class QuestionFragment : Fragment(), QuestionView {
+class QuestionFragment : Fragment(), QuestionView, ComponentProvider {
 
     private var whichQuestion: Int = 0
 
@@ -55,13 +58,15 @@ class QuestionFragment : Fragment(), QuestionView {
     @Inject
     lateinit var utils: QuestionUtils
 
+    lateinit var questionComponent: QuestionComponent
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         whichQuestion = arguments.getInt(WHICH_QUESTION_ARG)
 
-        QuizzesApplication.application(context).gameComponent!!.plus(QuestionModule(whichQuestion))
-                .inject(this)
+        questionComponent = QuizzesApplication.application(context).gameComponent!!.plus(QuestionModule(whichQuestion))
+        questionComponent.inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -82,6 +87,8 @@ class QuestionFragment : Fragment(), QuestionView {
 
         presenter.unbind()
     }
+
+    override fun create(module: AnswerModule) = questionComponent.plus(module)
 
     override fun answers(): Observable<Int> {
         val clicks: MutableList<Observable<Int>> = ArrayList()
@@ -112,13 +119,8 @@ class QuestionFragment : Fragment(), QuestionView {
         println("Show error")
     }
 
-    override fun showWrongAnswer(answer: Answer) {
-        println("Show wrong answer")
-    }
-
-    override fun showCorrectAnswer(answer: Answer): Completable {
-        println("Show correct answer")
-        return Completable.complete()
+    override fun showVerdict(verdict: Verdict) {
+        createAnswerFragment(verdict).show(childFragmentManager, null)
     }
 
 }

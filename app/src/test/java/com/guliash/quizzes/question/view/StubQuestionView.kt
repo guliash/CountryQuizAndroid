@@ -1,6 +1,6 @@
 package com.guliash.quizzes.question.view
 
-import com.guliash.quizzes.question.model.Answer
+import com.guliash.quizzes.answer.model.Answer
 import com.guliash.quizzes.question.model.Question
 import io.reactivex.Completable
 import io.reactivex.Observable

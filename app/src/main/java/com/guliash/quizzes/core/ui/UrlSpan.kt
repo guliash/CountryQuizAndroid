@@ -1,19 +1,21 @@
 package com.guliash.quizzes.core.ui
 
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
+import android.support.v4.content.ContextCompat
 import android.text.TextPaint
 import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.View
+import com.guliash.quizzes.R
 
-class UrlSpan(val url: String) : ClickableSpan() {
+class UrlSpan(val url: String, private val context: Context) : ClickableSpan() {
 
     override fun updateDrawState(ds: TextPaint?) {
         super.updateDrawState(ds)
-        ds!!.color = Color.rgb(0x44, 0x8A, 0xFF)
+        ds!!.color = ContextCompat.getColor(context, R.color.answerLinkColor)
     }
 
     override fun onClick(view: View?) {
