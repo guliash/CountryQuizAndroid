@@ -12,6 +12,14 @@ class AnswerPresenter @Inject constructor(val verdict: Verdict, val gamepad: Gam
         super.bind(view)
 
         if (verdict.correct) view.showCorrectAnswer(verdict.answer) else view.showWrongAnswer(verdict.answer)
+
+        subscribe(
+                view.tryAgain().subscribe { it -> view.close() },
+                view.next().subscribe { it ->
+                    gamepad.needNext()
+                    view.close()
+                }
+        )
     }
 
 }

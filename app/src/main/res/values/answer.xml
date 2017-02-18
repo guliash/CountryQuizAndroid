@@ -11,9 +11,10 @@
 
     <style name="Answer_Title">
         <item name="android:textSize">18sp</item>
-        <item name="android:padding">8dp</item>
     </style>
 
     <string name="answer_correctAnswer">Correct answer!</string>
     <string name="answer_wrongAnswer">Wrong answer :-(</string>
+    <string name="answer_tryAgain">Try again</string>
+    <string name="answer_next">Next</string>
 </resources>

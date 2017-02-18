@@ -5,7 +5,6 @@ import android.text.Spannable
 import android.text.SpannableString
 import com.guliash.quizzes.R
 import com.guliash.quizzes.core.ui.SpanFormatter
-import com.guliash.quizzes.core.ui.UrlSpan
 import com.guliash.quizzes.core.ui.UrlSpanFactory
 import com.guliash.quizzes.question.di.QuestionScope
 import com.guliash.quizzes.question.model.Attribution

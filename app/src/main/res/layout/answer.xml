@@ -3,20 +3,20 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="8dp">
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/title"
+        style="@style/Answer_Title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/Answer_Title"/>
+        android:layout_height="wrap_content" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/answer_dividerHeight"
-        android:background="@color/answer_dividerColor"/>
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/answer_dividerColor" />
 
     <ScrollView
         android:id="@+id/content"
@@ -31,18 +31,22 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/try_again"
+            style="@style/Answer_ControlButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            style="@style/Answer_ControlButton"/>
+            android:text="@string/answer_tryAgain" />
 
         <Button
+            android:id="@+id/next"
+            style="@style/Answer_ControlButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            style="@style/Answer_ControlButton"/>
+            android:text="@string/answer_next" />
     </RelativeLayout>
 
 </LinearLayout>
