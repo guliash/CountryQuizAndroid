@@ -8,21 +8,16 @@ import com.guliash.quizzes.core.ui.SpanFormatter
 import com.guliash.quizzes.core.ui.UrlSpanFactory
 import com.guliash.quizzes.question.di.QuestionScope
 import com.guliash.quizzes.question.model.Attribution
-import com.guliash.quizzes.question.model.Url
+import com.guliash.quizzes.core.url.Url
+import com.guliash.quizzes.core.url.UrlUtils
 import javax.inject.Inject
 
 @QuestionScope
 class QuestionUtils @Inject constructor(private val context: Context,
-                                        private val urlSpanFactory: UrlSpanFactory) {
+                                        private val urlUtils: UrlUtils) {
     fun buildAttribution(attribution: Attribution): CharSequence {
-        val str = context.getString(R.string.attribution)
-        return SpanFormatter.format(str, url(attribution.resource), url(attribution.author),
-                url(attribution.license))
-    }
-
-    fun url(url: Url): Spannable {
-        val spannableString = SpannableString(url.link)
-        spannableString.setSpan(urlSpanFactory.create(url.href), 0, url.link.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        return spannableString
+        val str = context.getString(R.string.question_attribution)
+        return SpanFormatter.format(str, urlUtils.url(attribution.resource),
+                urlUtils.url(attribution.author), urlUtils.url(attribution.license))
     }
 }

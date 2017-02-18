@@ -4,7 +4,6 @@ import com.guliash.quizzes.core.mvp.Presenter
 import com.guliash.quizzes.core.rx.IO
 import com.guliash.quizzes.core.rx.Main
 import com.guliash.quizzes.game.Game
-import com.guliash.quizzes.game.Gamepad
 import com.guliash.quizzes.question.di.QuestionScope
 import com.guliash.quizzes.question.model.Question
 import com.guliash.quizzes.question.view.QuestionView
@@ -15,7 +14,6 @@ import javax.inject.Inject
 @QuestionScope
 class QuestionPresenter @Inject constructor(private val whichQuestion: Int,
                                             private val game: Game,
-                                            private val gamepad: Gamepad,
                                             @IO val workScheduler: Scheduler,
                                             @Main val postScheduler: Scheduler) :
         Presenter<QuestionView>() {
@@ -37,7 +35,7 @@ class QuestionPresenter @Inject constructor(private val whichQuestion: Int,
                             game.answer(question, question.answers[whichAnswer]).toObservable()
                         })
                         .observeOn(postScheduler)
-                        .subscribe({ it -> view.showVerdict(it) })
+                        .subscribe({ verdict -> view.showVerdict(verdict, question.id) })
         )
     }
 

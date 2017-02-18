@@ -1,3 +1,3 @@
-package com.guliash.quizzes.question.model
+package com.guliash.quizzes.core.url
 
 data class Url(val href: String, val link: String)

@@ -10,7 +10,7 @@ interface QuestionView {
 
     fun showError(error: String)
 
-    fun showVerdict(verdict: Verdict)
+    fun showVerdict(verdict: Verdict, questionId: String)
 
     fun answers(): Observable<Int>
 

@@ -3,9 +3,10 @@ package com.guliash.quizzes.game
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.guliash.quizzes.answer.model.Answer
 import com.guliash.quizzes.core.io.FileUtils
 import com.guliash.quizzes.game.di.GameScope
-import com.guliash.quizzes.answer.model.Answer
+import com.guliash.quizzes.game.model.Enigma
 import com.guliash.quizzes.question.model.Question
 import com.guliash.quizzes.question.model.Verdict
 import io.reactivex.Observable
@@ -14,10 +15,19 @@ import javax.inject.Inject
 
 @GameScope
 class GameImpl @Inject constructor(private val context: Context, private val fileUtils: FileUtils) : Game {
+
     private var cache: List<Question> = emptyList()
 
     override fun question(which: Int): Single<Question> {
         return questions().map { questions -> questions[which % questions.size] }.singleOrError()
+    }
+
+    override fun enigma(questionId: String): Single<Enigma> {
+        return questions()
+                .flatMap { list -> Observable.fromIterable(list) }
+                .filter { it -> it.id == questionId }
+                .map(Question::enigma)
+                .singleOrError()
     }
 
     override fun answer(question: Question, answer: Answer): Single<Verdict> {

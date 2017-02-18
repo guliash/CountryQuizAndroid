@@ -1,5 +1,6 @@
 [
   {
+    "id": "1",
     "question": "Which country?",
     "answers": [
       {
@@ -35,9 +36,14 @@
           "link": "CC BY-SA 3.0"
         }
       }
+    },
+    "enigma": {
+      "name": "The Great Sphinx of Giza",
+      "href": "https://en.wikipedia.org/wiki/Great_Sphinx_of_Giza"
     }
   },
   {
+    "id": "2",
     "question": "Which country?",
     "answers": [
       {
@@ -73,9 +79,14 @@
           "link": "CC BY-SA 3.0"
         }
       }
+    },
+    "enigma": {
+      "name": "The Moscow Kremlin",
+      "href": "https://en.wikipedia.org/wiki/Moscow_Kremlin"
     }
   },
   {
+    "id": "3",
     "question": "Which country?",
     "answers": [
       {
@@ -111,9 +122,14 @@
           "link": "CC BY-SA 3.0"
         }
       }
+    },
+    "enigma": {
+      "name": "The Spring Temple Buddha",
+      "href": "https://en.wikipedia.org/wiki/Spring_Temple_Buddha"
     }
   },
   {
+    "id": "4",
     "question": "Which country?",
     "answers": [
       {
@@ -149,6 +165,10 @@
           "link": "CC0 1.0"
         }
       }
+    },
+    "enigma": {
+      "name": "Stonehenge",
+      "href": "https://en.wikipedia.org/wiki/Stonehenge"
     }
   }
 ]

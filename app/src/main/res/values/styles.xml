@@ -18,7 +18,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowBackground">@color/answer_backgroundColor</item>
-        <item name="windowFixedWidthMinor">90%</item>
     </style>
 
     <style name="Answer_ControlButton">

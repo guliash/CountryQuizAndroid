@@ -9,12 +9,18 @@
     <dimen name="answer_dividerHeight">@dimen/CommonDividerHeight</dimen>
     <dimen name="answer_dividerWidth">@dimen/CommonDividerWidth</dimen>
 
-    <style name="Answer_Title">
-        <item name="android:textSize">18sp</item>
-    </style>
-
     <string name="answer_correctAnswer">Correct answer!</string>
     <string name="answer_wrongAnswer">Wrong answer :-(</string>
     <string name="answer_tryAgain">Try again</string>
     <string name="answer_next">Next</string>
+    <string name="answer_description" formatted="false">This is %s! Follow the %s to learn more about it.</string>
+    <string name="answer_linkPlaceholder">link</string>
+
+    <style name="Answer_Title">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Answer_Description">
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

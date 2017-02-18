@@ -120,8 +120,8 @@ class QuestionFragment : Fragment(), QuestionView, ComponentProvider {
         println("Show error")
     }
 
-    override fun showVerdict(verdict: Verdict) {
-        createAnswerFragment(verdict).show(childFragmentManager, null)
+    override fun showVerdict(verdict: Verdict, questionId: String) {
+        createAnswerFragment(verdict, questionId).show(childFragmentManager, null)
     }
 
 }

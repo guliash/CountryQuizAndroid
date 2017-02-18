@@ -5,10 +5,15 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class AnswerModule(private val verdict: Verdict) {
+class AnswerModule(private val verdict: Verdict, private val questionId: String) {
 
     @Provides
     @AnswerScope
     fun verdict() = verdict
+
+    @Provides
+    @AnswerScope
+    @QuestionId
+    fun questionId() = questionId
 
 }
