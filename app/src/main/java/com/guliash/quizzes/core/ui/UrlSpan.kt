@@ -15,7 +15,7 @@ class UrlSpan(val url: String, private val context: Context) : ClickableSpan() {
 
     override fun updateDrawState(ds: TextPaint?) {
         super.updateDrawState(ds)
-        ds!!.color = ContextCompat.getColor(context, R.color.answerLinkColor)
+        ds!!.color = ContextCompat.getColor(context, R.color.question_answerLinkColor)
     }
 
     override fun onClick(view: View?) {

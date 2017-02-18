@@ -30,15 +30,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:background="@color/answerAttributionBackgroundColor"
+                android:background="@color/question_answerAttributionBackgroundColor"
                 android:padding="8dp"
                 tools:text="Test attribution" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/answerDividerHeight"
+                android:layout_height="@dimen/question_answerDividerHeight"
                 android:layout_gravity="bottom"
-                android:background="@color/answerDividerColor" />
+                android:background="@color/question_answerDividerColor" />
         </FrameLayout>
 
         <LinearLayout
@@ -53,19 +53,19 @@
 
                 <Button
                     android:id="@+id/answer1"
-                    style="@style/AnswerButton"
+                    style="@style/Question_AnswerButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
                 <View
-                    android:layout_width="@dimen/answerDividerWidth"
+                    android:layout_width="@dimen/question_answerDividerWidth"
                     android:layout_height="match_parent"
-                    android:background="@color/answerDividerColor" />
+                    android:background="@color/question_answerDividerColor" />
 
                 <Button
                     android:id="@+id/answer2"
-                    style="@style/AnswerButton"
+                    style="@style/Question_AnswerButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -73,8 +73,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/answerDividerHeight"
-                android:background="@color/answerDividerColor" />
+                android:layout_height="@dimen/question_answerDividerHeight"
+                android:background="@color/question_answerDividerColor" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -83,19 +83,19 @@
 
                 <Button
                     android:id="@+id/answer3"
-                    style="@style/AnswerButton"
+                    style="@style/Question_AnswerButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
                 <View
-                    android:layout_width="@dimen/answerDividerWidth"
+                    android:layout_width="@dimen/question_answerDividerWidth"
                     android:layout_height="match_parent"
-                    android:background="@color/answerDividerColor" />
+                    android:background="@color/question_answerDividerColor" />
 
                 <Button
                     android:id="@+id/answer4"
-                    style="@style/AnswerButton"
+                    style="@style/Question_AnswerButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />

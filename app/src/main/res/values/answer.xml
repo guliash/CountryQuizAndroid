@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="answer_backgroundColor">@color/grey800</color>
+    <color name="answer_controlBackgroundColor">@color/grey800</color>
+    <color name="answer_dividerColor">@color/grey600</color>
+    <color name="answer_correctAnswer">@color/greenA400</color>
+    <color name="answer_wrongAnswer">@color/red500</color>
+
+    <dimen name="answer_dividerHeight">@dimen/CommonDividerHeight</dimen>
+    <dimen name="answer_dividerWidth">@dimen/CommonDividerWidth</dimen>
+
+    <style name="Answer_Title">
+        <item name="android:textSize">18sp</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <string name="answer_correctAnswer">Correct answer!</string>
+    <string name="answer_wrongAnswer">Wrong answer :-(</string>
+</resources>

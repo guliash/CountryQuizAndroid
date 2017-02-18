@@ -7,10 +7,21 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="android:windowBackground">@color/windowBackground</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:dialogTheme">@style/DialogTheme</item>
     </style>
 
-    <style name="AnswerButton">
-        <item name="android:background">@drawable/answer_button_background</item>
+    <style name="Question_AnswerButton">
+        <item name="android:background">@drawable/question_answer_button_background</item>
+    </style>
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowBackground">@color/answer_backgroundColor</item>
+    </style>
+
+    <style name="Answer_ControlButton">
+        <item name="android:background">@drawable/answer_control_button_background</item>
     </style>
 
 </resources>

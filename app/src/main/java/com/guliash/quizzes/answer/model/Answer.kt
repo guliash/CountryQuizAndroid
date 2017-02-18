@@ -15,8 +15,9 @@ class Answer(val text: String, val correct: Boolean) : Parcelable {
         }
     }
 
-    override fun writeToParcel(p0: Parcel?, p1: Int) {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun writeToParcel(parcel: Parcel?, flags: Int) {
+        parcel!!.writeString(text)
+        parcel.writeByte(if (correct) 1 else 0)
     }
 
     override fun describeContents(): Int = 0

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="questionPageMargin">16dp</dimen>
-    <dimen name="answerDividerHeight">1dp</dimen>
-    <dimen name="answerDividerWidth">1dp</dimen>
+    <dimen name="question_PageMargin">16dp</dimen>
+    <dimen name="question_answerDividerHeight">@dimen/CommonDividerHeight</dimen>
+    <dimen name="question_answerDividerWidth">@dimen/CommonDividerWidth</dimen>
 
-    <color name="answerDividerColor">@color/grey600</color>
-    <color name="answerLinkColor">#448aff</color>
-    <color name="answerBackgroundColor">@color/grey800</color>
-    <color name="answerAttributionBackgroundColor">@color/grey800alpha80</color>
+    <color name="question_answerDividerColor">@color/grey600</color>
+    <color name="question_answerLinkColor">#448aff</color>
+    <color name="question_answerBackgroundColor">@color/grey800</color>
+    <color name="question_answerAttributionBackgroundColor">@color/grey800alpha80</color>
 </resources>

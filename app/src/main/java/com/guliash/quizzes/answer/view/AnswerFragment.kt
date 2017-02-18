@@ -2,6 +2,7 @@ package com.guliash.quizzes.answer.view
 
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,27 +23,26 @@ fun createAnswerFragment(verdict: Verdict): DialogFragment {
     val args = Bundle()
     args.putParcelable(VERDICT_EXTRA, verdict)
     val fragment = AnswerFragment()
-    fragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0)
     fragment.arguments = args
     return fragment
 }
 
 class AnswerFragment : DialogFragment(), AnswerView {
 
-    @BindView(R.id.verdict)
+    @BindView(R.id.title)
     lateinit var verdictTextView: TextView
 
     @Inject
     lateinit var presenter: AnswerPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
         if (parentFragment is ComponentProvider) {
             (parentFragment as ComponentProvider)
                     .create(AnswerModule(arguments.getParcelable(VERDICT_EXTRA)))
                     .inject(this)
         }
+
+        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -62,11 +62,13 @@ class AnswerFragment : DialogFragment(), AnswerView {
     }
 
     override fun showCorrectAnswer(answer: Answer) {
-        verdictTextView.text = "correct"
+        verdictTextView.setTextColor(ContextCompat.getColor(context, R.color.answer_correctAnswer))
+        verdictTextView.text = context.getString(R.string.answer_correctAnswer)
     }
 
     override fun showWrongAnswer(answer: Answer) {
-        verdictTextView.text = "wrong"
+        verdictTextView.setTextColor(ContextCompat.getColor(context, R.color.answer_wrongAnswer))
+        verdictTextView.text = context.getString(R.string.answer_wrongAnswer)
     }
 
 }
