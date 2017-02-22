@@ -1,7 +1,6 @@
 package com.guliash.quizzes.answer
 
 import android.content.Context
-import android.text.Spannable
 import android.text.SpannableString
 import com.guliash.quizzes.R
 import com.guliash.quizzes.answer.di.AnswerScope
