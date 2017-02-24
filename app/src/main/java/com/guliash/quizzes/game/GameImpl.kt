@@ -38,10 +38,12 @@ class GameImpl @Inject constructor(private val repository: Repository) : Game {
     private fun questionsSync(): List<Question> {
         synchronized(this) {
             if (questions === null) {
-                questions = CollectionUtils.shuffle(repository.questions()
-                        .toList()
-                        .blockingGet()
-                        .map { question -> question.copy(answers = CollectionUtils.shuffle(question.answers)) })
+                questions = CollectionUtils.shuffle(
+                        repository.questions()
+                                .toList()
+                                .blockingGet()
+                                .map { question -> question.copy(answers = CollectionUtils.shuffle(question.answers)) }
+                )
             }
             return questions!!
         }
