@@ -1,4 +1,4 @@
-package com.guliash.quizzes.core.ui
+package com.guliash.quizzes.core.utils.ui
 
 import android.text.Spannable
 import android.text.SpannableStringBuilder

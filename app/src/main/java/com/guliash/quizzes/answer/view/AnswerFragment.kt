@@ -21,7 +21,7 @@ import com.guliash.quizzes.answer.di.AnswerModule
 import com.guliash.quizzes.answer.di.ComponentProvider
 import com.guliash.quizzes.answer.model.Answer
 import com.guliash.quizzes.answer.presenter.AnswerPresenter
-import com.guliash.quizzes.core.rx.RxView
+import com.guliash.quizzes.core.utils.ui.RxView
 import com.guliash.quizzes.game.model.Enigma
 import com.guliash.quizzes.question.model.Verdict
 import io.reactivex.Observable

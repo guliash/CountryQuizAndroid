@@ -2,8 +2,8 @@ package com.guliash.quizzes.question
 
 import android.content.Context
 import com.guliash.quizzes.R
-import com.guliash.quizzes.core.ui.SpanFormatter
-import com.guliash.quizzes.core.url.UrlUtils
+import com.guliash.quizzes.core.utils.ui.SpanFormatter
+import com.guliash.quizzes.core.utils.url.UrlUtils
 import com.guliash.quizzes.question.di.QuestionScope
 import com.guliash.quizzes.question.model.Attribution
 import javax.inject.Inject

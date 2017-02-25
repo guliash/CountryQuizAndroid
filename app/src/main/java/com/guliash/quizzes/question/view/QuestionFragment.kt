@@ -18,7 +18,7 @@ import com.guliash.quizzes.answer.di.AnswerModule
 import com.guliash.quizzes.answer.di.ComponentProvider
 import com.guliash.quizzes.answer.view.createAnswerFragment
 import com.guliash.quizzes.core.QuizzesApplication
-import com.guliash.quizzes.core.rx.RxView
+import com.guliash.quizzes.core.utils.ui.RxView
 import com.guliash.quizzes.question.QuestionUtils
 import com.guliash.quizzes.question.di.QuestionComponent
 import com.guliash.quizzes.question.di.QuestionModule

@@ -1,4 +1,4 @@
-package com.guliash.quizzes.core.ui
+package com.guliash.quizzes.core.url
 
 import android.content.ActivityNotFoundException
 import android.content.Context

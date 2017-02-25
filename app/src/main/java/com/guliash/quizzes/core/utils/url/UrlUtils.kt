@@ -1,8 +1,9 @@
-package com.guliash.quizzes.core.url
+package com.guliash.quizzes.core.utils.url
 
 import android.text.Spannable
 import android.text.SpannableString
-import com.guliash.quizzes.core.ui.UrlSpanFactory
+import com.guliash.quizzes.core.url.Url
+import com.guliash.quizzes.core.url.UrlSpanFactory
 import javax.inject.Inject
 import javax.inject.Singleton
 

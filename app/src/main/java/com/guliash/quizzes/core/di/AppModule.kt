@@ -1,7 +1,7 @@
 package com.guliash.quizzes.core.di
 
 import android.content.Context
-import com.guliash.quizzes.core.io.FileUtils
+import com.guliash.quizzes.core.utils.io.FileUtils
 import com.guliash.quizzes.game.Repository
 import com.guliash.quizzes.game.RepositoryImpl
 import dagger.Module

@@ -1,8 +1,8 @@
 package com.guliash.quizzes.question.presenter
 
 import com.guliash.quizzes.core.mvp.Presenter
-import com.guliash.quizzes.core.rx.IO
-import com.guliash.quizzes.core.rx.Main
+import com.guliash.quizzes.core.di.rx.IO
+import com.guliash.quizzes.core.di.rx.Main
 import com.guliash.quizzes.game.Game
 import com.guliash.quizzes.question.di.QuestionScope
 import com.guliash.quizzes.question.model.Question

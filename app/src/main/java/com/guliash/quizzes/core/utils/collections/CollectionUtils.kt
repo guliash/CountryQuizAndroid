@@ -1,4 +1,4 @@
-package com.guliash.quizzes.core.utils
+package com.guliash.quizzes.core.utils.collections
 
 import java.util.*
 

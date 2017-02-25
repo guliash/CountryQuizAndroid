@@ -1,4 +1,4 @@
-package com.guliash.quizzes.core.io
+package com.guliash.quizzes.core.utils.io
 
 import java.io.InputStream
 import java.util.*

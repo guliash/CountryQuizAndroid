@@ -1,7 +1,7 @@
 package com.guliash.quizzes.game
 
 import com.guliash.quizzes.answer.model.Answer
-import com.guliash.quizzes.core.utils.CollectionUtils
+import com.guliash.quizzes.core.utils.collections.CollectionUtils
 import com.guliash.quizzes.game.di.GameScope
 import com.guliash.quizzes.game.model.Enigma
 import com.guliash.quizzes.question.model.Question

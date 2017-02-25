@@ -1,4 +1,4 @@
-package com.guliash.quizzes.core.rx
+package com.guliash.quizzes.core.di.rx
 
 import dagger.Module
 import dagger.Provides

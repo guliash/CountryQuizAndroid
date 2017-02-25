@@ -1,4 +1,4 @@
-package com.guliash.quizzes.core.rx
+package com.guliash.quizzes.core.utils.ui
 
 import android.view.View
 import io.reactivex.Observable

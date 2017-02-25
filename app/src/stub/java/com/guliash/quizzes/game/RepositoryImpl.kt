@@ -3,7 +3,7 @@ package com.guliash.quizzes.game
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.guliash.quizzes.core.io.FileUtils
+import com.guliash.quizzes.core.utils.io.FileUtils
 import com.guliash.quizzes.question.model.Question
 import io.reactivex.Observable
 import javax.inject.Inject
