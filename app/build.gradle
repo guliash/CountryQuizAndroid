@@ -12,11 +12,23 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        release {
+            keyAlias PkeyAlias
+            keyPassword PkeyPassword
+            storeFile file(PstoreFile)
+            storePassword PstorePassword
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
         }
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
