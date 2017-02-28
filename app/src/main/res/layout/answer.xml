@@ -25,6 +25,14 @@
         android:layout_height="wrap_content"
         android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/facts"
+        style="@style/Answer_Facts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
     <RelativeLayout
         android:id="@+id/controls"
         android:layout_width="wrap_content"

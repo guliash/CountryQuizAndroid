@@ -13,8 +13,8 @@
     <string name="answer_wrongAnswer">Wrong answer :-(</string>
     <string name="answer_tryAgain">Try again</string>
     <string name="answer_next">Next</string>
-    <string name="answer_description" formatted="false">This is %s! Follow the %s to learn more about it.</string>
-    <string name="answer_linkPlaceholder">link</string>
+    <string name="answer_description" formatted="false">This is %s!</string>
+    <string name="answer_factBullet">•</string>
 
     <style name="Answer_Title">
         <item name="android:textSize">20sp</item>
@@ -22,5 +22,11 @@
 
     <style name="Answer_Description">
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Answer_Facts">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:lineSpacingExtra">2dp</item>
     </style>
 </resources>

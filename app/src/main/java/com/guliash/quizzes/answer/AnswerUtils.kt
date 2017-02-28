@@ -16,7 +16,6 @@ class AnswerUtils @Inject constructor(private val context: Context,
     fun buildDescription(enigma: Enigma): CharSequence {
         val descriptionNotFormatted = context.getString(R.string.answer_description)
 
-        return SpanFormatter.format(descriptionNotFormatted, SpannableString(enigma.name),
-                urlUtils.url(Url(enigma.href, context.getString(R.string.answer_linkPlaceholder))))
+        return SpanFormatter.format(descriptionNotFormatted, urlUtils.url(Url(enigma.href, enigma.name)))
     }
 }

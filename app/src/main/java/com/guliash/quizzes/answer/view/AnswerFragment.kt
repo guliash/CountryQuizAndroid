@@ -46,6 +46,9 @@ class AnswerFragment : DialogFragment(), AnswerView {
     @BindView(R.id.description)
     lateinit var descriptionTextView: TextView
 
+    @BindView(R.id.facts)
+    lateinit var factsTextView: TextView
+
     @BindView(R.id.try_again)
     lateinit var tryAgainButton: Button
 
@@ -110,10 +113,28 @@ class AnswerFragment : DialogFragment(), AnswerView {
     override fun showEnigma(enigma: Enigma) {
         descriptionTextView.visibility = VISIBLE
         descriptionTextView.text = answerUtils.buildDescription(enigma)
+        showFacts(enigma.facts)
     }
 
     override fun hideEnigma() {
         descriptionTextView.visibility = GONE
+        factsTextView.visibility = GONE
+    }
+
+    private fun showFacts(facts: List<String>) {
+        //todo move to extension function
+        val factsMerged = StringBuilder()
+        val factsBullet = context.getString(R.string.answer_factBullet)
+
+        for((index, fact) in facts.withIndex()) {
+            factsMerged.append(factsBullet).append(" ").append(fact)
+            if(index != facts.size - 1) {
+                factsMerged.append("\n")
+            }
+        }
+
+        factsTextView.text = factsMerged
+        factsTextView.visibility = VISIBLE
     }
 
     override fun tryAgain(): Observable<Unit> = RxView.clicks(tryAgainButton)

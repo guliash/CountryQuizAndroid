@@ -38,7 +38,8 @@
     },
     "enigma": {
       "name": "The Great Sphinx of Giza",
-      "href": "https://en.wikipedia.org/wiki/Great_Sphinx_of_Giza"
+      "href": "https://en.wikipedia.org/wiki/Great_Sphinx_of_Giza",
+      "facts": []
     }
   },
   {
@@ -80,7 +81,12 @@
     },
     "enigma": {
       "name": "The Moscow Kremlin",
-      "href": "https://en.wikipedia.org/wiki/Moscow_Kremlin"
+      "href": "https://en.wikipedia.org/wiki/Moscow_Kremlin",
+      "facts": [
+        "Built 1482 - 1495.",
+        "The name Kremlin means \"fortress inside a city\".",
+        "The complex serves as the official residence of the President of the Russian Federation."
+      ]
     }
   },
   {
@@ -122,7 +128,8 @@
     },
     "enigma": {
       "name": "The Spring Temple Buddha",
-      "href": "https://en.wikipedia.org/wiki/Spring_Temple_Buddha"
+      "href": "https://en.wikipedia.org/wiki/Spring_Temple_Buddha",
+      "facts": []
     }
   },
   {
@@ -164,7 +171,8 @@
     },
     "enigma": {
       "name": "Stonehenge",
-      "href": "https://en.wikipedia.org/wiki/Stonehenge"
+      "href": "https://en.wikipedia.org/wiki/Stonehenge",
+      "facts": []
     }
   },
   {
@@ -206,7 +214,8 @@
     },
     "enigma": {
       "name": "The Buddhas of Bamiyan",
-      "href": "https://en.wikipedia.org/wiki/Buddhas_of_Bamiyan"
+      "href": "https://en.wikipedia.org/wiki/Buddhas_of_Bamiyan",
+      "facts": []
     }
   },
   {
@@ -248,7 +257,8 @@
     },
     "enigma": {
       "name": "Ananuri",
-      "href": "https://en.wikipedia.org/wiki/Ananuri"
+      "href": "https://en.wikipedia.org/wiki/Ananuri",
+      "facts": []
     }
   },
   {
@@ -290,7 +300,8 @@
     },
     "enigma": {
       "name": "Hattusa",
-      "href": "https://en.wikipedia.org/wiki/Hattusa"
+      "href": "https://en.wikipedia.org/wiki/Hattusa",
+      "facts": []
     }
   },
   {
@@ -332,7 +343,8 @@
     },
     "enigma": {
       "name": "The Giant's Causeway",
-      "href": "https://en.wikipedia.org/wiki/Giant%27s_Causeway"
+      "href": "https://en.wikipedia.org/wiki/Giant%27s_Causeway",
+      "facts": []
     }
   },
   {
@@ -374,7 +386,8 @@
     },
     "enigma": {
       "name": "The Paracas Candelabra",
-      "href": "https://en.wikipedia.org/wiki/Paracas_Candelabra"
+      "href": "https://en.wikipedia.org/wiki/Paracas_Candelabra",
+      "facts": []
     }
   },
   {
@@ -416,7 +429,8 @@
     },
     "enigma": {
       "name": "The Maiden Tower",
-      "href": "https://en.wikipedia.org/wiki/Maiden_Tower_(Baku)"
+      "href": "https://en.wikipedia.org/wiki/Maiden_Tower_(Baku)",
+      "facts": []
     }
   },
   {
@@ -458,7 +472,8 @@
     },
     "enigma": {
       "name": "Al-Azhar University",
-      "href": "https://en.wikipedia.org/wiki/Al-Azhar_University"
+      "href": "https://en.wikipedia.org/wiki/Al-Azhar_University",
+      "facts": []
     }
   },
   {
@@ -500,7 +515,8 @@
     },
     "enigma": {
       "name": "Mada'in Saleh",
-      "href": "https://en.wikipedia.org/wiki/Mada%27in_Saleh"
+      "href": "https://en.wikipedia.org/wiki/Mada%27in_Saleh",
+      "facts": []
     }
   },
   {
@@ -542,7 +558,8 @@
     },
     "enigma": {
       "name": "Buda Castle",
-      "href": "https://en.wikipedia.org/wiki/Buda_Castle"
+      "href": "https://en.wikipedia.org/wiki/Buda_Castle",
+      "facts": []
     }
   },
   {
@@ -584,7 +601,8 @@
     },
     "enigma": {
       "name": "Urnes Stave Church",
-      "href": "https://en.wikipedia.org/wiki/Urnes_Stave_Church"
+      "href": "https://en.wikipedia.org/wiki/Urnes_Stave_Church",
+      "facts": []
     }
   },
   {
@@ -626,7 +644,8 @@
     },
     "enigma": {
       "name": "Chichen Itza",
-      "href": "https://en.wikipedia.org/wiki/Chichen_Itza"
+      "href": "https://en.wikipedia.org/wiki/Chichen_Itza",
+      "facts": []
     }
   },
   {
@@ -668,7 +687,8 @@
     },
     "enigma": {
       "name": "Нарын-кала",
-      "href": "https://ru.wikipedia.org/wiki/%D0%9D%D0%B0%D1%80%D1%8B%D0%BD-%D0%BA%D0%B0%D0%BB%D0%B0"
+      "href": "https://ru.wikipedia.org/wiki/%D0%9D%D0%B0%D1%80%D1%8B%D0%BD-%D0%BA%D0%B0%D0%BB%D0%B0",
+      "facts": []
     }
   },
   {
@@ -710,7 +730,8 @@
     },
     "enigma": {
       "name": "The Leshan Giant Buddha",
-      "href": "https://en.wikipedia.org/wiki/Leshan_Giant_Buddha"
+      "href": "https://en.wikipedia.org/wiki/Leshan_Giant_Buddha",
+      "facts": []
     }
   },
   {
@@ -752,7 +773,8 @@
     },
     "enigma": {
       "name": "Saint Hripsime Church",
-      "href": "https://en.wikipedia.org/wiki/Saint_Hripsime_Church"
+      "href": "https://en.wikipedia.org/wiki/Saint_Hripsime_Church",
+      "facts": []
     }
   },
   {
@@ -794,7 +816,8 @@
     },
     "enigma": {
       "name": "The Holy Trinity Column in Olomouc",
-      "href": "https://en.wikipedia.org/wiki/Holy_Trinity_Column_in_Olomouc"
+      "href": "https://en.wikipedia.org/wiki/Holy_Trinity_Column_in_Olomouc",
+      "facts": []
     }
   },
   {
@@ -835,8 +858,14 @@
       }
     },
     "enigma": {
-      "name": "Palenque",
-      "href": "https://en.wikipedia.org/wiki/Palenque"
+      "name": "The Temple of the Inscriptions",
+      "href": "https://en.wikipedia.org/wiki/Temple_of_the_Inscriptions",
+      "facts": [
+        "The Temple of Inscriptions was finished a short time after 683.",
+        "The structure was specifically built as the funerary monument for K'inich Janaab' Pakal, ajaw or ruler of Palenque in the 7th century whose reign over the polity lasted almost 70 years.",
+        "The Temple of Inscriptions gets its name from three hieroglyphic tablets, known as the East Tablet, the Central Tablet, and the West Tablet, on the temple's inner walls. These tablets emphasize the idea that events that happened in the past will be repeated on the same calendar date.",
+        "Pakal’s death mask is another extraordinary artifact found in the tomb. The face of the mask is made entirely of jade, while the eyes consist of shells, mother of pearl, and obsidian."
+      ]
     }
   }
 ]
