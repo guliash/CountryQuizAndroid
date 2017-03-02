@@ -14,24 +14,46 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/answer_dividerHeight"
-        android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
-        android:background="@color/answer_dividerColor" />
+        android:background="@color/answer_dividerColor"
+        android:id="@+id/topDivider"
+        android:visibility="invisible"/>
 
-    <TextView
-        android:id="@+id/description"
-        style="@style/Answer_Description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
+    <com.guliash.quizzes.core.view.CustomScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/scrollablePart">
 
-    <TextView
-        android:id="@+id/facts"
-        style="@style/Answer_Facts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:visibility="gone" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/description"
+                style="@style/Answer_Description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/facts"
+                style="@style/Answer_Facts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </com.guliash.quizzes.core.view.CustomScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/answer_dividerHeight"
+        android:layout_marginBottom="16dp"
+        android:background="@color/answer_dividerColor"
+        android:id="@+id/bottomDivider"
+        android:visibility="invisible"/>
 
     <RelativeLayout
         android:id="@+id/controls"

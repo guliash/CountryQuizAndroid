@@ -2,6 +2,17 @@ package com.guliash.quizzes.core.utils.collections
 
 import java.util.*
 
+fun <T> Collection<T>.joinToString(separator: String, beforeEach: String): String {
+    val stringBuilder = StringBuilder()
+    for ((index, element) in withIndex()) {
+        stringBuilder.append(beforeEach).append(element)
+        if (index != size - 1) {
+            stringBuilder.append(separator)
+        }
+    }
+    return stringBuilder.toString()
+}
+
 object CollectionUtils {
 
     fun <E> shuffle(list: List<E>): List<E> {

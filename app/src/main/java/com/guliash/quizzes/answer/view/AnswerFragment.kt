@@ -3,12 +3,12 @@ package com.guliash.quizzes.answer.view
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v4.content.ContextCompat
+import android.support.v4.widget.NestedScrollView
 import android.text.method.LinkMovementMethod
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.Button
@@ -21,7 +21,9 @@ import com.guliash.quizzes.answer.di.AnswerModule
 import com.guliash.quizzes.answer.di.ComponentProvider
 import com.guliash.quizzes.answer.model.Answer
 import com.guliash.quizzes.answer.presenter.AnswerPresenter
+import com.guliash.quizzes.core.utils.collections.joinToString
 import com.guliash.quizzes.core.utils.ui.RxView
+import com.guliash.quizzes.core.view.CustomScrollView
 import com.guliash.quizzes.game.model.Enigma
 import com.guliash.quizzes.question.model.Verdict
 import io.reactivex.Observable
@@ -55,6 +57,15 @@ class AnswerFragment : DialogFragment(), AnswerView {
     @BindView(R.id.next)
     lateinit var nextButton: Button
 
+    @BindView(R.id.scrollablePart)
+    lateinit var scrollablePartView: CustomScrollView
+
+    @BindView(R.id.topDivider)
+    lateinit var topDivider: View
+
+    @BindView(R.id.bottomDivider)
+    lateinit var bottomDivider: View
+
     @Inject
     lateinit var presenter: AnswerPresenter
 
@@ -78,6 +89,22 @@ class AnswerFragment : DialogFragment(), AnswerView {
         super.onViewCreated(view, savedInstanceState)
         ButterKnife.bind(this, view!!)
 
+        scrollablePartView.setOnScrollChangeListener(object : NestedScrollView.OnScrollChangeListener {
+            override fun onScrollChange(v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
+                if (scrollY != 0) {
+                    topDivider.visibility = VISIBLE
+                } else {
+                    topDivider.visibility = INVISIBLE
+                }
+
+                if (scrollY == (scrollablePartView.getChildAt(0).height - scrollablePartView.height)) {
+                    bottomDivider.visibility = INVISIBLE
+                } else {
+                    bottomDivider.visibility = VISIBLE
+                }
+            }
+        })
+
         descriptionTextView.movementMethod = LinkMovementMethod.getInstance()
 
         presenter.bind(this)
@@ -93,10 +120,10 @@ class AnswerFragment : DialogFragment(), AnswerView {
         super.onResume()
 
         val metrics = DisplayMetrics()
-        activity.windowManager.defaultDisplay.getMetrics(metrics)
 
-        //todo can avoid setting width manually?
+        activity.windowManager.defaultDisplay.getMetrics(metrics)
         dialog.window.setLayout((metrics.widthPixels * 0.9).toInt(), WRAP_CONTENT)
+        scrollablePartView.maxHeight = (metrics.heightPixels * 0.6).toInt()
     }
 
     override fun showCorrectAnswer(answer: Answer) {
@@ -114,6 +141,12 @@ class AnswerFragment : DialogFragment(), AnswerView {
         descriptionTextView.visibility = VISIBLE
         descriptionTextView.text = answerUtils.buildDescription(enigma)
         showFacts(enigma.facts)
+
+        scrollablePartView.post {
+            if(scrollablePartView.getChildAt(0).height > scrollablePartView.height) {
+                bottomDivider.visibility = VISIBLE
+            }
+        }
     }
 
     override fun hideEnigma() {
@@ -122,18 +155,7 @@ class AnswerFragment : DialogFragment(), AnswerView {
     }
 
     private fun showFacts(facts: List<String>) {
-        //todo move to extension function
-        val factsMerged = StringBuilder()
-        val factsBullet = context.getString(R.string.answer_factBullet)
-
-        for((index, fact) in facts.withIndex()) {
-            factsMerged.append(factsBullet).append(" ").append(fact)
-            if(index != facts.size - 1) {
-                factsMerged.append("\n")
-            }
-        }
-
-        factsTextView.text = factsMerged
+        factsTextView.text = facts.joinToString("\n", context.getString(R.string.answer_factBullet))
         factsTextView.visibility = VISIBLE
     }
 
