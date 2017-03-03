@@ -3,7 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:paddingBottom="8dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp">
 
     <TextView
         android:id="@+id/title"
@@ -12,18 +15,18 @@
         android:layout_height="wrap_content" />
 
     <View
+        android:id="@+id/topDivider"
         android:layout_width="match_parent"
         android:layout_height="@dimen/answer_dividerHeight"
         android:layout_marginTop="16dp"
         android:background="@color/answer_dividerColor"
-        android:id="@+id/topDivider"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 
     <com.guliash.quizzes.core.view.CustomScrollView
+        android:id="@+id/scrollablePart"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/scrollablePart">
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,12 +51,12 @@
     </com.guliash.quizzes.core.view.CustomScrollView>
 
     <View
+        android:id="@+id/bottomDivider"
         android:layout_width="match_parent"
         android:layout_height="@dimen/answer_dividerHeight"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/answer_dividerColor"
-        android:id="@+id/bottomDivider"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 
     <RelativeLayout
         android:id="@+id/controls"

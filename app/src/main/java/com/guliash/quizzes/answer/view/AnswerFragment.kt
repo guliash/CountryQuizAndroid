@@ -91,17 +91,7 @@ class AnswerFragment : DialogFragment(), AnswerView {
 
         scrollablePartView.setOnScrollChangeListener(object : NestedScrollView.OnScrollChangeListener {
             override fun onScrollChange(v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
-                if (scrollY != 0) {
-                    topDivider.visibility = VISIBLE
-                } else {
-                    topDivider.visibility = INVISIBLE
-                }
-
-                if (scrollY == (scrollablePartView.getChildAt(0).height - scrollablePartView.height)) {
-                    bottomDivider.visibility = INVISIBLE
-                } else {
-                    bottomDivider.visibility = VISIBLE
-                }
+                manageDividersState(scrollY)
             }
         })
 
@@ -143,8 +133,11 @@ class AnswerFragment : DialogFragment(), AnswerView {
         showFacts(enigma.facts)
 
         scrollablePartView.post {
-            if(scrollablePartView.getChildAt(0).height > scrollablePartView.height) {
+            topDivider.visibility = INVISIBLE
+            if (scrollablePartView.getChildAt(0).height > scrollablePartView.height) {
                 bottomDivider.visibility = VISIBLE
+            } else {
+                bottomDivider.visibility = INVISIBLE
             }
         }
     }
@@ -155,8 +148,27 @@ class AnswerFragment : DialogFragment(), AnswerView {
     }
 
     private fun showFacts(facts: List<String>) {
-        factsTextView.text = facts.joinToString("\n", context.getString(R.string.answer_factBullet))
-        factsTextView.visibility = VISIBLE
+        val factsMerged = facts.joinToString("\n", context.getString(R.string.answer_factBullet) + " ")
+        factsTextView.text = factsMerged
+        if (factsMerged.isBlank()) {
+            factsTextView.visibility = GONE
+        } else {
+            factsTextView.visibility = VISIBLE
+        }
+    }
+
+    private fun manageDividersState(scrollY: Int) {
+        if (scrollY != 0) {
+            topDivider.visibility = VISIBLE
+        } else {
+            topDivider.visibility = INVISIBLE
+        }
+
+        if (scrollY == (scrollablePartView.getChildAt(0).height - scrollablePartView.height)) {
+            bottomDivider.visibility = INVISIBLE
+        } else {
+            bottomDivider.visibility = VISIBLE
+        }
     }
 
     override fun tryAgain(): Observable<Unit> = RxView.clicks(tryAgainButton)
