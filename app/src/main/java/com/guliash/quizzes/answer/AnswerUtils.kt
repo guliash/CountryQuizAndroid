@@ -1,11 +1,10 @@
 package com.guliash.quizzes.answer
 
 import android.content.Context
-import android.text.SpannableString
 import com.guliash.quizzes.R
 import com.guliash.quizzes.answer.di.AnswerScope
-import com.guliash.quizzes.core.utils.ui.SpanFormatter
 import com.guliash.quizzes.core.url.Url
+import com.guliash.quizzes.core.utils.ui.SpanFormatter
 import com.guliash.quizzes.core.utils.url.UrlUtils
 import com.guliash.quizzes.game.model.Enigma
 import javax.inject.Inject

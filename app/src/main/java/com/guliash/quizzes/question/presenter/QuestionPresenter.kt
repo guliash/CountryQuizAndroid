@@ -1,8 +1,8 @@
 package com.guliash.quizzes.question.presenter
 
-import com.guliash.quizzes.core.mvp.Presenter
 import com.guliash.quizzes.core.di.rx.IO
 import com.guliash.quizzes.core.di.rx.Main
+import com.guliash.quizzes.core.mvp.Presenter
 import com.guliash.quizzes.game.Game
 import com.guliash.quizzes.question.di.QuestionScope
 import com.guliash.quizzes.question.model.Question
@@ -14,8 +14,8 @@ import javax.inject.Inject
 @QuestionScope
 class QuestionPresenter @Inject constructor(private val whichQuestion: Int,
                                             private val game: Game,
-                                            @IO val workScheduler: Scheduler,
-                                            @Main val postScheduler: Scheduler) :
+                                            private @IO val workScheduler: Scheduler,
+                                            private @Main val postScheduler: Scheduler) :
         Presenter<QuestionView>() {
 
     private lateinit var question: Question

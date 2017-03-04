@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".map.MapActivity"/>
+        <activity android:name=".map.view.MapActivity"/>
         <meta-data
             android:name="com.guliash.quizzes.core.glide.QuizzesGlideModule"
             android:value="GlideModule" />

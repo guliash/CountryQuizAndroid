@@ -41,7 +41,11 @@
       "href": "https://en.wikipedia.org/wiki/Great_Sphinx_of_Giza",
       "facts": [
         "It is the oldest known monumental sculpture in Egypt and is commonly believed to have been built by ancient Egyptians of the Old Kingdom during the reign of the Pharaoh Khafre (c. 2558–2532 BC)."
-      ]
+      ],
+      "position": {
+        "lat": 29.9752654,
+        "lng": 31.1367871
+      }
     }
   },
   {
@@ -88,7 +92,11 @@
         "Built 1482 - 1495.",
         "The name Kremlin means \"fortress inside a city\".",
         "The complex serves as the official residence of the President of the Russian Federation."
-      ]
+      ],
+      "position": {
+        "lat": 55.752002,
+        "lng": 37.617424
+      }
     }
   },
   {
@@ -133,7 +141,11 @@
       "href": "https://en.wikipedia.org/wiki/Spring_Temple_Buddha",
       "facts": [
         "It is the tallest statue in the world (128 metres)."
-      ]
+      ],
+      "position": {
+        "lat": 33.775013,
+        "lng": 112.450941
+      }
     }
   },
   {
@@ -178,7 +190,11 @@
       "href": "https://en.wikipedia.org/wiki/Stonehenge",
       "facts": [
         "Archaeologists believe it was constructed from 3000 BC to 2000 BC."
-      ]
+      ],
+      "position": {
+        "lat": 51.178754,
+        "lng": -1.826319
+      }
     }
   },
   {
@@ -221,7 +237,11 @@
     "enigma": {
       "name": "The Buddhas of Bamiyan",
       "href": "https://en.wikipedia.org/wiki/Buddhas_of_Bamiyan",
-      "facts": []
+      "facts": [],
+      "position": {
+        "lat": 34.831958,
+        "lng": 67.826705
+      }
     }
   },
   {
@@ -264,7 +284,11 @@
     "enigma": {
       "name": "Ananuri",
       "href": "https://en.wikipedia.org/wiki/Ananuri",
-      "facts": []
+      "facts": [],
+      "position": {
+        "lat": 42.163826,
+        "lng": 44.702892
+      }
     }
   },
   {
@@ -307,7 +331,11 @@
     "enigma": {
       "name": "Hattusa",
       "href": "https://en.wikipedia.org/wiki/Hattusa",
-      "facts": []
+      "facts": [],
+      "position": {
+        "lat": 40.023329,
+        "lng": 34.614853
+      }
     }
   },
   {
@@ -350,7 +378,11 @@
     "enigma": {
       "name": "The Giant's Causeway",
       "href": "https://en.wikipedia.org/wiki/Giant%27s_Causeway",
-      "facts": []
+      "facts": [],
+      "position": {
+        "lat": 55.240716,
+        "lng": -6.511555
+      }
     }
   },
   {
@@ -393,7 +425,11 @@
     "enigma": {
       "name": "The Paracas Candelabra",
       "href": "https://en.wikipedia.org/wiki/Paracas_Candelabra",
-      "facts": []
+      "facts": [],
+      "position": {
+        "lat": -13.789571,
+        "lng": -76.316142
+      }
     }
   },
   {
@@ -436,7 +472,11 @@
     "enigma": {
       "name": "The Maiden Tower",
       "href": "https://en.wikipedia.org/wiki/Maiden_Tower_(Baku)",
-      "facts": []
+      "facts": [],
+      "position": {
+        "lat": 40.366167,
+        "lng": 49.83725
+      }
     }
   },
   {
@@ -479,7 +519,11 @@
     "enigma": {
       "name": "Al-Azhar University",
       "href": "https://en.wikipedia.org/wiki/Al-Azhar_University",
-      "facts": []
+      "facts": [],
+      "position": {
+        "lat": 30.057478,
+        "lng": 31.314427
+      }
     }
   },
   {
@@ -522,7 +566,11 @@
     "enigma": {
       "name": "Mada'in Saleh",
       "href": "https://en.wikipedia.org/wiki/Mada%27in_Saleh",
-      "facts": []
+      "facts": [],
+      "position": {
+        "lat": 26.801331,
+        "lng": 37.970499
+      }
     }
   },
   {
@@ -565,7 +613,11 @@
     "enigma": {
       "name": "Buda Castle",
       "href": "https://en.wikipedia.org/wiki/Buda_Castle",
-      "facts": []
+      "facts": [],
+      "position": {
+        "lat": 47.496212,
+        "lng": 19.039420
+      }
     }
   },
   {
@@ -608,7 +660,11 @@
     "enigma": {
       "name": "Urnes Stave Church",
       "href": "https://en.wikipedia.org/wiki/Urnes_Stave_Church",
-      "facts": []
+      "facts": [],
+      "position": {
+        "lat": 61.298180,
+        "lng": 7.322504
+      }
     }
   },
   {
@@ -651,7 +707,11 @@
     "enigma": {
       "name": "Chichen Itza",
       "href": "https://en.wikipedia.org/wiki/Chichen_Itza",
-      "facts": []
+      "facts": [],
+      "position": {
+        "lat": 20.684154,
+        "lng": -88.567730
+      }
     }
   },
   {
@@ -694,7 +754,11 @@
     "enigma": {
       "name": "Нарын-кала",
       "href": "https://ru.wikipedia.org/wiki/%D0%9D%D0%B0%D1%80%D1%8B%D0%BD-%D0%BA%D0%B0%D0%BB%D0%B0",
-      "facts": []
+      "facts": [],
+      "position": {
+        "lat": 42.052038,
+        "lng": 48.273651
+      }
     }
   },
   {
@@ -737,7 +801,11 @@
     "enigma": {
       "name": "The Leshan Giant Buddha",
       "href": "https://en.wikipedia.org/wiki/Leshan_Giant_Buddha",
-      "facts": []
+      "facts": [],
+      "position": {
+        "lat": 29.544005,
+        "lng": 103.771601
+      }
     }
   },
   {
@@ -780,7 +848,11 @@
     "enigma": {
       "name": "Saint Hripsime Church",
       "href": "https://en.wikipedia.org/wiki/Saint_Hripsime_Church",
-      "facts": []
+      "facts": [],
+      "position": {
+        "lat": 40.166945,
+        "lng": 44.309699
+      }
     }
   },
   {
@@ -823,7 +895,11 @@
     "enigma": {
       "name": "The Holy Trinity Column in Olomouc",
       "href": "https://en.wikipedia.org/wiki/Holy_Trinity_Column_in_Olomouc",
-      "facts": []
+      "facts": [],
+      "position": {
+        "lat": 49.593867,
+        "lng": 17.250324
+      }
     }
   },
   {
@@ -870,9 +946,12 @@
         "The Temple of Inscriptions was finished a short time after 683.",
         "The structure was specifically built as the funerary monument for K'inich Janaab' Pakal, ajaw or ruler of Palenque in the 7th century whose reign over the polity lasted almost 70 years.",
         "The Temple of Inscriptions gets its name from three hieroglyphic tablets, known as the East Tablet, the Central Tablet, and the West Tablet, on the temple's inner walls. These tablets emphasize the idea that events that happened in the past will be repeated on the same calendar date.",
-        "Pakal’s death mask is another extraordinary artifact found in the tomb. The face of the mask is made entirely of jade, while the eyes consist of shells, mother of pearl, and obsidian.",
-        "AJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaasAJFASJfSaas"
-      ]
+        "Pakal’s death mask is another extraordinary artifact found in the tomb. The face of the mask is made entirely of jade, while the eyes consist of shells, mother of pearl, and obsidian."
+      ],
+      "position": {
+        "lat": 17.483558,
+        "lng": -92.047094
+      }
     }
   }
 ]

@@ -27,7 +27,9 @@ import com.guliash.quizzes.core.utils.collections.joinToString
 import com.guliash.quizzes.core.utils.ui.RxView
 import com.guliash.quizzes.core.view.CustomScrollView
 import com.guliash.quizzes.game.model.Enigma
-import com.guliash.quizzes.map.MapActivity
+import com.guliash.quizzes.map.model.Position
+import com.guliash.quizzes.map.view.MapActivity
+import com.guliash.quizzes.map.view.POSITION_EXTRA
 import com.guliash.quizzes.question.model.Verdict
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -158,8 +160,10 @@ class AnswerFragment : DialogFragment(), AnswerView, ActionsDelegate {
         factsTextView.visibility = GONE
     }
 
-    override fun showMap() {
-        startActivity(Intent(context, MapActivity::class.java))
+    override fun showMap(position: Position) {
+        val intent = Intent(context, MapActivity::class.java)
+        intent.putExtra(POSITION_EXTRA, position)
+        startActivity(intent)
     }
 
     private fun showFacts(facts: List<String>) {
