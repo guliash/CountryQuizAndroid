@@ -16,7 +16,8 @@ class AnswerPresenter @Inject constructor(@QuestionId val questionId: String,
                                           val gamepad: Gamepad,
                                           val game: Game,
                                           @IO val workScheduler: Scheduler,
-                                          @Main val postScheduler: Scheduler) : Presenter<AnswerView>() {
+                                          @Main val postScheduler: Scheduler,
+                                          val actionsDelegate: ActionsDelegate) : Presenter<AnswerView>() {
 
     override fun bind(view: AnswerView) {
         super.bind(view)
@@ -37,10 +38,13 @@ class AnswerPresenter @Inject constructor(@QuestionId val questionId: String,
         }
 
         subscribe(
-                view.tryAgain().subscribe { it -> view.close() },
-                view.next().subscribe { it ->
+                view.tryAgain().subscribe { ø -> view.close() },
+                view.next().subscribe { ø ->
                     gamepad.needNext()
                     view.close()
+                },
+                view.showOnMap().subscribe { ø ->
+                    actionsDelegate.showMap()
                 }
         )
     }

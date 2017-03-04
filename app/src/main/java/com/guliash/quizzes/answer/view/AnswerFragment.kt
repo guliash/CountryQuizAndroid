@@ -1,5 +1,6 @@
 package com.guliash.quizzes.answer.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v4.content.ContextCompat
@@ -20,11 +21,13 @@ import com.guliash.quizzes.answer.AnswerUtils
 import com.guliash.quizzes.answer.di.AnswerModule
 import com.guliash.quizzes.answer.di.ComponentProvider
 import com.guliash.quizzes.answer.model.Answer
+import com.guliash.quizzes.answer.presenter.ActionsDelegate
 import com.guliash.quizzes.answer.presenter.AnswerPresenter
 import com.guliash.quizzes.core.utils.collections.joinToString
 import com.guliash.quizzes.core.utils.ui.RxView
 import com.guliash.quizzes.core.view.CustomScrollView
 import com.guliash.quizzes.game.model.Enigma
+import com.guliash.quizzes.map.MapActivity
 import com.guliash.quizzes.question.model.Verdict
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -41,7 +44,8 @@ fun createAnswerFragment(verdict: Verdict, questionId: String): DialogFragment {
     return fragment
 }
 
-class AnswerFragment : DialogFragment(), AnswerView {
+class AnswerFragment : DialogFragment(), AnswerView, ActionsDelegate {
+
     @BindView(R.id.title)
     lateinit var verdictTextView: TextView
 
@@ -51,8 +55,11 @@ class AnswerFragment : DialogFragment(), AnswerView {
     @BindView(R.id.facts)
     lateinit var factsTextView: TextView
 
-    @BindView(R.id.try_again)
+    @BindView(R.id.tryAgain)
     lateinit var tryAgainButton: Button
+
+    @BindView(R.id.showOnMap)
+    lateinit var showOnMapButton: Button
 
     @BindView(R.id.next)
     lateinit var nextButton: Button
@@ -75,7 +82,8 @@ class AnswerFragment : DialogFragment(), AnswerView {
     override fun onCreate(savedInstanceState: Bundle?) {
         if (parentFragment is ComponentProvider) {
             (parentFragment as ComponentProvider)
-                    .create(AnswerModule(arguments.getParcelable(VERDICT_EXTRA), arguments.getString(QUESTION_ID_EXTRA)))
+                    .create(AnswerModule(arguments.getParcelable(VERDICT_EXTRA),
+                            arguments.getString(QUESTION_ID_EXTRA), this))
                     .inject(this)
         }
 
@@ -118,11 +126,14 @@ class AnswerFragment : DialogFragment(), AnswerView {
 
     override fun showCorrectAnswer(answer: Answer) {
         tryAgainButton.visibility = GONE
+        showOnMapButton.visibility = VISIBLE
         verdictTextView.setTextColor(ContextCompat.getColor(context, R.color.answer_correctAnswer))
         verdictTextView.text = context.getString(R.string.answer_correctAnswer)
     }
 
     override fun showWrongAnswer(answer: Answer) {
+        tryAgainButton.visibility = VISIBLE
+        showOnMapButton.visibility = GONE
         verdictTextView.setTextColor(ContextCompat.getColor(context, R.color.answer_wrongAnswer))
         verdictTextView.text = context.getString(R.string.answer_wrongAnswer)
     }
@@ -145,6 +156,10 @@ class AnswerFragment : DialogFragment(), AnswerView {
     override fun hideEnigma() {
         descriptionTextView.visibility = GONE
         factsTextView.visibility = GONE
+    }
+
+    override fun showMap() {
+        startActivity(Intent(context, MapActivity::class.java))
     }
 
     private fun showFacts(facts: List<String>) {
@@ -174,6 +189,8 @@ class AnswerFragment : DialogFragment(), AnswerView {
     override fun tryAgain(): Observable<Unit> = RxView.clicks(tryAgainButton)
 
     override fun next(): Observable<Unit> = RxView.clicks(nextButton)
+
+    override fun showOnMap(): Observable<Unit> = RxView.clicks(showOnMapButton)
 
     override fun close() = dismiss()
 }

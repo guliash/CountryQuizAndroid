@@ -64,13 +64,24 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/try_again"
+            android:id="@+id/tryAgain"
             style="@style/Answer_ControlButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:text="@string/answer_tryAgain" />
+            android:text="@string/answer_tryAgain"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/showOnMap"
+            style="@style/Answer_ControlButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="@string/answer_showOnMap"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/next"

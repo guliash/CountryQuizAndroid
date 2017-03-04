@@ -18,4 +18,6 @@ interface AnswerView {
     fun tryAgain(): Observable<Unit>
 
     fun next(): Observable<Unit>
+
+    fun showOnMap(): Observable<Unit>
 }

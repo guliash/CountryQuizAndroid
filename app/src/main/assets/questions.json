@@ -39,7 +39,9 @@
     "enigma": {
       "name": "The Great Sphinx of Giza",
       "href": "https://en.wikipedia.org/wiki/Great_Sphinx_of_Giza",
-      "facts": []
+      "facts": [
+        "It is the oldest known monumental sculpture in Egypt and is commonly believed to have been built by ancient Egyptians of the Old Kingdom during the reign of the Pharaoh Khafre (c. 2558–2532 BC)."
+      ]
     }
   },
   {
@@ -129,7 +131,9 @@
     "enigma": {
       "name": "The Spring Temple Buddha",
       "href": "https://en.wikipedia.org/wiki/Spring_Temple_Buddha",
-      "facts": []
+      "facts": [
+        "It is the tallest statue in the world (128 metres)."
+      ]
     }
   },
   {
@@ -172,7 +176,9 @@
     "enigma": {
       "name": "Stonehenge",
       "href": "https://en.wikipedia.org/wiki/Stonehenge",
-      "facts": []
+      "facts": [
+        "Archaeologists believe it was constructed from 3000 BC to 2000 BC."
+      ]
     }
   },
   {

@@ -11,6 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        resValue "string", "googleMapsApiKey", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
     }
     signingConfigs {
         release {
@@ -70,7 +71,9 @@ dependencies {
     compile "com.jakewharton:butterknife:$butterKnifeVersion"
     kapt "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
 
-    compile group: 'com.google.code.gson', name: 'gson', version: '2.4'
+    compile 'com.google.code.gson:gson:2.7'
+
+    compile "com.google.android.gms:play-services-maps:10.2.0"
 
     compile "com.google.dagger:dagger:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
