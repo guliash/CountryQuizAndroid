@@ -15,6 +15,6 @@ interface Game {
 
     fun answer(question: Question, answer: Answer): Single<Verdict>
 
-    fun enigma(questionId: String): Single<Enigma>
+    fun enigma(id: String): Single<Enigma>
 
 }

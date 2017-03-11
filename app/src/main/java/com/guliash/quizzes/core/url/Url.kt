@@ -1,3 +1,8 @@
 package com.guliash.quizzes.core.url
 
-data class Url(val href: String, val link: String)
+import com.google.gson.annotations.SerializedName
+
+data class Url(
+        @SerializedName("href") val href: String,
+        @SerializedName("link") val link: String
+)

@@ -35,7 +35,7 @@ class QuestionPresenter @Inject constructor(private val whichQuestion: Int,
                             game.answer(question, question.answers[whichAnswer]).toObservable()
                         })
                         .observeOn(postScheduler)
-                        .subscribe({ verdict -> view.showVerdict(verdict, question.id) })
+                        .subscribe({ verdict -> view.showVerdict(verdict, question.enigma.id) })
         )
     }
 

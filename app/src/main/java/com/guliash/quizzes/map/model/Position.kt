@@ -3,8 +3,12 @@ package com.guliash.quizzes.map.model
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.android.gms.maps.model.LatLng
+import com.google.gson.annotations.SerializedName
 
-class Position(val lat: Double, val lng: Double) : Parcelable {
+class Position(
+        @SerializedName("lat") val lat: Double,
+        @SerializedName("lng") val lng: Double
+) : Parcelable {
 
     companion object {
         @JvmField

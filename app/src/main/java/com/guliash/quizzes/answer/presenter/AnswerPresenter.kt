@@ -51,7 +51,7 @@ class AnswerPresenter @Inject constructor(private @QuestionId val questionId: St
                             .observeOn(postScheduler)
                             .toObservable()
                 }.subscribe { enigma ->
-                    actionsDelegate.showMap(enigma.position!!)
+                    actionsDelegate.showMap(enigma.position)
                 }
         )
     }

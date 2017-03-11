@@ -23,12 +23,10 @@ object CollectionUtils {
 
     fun <E> shuffle(list: MutableList<E>) {
         val rnd = Random()
-        println(list)
         for (i in 0..list.size - 2) {
             val swapWith = rnd.nextInt(list.size - i)
             swap(list, i, i + swapWith)
         }
-        println(list)
     }
 
 

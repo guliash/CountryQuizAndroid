@@ -4,8 +4,8 @@ import android.content.Context
 import com.guliash.quizzes.R
 import com.guliash.quizzes.core.utils.ui.SpanFormatter
 import com.guliash.quizzes.core.utils.url.UrlUtils
+import com.guliash.quizzes.game.model.Attribution
 import com.guliash.quizzes.question.di.QuestionScope
-import com.guliash.quizzes.question.model.Attribution
 import javax.inject.Inject
 
 @QuestionScope

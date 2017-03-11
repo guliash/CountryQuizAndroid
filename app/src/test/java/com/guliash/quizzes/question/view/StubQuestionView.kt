@@ -1,7 +1,7 @@
 package com.guliash.quizzes.question.view
 
 import com.guliash.quizzes.answer.model.Answer
-import com.guliash.quizzes.question.model.Question
+import com.guliash.quizzes.game.model.Enigma
 import io.reactivex.Completable
 import io.reactivex.Observable
 
@@ -16,7 +16,7 @@ class StubQuestionView : QuestionView {
 
     override fun answers(): Observable<Int> = Observable.empty()
 
-    override fun showQuestion(question: Question) {
+    override fun showQuestion(enigma: Enigma) {
 
     }
 
