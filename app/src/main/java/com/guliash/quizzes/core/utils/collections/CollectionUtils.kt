@@ -13,27 +13,22 @@ fun <T> Collection<T>.joinToString(separator: String, beforeEach: String): Strin
     return stringBuilder.toString()
 }
 
-object CollectionUtils {
+fun <T> List<T>.shuffle(): List<T> {
+    val mutable = toMutableList()
+    mutable.shuffle()
+    return mutable.toList()
+}
 
-    fun <E> shuffle(list: List<E>): List<E> {
-        val mutable = list.toMutableList()
-        shuffle(mutable)
-        return mutable
+fun <T> MutableList<T>.shuffle() {
+    val rnd = Random()
+    for (i in 0..size - 2) {
+        val swapWith = rnd.nextInt(size - i)
+        swap(i, i + swapWith)
     }
+}
 
-    fun <E> shuffle(list: MutableList<E>) {
-        val rnd = Random()
-        for (i in 0..list.size - 2) {
-            val swapWith = rnd.nextInt(list.size - i)
-            swap(list, i, i + swapWith)
-        }
-    }
-
-
-    fun <E> swap(list: MutableList<E>, x: Int, y: Int) {
-        val value = list[x]
-        list[x] = list[y]
-        list[y] = value
-    }
-
+fun <T> MutableList<T>.swap(x: Int, y: Int) {
+    val value = this[x]
+    this[x] = this[y]
+    this[y] = value
 }

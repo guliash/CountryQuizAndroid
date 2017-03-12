@@ -11,7 +11,7 @@ import javax.inject.Inject
 class RepositoryImpl @Inject constructor(private val fileUtils: FileUtils, private val context: Context) : Repository {
     override fun enigmas(): Observable<Enigma> = Observable.fromCallable({
         Gson().fromJson<List<Enigma>>(
-                fileUtils.readWhole(context.assets.open("questions.json")),
+                fileUtils.readWhole(context.assets.open("enigmas.json")),
                 object : TypeToken<List<Enigma>>() {}.type
         )
     }).flatMap { list -> Observable.fromIterable(list) }

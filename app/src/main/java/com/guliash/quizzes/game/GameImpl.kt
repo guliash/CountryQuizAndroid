@@ -2,7 +2,7 @@ package com.guliash.quizzes.game
 
 import com.guliash.quizzes.answer.model.Answer
 import com.guliash.quizzes.core.repository.Repository
-import com.guliash.quizzes.core.utils.collections.CollectionUtils
+import com.guliash.quizzes.core.utils.collections.shuffle
 import com.guliash.quizzes.game.di.GameScope
 import com.guliash.quizzes.game.model.Enigma
 import com.guliash.quizzes.question.model.Question
@@ -12,7 +12,10 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 @GameScope
-class GameImpl @Inject constructor(private val repository: Repository) : Game {
+class GameImpl @Inject constructor(
+        private val repository: Repository,
+        private val answerGenerationStrategy: AnswerGenerationStrategy
+) : Game {
 
     private var enigmas: List<Enigma>? = null
     private var questions: List<Question>? = null
@@ -38,7 +41,7 @@ class GameImpl @Inject constructor(private val repository: Repository) : Game {
     private fun questionsSync(): List<Question> {
         synchronized(this) {
             enigmasSync()
-            questions = enigmas!!.map { enigma -> Question(enigma, emptyList()) }
+            questions = enigmas!!.map { enigma -> Question(enigma, answerGenerationStrategy.generate(enigma)) }
             return questions!!
         }
     }
@@ -46,13 +49,12 @@ class GameImpl @Inject constructor(private val repository: Repository) : Game {
     private fun enigmasSync(): List<Enigma> {
         synchronized(this) {
             if (enigmas === null) {
-                enigmas = CollectionUtils.shuffle(
-                        repository
-                                .enigmas()
-                                .toList()
-                                .blockingGet()
-                                .toList()
-                )
+                enigmas = repository
+                        .enigmas()
+                        .toList()
+                        .blockingGet()
+                        .toList()
+                        .shuffle()
             }
             return enigmas!!
         }
