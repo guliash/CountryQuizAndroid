@@ -103,7 +103,7 @@ class QuestionFragment : Fragment(), QuestionView, ComponentProvider {
 
     override fun showQuestion(question: Question) {
         Glide.with(this)
-                .load(question.enigma.image.url)
+                .load(question.place.image.url)
                 .centerCrop()
                 .into(questionImageView)
 
@@ -112,7 +112,7 @@ class QuestionFragment : Fragment(), QuestionView, ComponentProvider {
             answerButtons[index].text = answer.text
         }
 
-        attributionTextView.setText(utils.buildAttribution(question.enigma.image.attribution), TextView.BufferType.SPANNABLE)
+        attributionTextView.setText(utils.buildAttribution(question.place.image.attribution), TextView.BufferType.SPANNABLE)
 
     }
 

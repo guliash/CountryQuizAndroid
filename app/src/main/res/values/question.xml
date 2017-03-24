@@ -10,4 +10,5 @@
     <color name="question_answerAttributionBackgroundColor">@color/grey800alpha80</color>
 
     <string name="question_attribution" formatted="false">%s by %s is licensed under %s</string>
+    <string name="question_attributionImageSourceLink">Photo</string>
 </resources>

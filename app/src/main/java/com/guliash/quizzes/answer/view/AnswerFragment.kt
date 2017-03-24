@@ -26,7 +26,7 @@ import com.guliash.quizzes.answer.presenter.AnswerPresenter
 import com.guliash.quizzes.core.utils.collections.joinToString
 import com.guliash.quizzes.core.utils.ui.RxView
 import com.guliash.quizzes.core.view.CustomScrollView
-import com.guliash.quizzes.game.model.Enigma
+import com.guliash.quizzes.game.model.Place
 import com.guliash.quizzes.map.model.Position
 import com.guliash.quizzes.map.view.MapActivity
 import com.guliash.quizzes.map.view.POSITION_EXTRA
@@ -140,10 +140,10 @@ class AnswerFragment : DialogFragment(), AnswerView, ActionsDelegate {
         verdictTextView.text = context.getString(R.string.answer_wrongAnswer)
     }
 
-    override fun showEnigma(enigma: Enigma) {
+    override fun showPlace(place: Place) {
         descriptionTextView.visibility = VISIBLE
-        descriptionTextView.text = answerUtils.buildDescription(enigma)
-        showFacts(enigma.facts)
+        descriptionTextView.text = answerUtils.buildDescription(place)
+        showFacts(place.facts)
 
         scrollablePartView.post {
             topDivider.visibility = INVISIBLE
@@ -155,7 +155,7 @@ class AnswerFragment : DialogFragment(), AnswerView, ActionsDelegate {
         }
     }
 
-    override fun hideEnigma() {
+    override fun hidePlace() {
         descriptionTextView.visibility = GONE
         factsTextView.visibility = GONE
     }

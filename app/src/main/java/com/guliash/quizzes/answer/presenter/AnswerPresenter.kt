@@ -26,16 +26,16 @@ class AnswerPresenter @Inject constructor(private @QuestionId val questionId: St
 
         if (verdict.correct) {
             subscribe(
-                    game.enigma(questionId)
+                    game.place(questionId)
                             .subscribeOn(workScheduler)
                             .observeOn(postScheduler)
-                            .subscribe { enigma ->
+                            .subscribe { place ->
                                 view.showCorrectAnswer(verdict.answer)
-                                view.showEnigma(enigma)
+                                view.showPlace(place)
                             }
             )
         } else {
-            view.hideEnigma()
+            view.hidePlace()
             view.showWrongAnswer(verdict.answer)
         }
 
@@ -46,12 +46,12 @@ class AnswerPresenter @Inject constructor(private @QuestionId val questionId: St
                     view.close()
                 },
                 view.showOnMap().switchMap { ø ->
-                    game.enigma(questionId)
+                    game.place(questionId)
                             .subscribeOn(workScheduler)
                             .observeOn(postScheduler)
                             .toObservable()
-                }.subscribe { enigma ->
-                    actionsDelegate.showMap(enigma.position)
+                }.subscribe { place ->
+                    actionsDelegate.showMap(place.position)
                 }
         )
     }

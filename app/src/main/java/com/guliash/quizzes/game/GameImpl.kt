@@ -4,7 +4,7 @@ import com.guliash.quizzes.answer.model.Answer
 import com.guliash.quizzes.core.repository.Repository
 import com.guliash.quizzes.core.utils.collections.shuffle
 import com.guliash.quizzes.game.di.GameScope
-import com.guliash.quizzes.game.model.Enigma
+import com.guliash.quizzes.game.model.Place
 import com.guliash.quizzes.question.model.Question
 import com.guliash.quizzes.question.model.Verdict
 import io.reactivex.Observable
@@ -17,46 +17,33 @@ class GameImpl @Inject constructor(
         private val answerGenerationStrategy: AnswerGenerationStrategy
 ) : Game {
 
-    private var enigmas: List<Enigma>? = null
-    private var questions: List<Question>? = null
+    private val places: List<Place> by lazy {
+        repository
+                .places()
+                .toList()
+                .blockingGet()
+                .toList()
+                .shuffle()
+    }
+    private val questions: List<Question> by lazy {
+        places.map { place -> Question(place, answerGenerationStrategy.generate(place)) }
+    }
 
     override fun questions(): Observable<Question> {
-        return enigmas().map { enigma -> Question(enigma, emptyList()) }
+        return places().map { place -> Question(place, emptyList()) }
     }
 
     override fun question(which: Int): Single<Question> {
-        return Single.fromCallable { questionsSync()[which % questions!!.size] }
+        return Single.fromCallable { questions[which % questions.size] }
     }
 
-    override fun enigma(id: String): Single<Enigma> {
-        return enigmas().filter { it -> it.id == id }.singleOrError()
+    override fun place(id: String): Single<Place> {
+        return places().filter { it -> it.id == id }.singleOrError()
     }
 
     override fun answer(question: Question, answer: Answer): Single<Verdict> {
         return if (answer.correct) Single.just(Verdict(answer, true)) else Single.just(Verdict(answer, false))
     }
 
-    private fun enigmas(): Observable<Enigma> = Observable.defer { Observable.fromIterable(enigmasSync()) }
-
-    private fun questionsSync(): List<Question> {
-        synchronized(this) {
-            enigmasSync()
-            questions = enigmas!!.map { enigma -> Question(enigma, answerGenerationStrategy.generate(enigma)) }
-            return questions!!
-        }
-    }
-
-    private fun enigmasSync(): List<Enigma> {
-        synchronized(this) {
-            if (enigmas === null) {
-                enigmas = repository
-                        .enigmas()
-                        .toList()
-                        .blockingGet()
-                        .toList()
-                        .shuffle()
-            }
-            return enigmas!!
-        }
-    }
+    private fun places(): Observable<Place> = Observable.defer { Observable.fromIterable(places) }
 }

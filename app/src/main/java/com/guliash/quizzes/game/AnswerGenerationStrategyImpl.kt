@@ -8,7 +8,7 @@ import com.guliash.quizzes.core.utils.collections.shuffle
 import com.guliash.quizzes.core.utils.io.FileUtils
 import com.guliash.quizzes.game.di.GameScope
 import com.guliash.quizzes.game.model.Country
-import com.guliash.quizzes.game.model.Enigma
+import com.guliash.quizzes.game.model.Place
 import javax.inject.Inject
 
 @GameScope
@@ -25,16 +25,35 @@ class AnswerGenerationStrategyImpl @Inject constructor(
                     object : TypeToken<List<Country>>() {}.type
             )
 
-    override fun generate(enigma: Enigma): List<Answer> {
-        val answers = mutableListOf(Answer(enigma.country, true))
+    override fun generate(place: Place): List<Answer> {
+        val answers = mutableListOf(Answer(place.country, true))
+        val placeCountry = countries.find { it.name == place.country } ?: throw NullPointerException()
+        val shuffled = countries.shuffle()
         answers.addAll(
-                countries.shuffle()
+                shuffled
                         .asSequence()
-                        .filter { it.name != enigma.country }
+                        .filter {
+                            it.name != placeCountry.name &&
+                                    (it.region == placeCountry.region || it.subregion == placeCountry.subregion)
+                        }
                         .take(3)
                         .map { it -> Answer(it.name, false) }
                         .toList()
         )
+        if (answers.size < 4) {
+            val need = 4 - answers.size
+            answers.addAll(
+                    shuffled
+                            .asSequence()
+                            .filter {
+                                it.name != placeCountry.name && it.region != placeCountry.region &&
+                                        it.subregion == placeCountry.subregion
+                            }
+                            .take(need)
+                            .map { it -> Answer(it.name, false) }
+                            .toList()
+            )
+        }
         answers.shuffle()
         return answers
     }

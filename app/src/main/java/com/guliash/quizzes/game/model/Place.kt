@@ -3,7 +3,7 @@ package com.guliash.quizzes.game.model
 import com.google.gson.annotations.SerializedName
 import com.guliash.quizzes.map.model.Position
 
-data class Enigma(
+data class Place(
         @SerializedName("_id") val id: String,
         @SerializedName("name") val name: String,
         @SerializedName("country") val country: String,

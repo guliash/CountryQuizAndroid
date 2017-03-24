@@ -1,7 +1,7 @@
 package com.guliash.quizzes.game
 
 import com.guliash.quizzes.answer.model.Answer
-import com.guliash.quizzes.game.model.Enigma
+import com.guliash.quizzes.game.model.Place
 import com.guliash.quizzes.question.model.Question
 import com.guliash.quizzes.question.model.Verdict
 import io.reactivex.Observable
@@ -15,6 +15,6 @@ interface Game {
 
     fun answer(question: Question, answer: Answer): Single<Verdict>
 
-    fun enigma(id: String): Single<Enigma>
+    fun place(id: String): Single<Place>
 
 }

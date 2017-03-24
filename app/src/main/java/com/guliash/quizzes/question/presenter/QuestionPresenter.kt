@@ -26,6 +26,7 @@ class QuestionPresenter @Inject constructor(private val whichQuestion: Int,
         subscribe(
                 question()
                         .doOnSuccess { question -> this.question = question }
+                        .doOnError { it.printStackTrace() }
                         .subscribe(
                                 { question -> view.showQuestion(question) },
                                 { error -> view.showError("Sorry, error occurred.") }),
@@ -35,7 +36,7 @@ class QuestionPresenter @Inject constructor(private val whichQuestion: Int,
                             game.answer(question, question.answers[whichAnswer]).toObservable()
                         })
                         .observeOn(postScheduler)
-                        .subscribe({ verdict -> view.showVerdict(verdict, question.enigma.id) })
+                        .subscribe({ verdict -> view.showVerdict(verdict, question.place.id) })
         )
     }
 

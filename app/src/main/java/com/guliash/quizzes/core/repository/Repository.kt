@@ -1,10 +1,10 @@
 package com.guliash.quizzes.core.repository
 
-import com.guliash.quizzes.game.model.Enigma
+import com.guliash.quizzes.game.model.Place
 import io.reactivex.Observable
 
 interface Repository {
 
-    fun enigmas(): Observable<Enigma>
+    fun places(): Observable<Place>
 
 }

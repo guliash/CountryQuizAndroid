@@ -1,7 +1,7 @@
 package com.guliash.quizzes.answer.view
 
 import com.guliash.quizzes.answer.model.Answer
-import com.guliash.quizzes.game.model.Enigma
+import com.guliash.quizzes.game.model.Place
 import io.reactivex.Observable
 
 interface AnswerView {
@@ -9,9 +9,9 @@ interface AnswerView {
 
     fun showCorrectAnswer(answer: Answer)
 
-    fun showEnigma(enigma: Enigma)
+    fun showPlace(place: Place)
 
-    fun hideEnigma()
+    fun hidePlace()
 
     fun close()
 

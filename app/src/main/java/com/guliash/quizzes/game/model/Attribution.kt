@@ -1,10 +1,9 @@
 package com.guliash.quizzes.game.model
 
 import com.google.gson.annotations.SerializedName
-import com.guliash.quizzes.core.url.Url
 
 data class Attribution(
-        @SerializedName("resource") val resource: Url,
-        @SerializedName("author") val author: Url,
-        @SerializedName("license") val license: Url
+        @SerializedName("source") val source: String,
+        @SerializedName("author") val author: Author,
+        @SerializedName("license") val license: License
 )
