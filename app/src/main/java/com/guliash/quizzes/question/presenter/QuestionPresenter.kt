@@ -27,9 +27,7 @@ class QuestionPresenter @Inject constructor(private val whichQuestion: Int,
                 question()
                         .doOnSuccess { question -> this.question = question }
                         .doOnError { it.printStackTrace() }
-                        .subscribe(
-                                { question -> view.showQuestion(question) },
-                                { error -> view.showError("Sorry, error occurred.") }),
+                        .subscribe({ question -> view.showQuestion(question) }),
                 view.answers()
                         .observeOn(workScheduler)
                         .concatMap({ whichAnswer ->

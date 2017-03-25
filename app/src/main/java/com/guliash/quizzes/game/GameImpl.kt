@@ -25,6 +25,7 @@ class GameImpl @Inject constructor(
                 .toList()
                 .shuffle()
     }
+
     private val questions: List<Question> by lazy {
         places.map { place -> Question(place, answerGenerationStrategy.generate(place)) }
     }

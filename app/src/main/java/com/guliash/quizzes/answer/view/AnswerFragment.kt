@@ -82,12 +82,13 @@ class AnswerFragment : DialogFragment(), AnswerView, ActionsDelegate {
     lateinit var answerUtils: AnswerUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (parentFragment is ComponentProvider) {
-            (parentFragment as ComponentProvider)
-                    .create(AnswerModule(arguments.getParcelable(VERDICT_EXTRA),
-                            arguments.getString(QUESTION_ID_EXTRA), this))
-                    .inject(this)
-        }
+        (parentFragment as? ComponentProvider)?.create(
+                AnswerModule(
+                        arguments.getParcelable(VERDICT_EXTRA),
+                        arguments.getString(QUESTION_ID_EXTRA),
+                        this
+                )
+        )?.inject(this)
 
         super.onCreate(savedInstanceState)
     }

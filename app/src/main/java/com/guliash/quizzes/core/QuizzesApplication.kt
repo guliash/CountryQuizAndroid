@@ -10,7 +10,7 @@ import com.guliash.quizzes.game.di.GameComponent
 class QuizzesApplication : Application() {
 
     lateinit var appComponent: AppComponent
-    var gameComponent: GameComponent? = null
+    lateinit var gameComponent: GameComponent
 
     companion object {
         fun application(context: Context): QuizzesApplication = (context.applicationContext as QuizzesApplication)
@@ -20,6 +20,7 @@ class QuizzesApplication : Application() {
         super.onCreate()
 
         appComponent = DaggerAppComponent.builder().appModule(AppModule(this)).build()
+        gameComponent = appComponent.plus()
     }
 
 

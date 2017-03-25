@@ -5,6 +5,6 @@ import io.reactivex.Observable
 import retrofit2.http.GET
 
 interface Api {
-    @GET("quizzes/places")
+    @GET("places")
     fun places(): Observable<List<Place>>
 }

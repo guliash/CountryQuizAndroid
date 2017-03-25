@@ -17,7 +17,7 @@ class RepositoryModule {
     @Provides
     fun api(): Api {
         val retrofit = Retrofit.Builder()
-                .baseUrl("https://guliash.com/")
+                .baseUrl("https://guliash.com/quizzes/api/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

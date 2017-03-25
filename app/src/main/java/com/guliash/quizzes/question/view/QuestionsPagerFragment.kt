@@ -31,7 +31,7 @@ class QuestionsPagerFragment : Fragment(), QuestionsPagerView {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        QuizzesApplication.application(context).gameComponent!!.inject(this)
+        QuizzesApplication.application(context).gameComponent.inject(this)
 
         ButterKnife.bind(this, view!!)
 
