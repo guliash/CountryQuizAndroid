@@ -11,4 +11,11 @@
 
     <string name="question_attribution" formatted="false">%s by %s is licensed under %s</string>
     <string name="question_attributionImageSourceLink">Photo</string>
+    <string name="question_error">Error occurred while loading quizzes :(</string>
+    <string name="question_errorTryAgain">Try again</string>
+
+    <style name="ErrorText" parent="Text.Medium">
+
+    </style>
+
 </resources>

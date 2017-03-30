@@ -25,4 +25,15 @@
         <item name="android:padding">8dp</item>
     </style>
 
+    <style name="Text" />
+
+    <style name="Text.Medium">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Text.Large">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+
 </resources>

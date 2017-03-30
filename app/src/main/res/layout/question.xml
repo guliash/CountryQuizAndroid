@@ -4,13 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     card_view:cardCornerRadius="6dp"
     card_view:cardElevation="2dp"
     card_view:cardPreventCornerOverlap="false"
     card_view:cardUseCompatPadding="true">
 
+    <android.support.v4.widget.ContentLoadingProgressBar
+        android:id="@+id/loadingProgress"
+        style="@android:style/Widget.ProgressBar.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
     <LinearLayout
+        android:id="@+id/questionBlock"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -102,4 +109,35 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/errorBlock"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/errorText"
+                style="@style/ErrorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                tools:text="Error text" />
+
+            <Button
+                android:id="@+id/errorButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/errorText"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:minWidth="200dp"
+                android:text="@string/question_errorTryAgain" />
+        </RelativeLayout>
+    </FrameLayout>
 </android.support.v7.widget.CardView>

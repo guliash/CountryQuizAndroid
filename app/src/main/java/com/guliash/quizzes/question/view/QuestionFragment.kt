@@ -2,6 +2,7 @@ package com.guliash.quizzes.question.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.widget.ContentLoadingProgressBar
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
@@ -43,6 +44,12 @@ class QuestionFragment : Fragment(), QuestionView, ComponentProvider {
 
     private var whichQuestion: Int = 0
 
+    @BindView(R.id.loadingProgress)
+    lateinit var loadingProgress: ContentLoadingProgressBar
+
+    @BindView(R.id.questionBlock)
+    lateinit var questionBlock: View
+
     @BindView(R.id.image)
     lateinit var questionImageView: ImageView
 
@@ -51,6 +58,15 @@ class QuestionFragment : Fragment(), QuestionView, ComponentProvider {
 
     @BindViews(R.id.answer1, R.id.answer2, R.id.answer3, R.id.answer4)
     lateinit var answerButtons: Array<Button>
+
+    @BindView(R.id.errorBlock)
+    lateinit var errorBlock: View
+
+    @BindView(R.id.errorText)
+    lateinit var errorTextView: TextView
+
+    @BindView(R.id.errorButton)
+    lateinit var errorButton: Button
 
     @Inject
     lateinit var presenter: QuestionPresenter
@@ -101,7 +117,13 @@ class QuestionFragment : Fragment(), QuestionView, ComponentProvider {
         return Observable.merge(clicks)
     }
 
+    override fun showProgress() {
+        loadingProgress.show()
+    }
+
     override fun showQuestion(question: Question) {
+        questionBlock.visibility = View.VISIBLE
+
         Glide.with(this)
                 .load(question.place.image.url)
                 .centerCrop()
@@ -117,11 +139,26 @@ class QuestionFragment : Fragment(), QuestionView, ComponentProvider {
     }
 
     override fun showError(error: String) {
-        println("Show error")
+        errorBlock.visibility = View.VISIBLE
+        errorTextView.text = error
     }
 
     override fun showVerdict(verdict: Verdict, questionId: String) {
         createAnswerFragment(verdict, questionId).show(childFragmentManager, null)
     }
+
+    override fun hideProgress() {
+        loadingProgress.hide()
+    }
+
+    override fun hideQuestion() {
+        questionBlock.visibility = View.GONE
+    }
+
+    override fun hideError() {
+        errorBlock.visibility = View.GONE
+    }
+
+    override fun retries(): Observable<Unit> = RxView.clicks(errorButton)
 
 }
