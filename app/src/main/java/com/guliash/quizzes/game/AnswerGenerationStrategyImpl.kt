@@ -47,7 +47,7 @@ class AnswerGenerationStrategyImpl @Inject constructor(
                             .asSequence()
                             .filter {
                                 it.name != placeCountry.name && it.region != placeCountry.region &&
-                                        it.subregion == placeCountry.subregion
+                                        it.subregion != placeCountry.subregion
                             }
                             .take(need)
                             .map { it -> Answer(it.name, false) }
