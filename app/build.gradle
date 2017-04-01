@@ -71,6 +71,8 @@ dependencies {
     compile "com.jakewharton:butterknife:$butterKnifeVersion"
     kapt "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
 
+    compile 'com.jakewharton.timber:timber:4.5.1'
+
     compile 'com.google.code.gson:gson:2.7'
 
     compile "com.google.android.gms:play-services-maps:10.2.0"

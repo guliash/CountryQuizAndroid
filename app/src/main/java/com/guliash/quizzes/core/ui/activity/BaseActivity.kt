@@ -2,50 +2,51 @@ package com.guliash.quizzes.core.ui.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import timber.log.Timber
 
 open class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        println("${this}: onCreate")
+        Timber.d("${this}: onCreate")
         super.onCreate(savedInstanceState)
     }
 
     override fun onDestroy() {
-        println("${this}: onDestroy")
+        Timber.d("${this}: onDestroy")
         super.onDestroy()
     }
 
     override fun onStart() {
-        println("${this}: onStart")
+        Timber.d("${this}: onStart")
         super.onStart()
     }
 
     override fun onRestart() {
-        println("${this}: onRestart")
+        Timber.d("${this}: onRestart")
         super.onRestart()
     }
 
     override fun onStop() {
-        println("${this}: onStop")
+        Timber.d("${this}: onStop")
         super.onStop()
     }
 
     override fun onResume() {
-        println("${this}: onResume")
+        Timber.d("${this}: onResume")
         super.onResume()
     }
 
     override fun onPause() {
-        println("${this}: onPause")
+        Timber.d("${this}: onPause")
         super.onPause()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        println("${this}: onRestoreInstanceState")
+        Timber.d("${this}: onRestoreInstanceState")
         super.onRestoreInstanceState(savedInstanceState)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
-        println("${this}: onSaveInstanceState")
+        Timber.d("${this}: onSaveInstanceState")
         super.onSaveInstanceState(outState)
     }
 

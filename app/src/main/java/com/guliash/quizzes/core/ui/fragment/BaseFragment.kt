@@ -3,55 +3,56 @@ package com.guliash.quizzes.core.ui.fragment
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.View
+import timber.log.Timber
 
 open class BaseFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        println("${this}: onCreate")
+        Timber.d("${this}: onCreate")
         super.onCreate(savedInstanceState)
     }
 
     override fun onDestroy() {
-        println("${this}: onDestroy")
+        Timber.d("${this}: onDestroy")
         super.onDestroy()
     }
 
     override fun onStart() {
-        println("${this}: onStart")
+        Timber.d("${this}: onStart")
         super.onStart()
     }
 
     override fun onStop() {
-        println("${this}: onStop")
+        Timber.d("${this}: onStop")
         super.onStop()
     }
 
     override fun onResume() {
-        println("${this}: onResume")
+        Timber.d("${this}: onResume")
         super.onResume()
     }
 
     override fun onPause() {
-        println("${this}: onPause")
+        Timber.d("${this}: onPause")
         super.onPause()
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        println("${this}: onViewCreated")
+        Timber.d("${this}: onViewCreated")
         super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {
-        println("${this}: onDestroyView")
+        Timber.d("${this}: onDestroyView")
         super.onDestroyView()
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        println("${this}: onViewStateRestored")
+        Timber.d("${this}: onViewStateRestored")
         super.onViewStateRestored(savedInstanceState)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
-        println("${this}: onSaveInstanceState")
+        Timber.d("${this}: onSaveInstanceState")
         super.onSaveInstanceState(outState)
     }
 }
