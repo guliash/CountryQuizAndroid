@@ -1,7 +1,6 @@
 package com.guliash.quizzes.question.view
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.widget.ContentLoadingProgressBar
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
@@ -18,8 +17,9 @@ import com.guliash.quizzes.R
 import com.guliash.quizzes.answer.di.AnswerModule
 import com.guliash.quizzes.answer.di.ComponentProvider
 import com.guliash.quizzes.answer.view.createAnswerFragment
-import com.guliash.quizzes.core.QuizzesApplication
+import com.guliash.quizzes.core.ui.fragment.BaseFragment
 import com.guliash.quizzes.core.utils.ui.RxView
+import com.guliash.quizzes.game.GameActivity
 import com.guliash.quizzes.question.QuestionUtils
 import com.guliash.quizzes.question.di.QuestionComponent
 import com.guliash.quizzes.question.di.QuestionModule
@@ -40,7 +40,7 @@ fun createQuestionFragment(whichQuestion: Int): QuestionFragment {
     return fragment
 }
 
-class QuestionFragment : Fragment(), QuestionView, ComponentProvider {
+class QuestionFragment : BaseFragment(), QuestionView, ComponentProvider {
 
     private var whichQuestion: Int = 0
 
@@ -80,7 +80,7 @@ class QuestionFragment : Fragment(), QuestionView, ComponentProvider {
     override fun onCreate(savedInstanceState: Bundle?) {
         whichQuestion = arguments.getInt(WHICH_QUESTION_ARG)
 
-        questionComponent = QuizzesApplication.application(context).gameComponent!!.plus(QuestionModule(whichQuestion))
+        questionComponent = (activity as GameActivity).gameComponent.plus(QuestionModule(whichQuestion))
         questionComponent.inject(this)
 
         super.onCreate(savedInstanceState)

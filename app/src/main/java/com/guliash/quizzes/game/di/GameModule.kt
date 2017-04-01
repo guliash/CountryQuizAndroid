@@ -1,17 +1,26 @@
 package com.guliash.quizzes.game.di
 
-import com.guliash.quizzes.game.*
-import dagger.Binds
+import com.guliash.quizzes.core.services.ConnectivityService
+import com.guliash.quizzes.core.services.ConnectivityServiceImpl
+import com.guliash.quizzes.core.services.ConnectivityStatusProvider
+import com.guliash.quizzes.game.GameActivity
+import com.guliash.quizzes.game.Gamepad
+import com.guliash.quizzes.game.GamepadImpl
 import dagger.Module
+import dagger.Provides
 
 @Module
-abstract class GameModule {
-    @Binds
-    abstract fun game(game: GameImpl): Game
+class GameModule(private val activity: GameActivity) {
 
-    @Binds
-    abstract fun gamepad(gamepad: GamepadImpl): Gamepad
+    @Provides
+    @GameScope
+    fun gamepad(): Gamepad = GamepadImpl()
 
-    @Binds
-    abstract fun answerGenerationStrategy(answerGenerationStrategy: AnswerGenerationStrategyImpl): AnswerGenerationStrategy
+    @Provides
+    @GameScope
+    fun connectivityService(): ConnectivityService = ConnectivityServiceImpl(activity)
+
+    @Provides
+    @GameScope
+    fun connectivityStatusProvider(connectivityService: ConnectivityService): ConnectivityStatusProvider = connectivityService
 }

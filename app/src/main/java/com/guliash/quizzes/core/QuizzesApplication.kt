@@ -2,15 +2,13 @@ package com.guliash.quizzes.core
 
 import android.app.Application
 import android.content.Context
-import com.guliash.quizzes.core.di.AppComponent
-import com.guliash.quizzes.core.di.AppModule
-import com.guliash.quizzes.core.di.DaggerAppComponent
-import com.guliash.quizzes.game.di.GameComponent
+import com.guliash.quizzes.core.app.di.AppComponent
+import com.guliash.quizzes.core.app.di.AppModule
+import com.guliash.quizzes.core.app.di.DaggerAppComponent
 
 class QuizzesApplication : Application() {
 
     lateinit var appComponent: AppComponent
-    lateinit var gameComponent: GameComponent
 
     companion object {
         fun application(context: Context): QuizzesApplication = (context.applicationContext as QuizzesApplication)
@@ -20,8 +18,6 @@ class QuizzesApplication : Application() {
         super.onCreate()
 
         appComponent = DaggerAppComponent.builder().appModule(AppModule(this)).build()
-        gameComponent = appComponent.plus()
     }
-
 
 }

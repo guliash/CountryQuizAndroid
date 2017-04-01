@@ -3,8 +3,8 @@ package com.guliash.quizzes.answer.presenter
 import com.guliash.quizzes.answer.di.AnswerScope
 import com.guliash.quizzes.answer.di.QuestionId
 import com.guliash.quizzes.answer.view.AnswerView
-import com.guliash.quizzes.core.di.rx.IO
-import com.guliash.quizzes.core.di.rx.Main
+import com.guliash.quizzes.core.app.di.rx.IO
+import com.guliash.quizzes.core.app.di.rx.Main
 import com.guliash.quizzes.core.mvp.Presenter
 import com.guliash.quizzes.game.Game
 import com.guliash.quizzes.game.Gamepad

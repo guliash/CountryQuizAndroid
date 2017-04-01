@@ -6,12 +6,12 @@ import com.google.gson.reflect.TypeToken
 import com.guliash.quizzes.answer.model.Answer
 import com.guliash.quizzes.core.utils.collections.shuffle
 import com.guliash.quizzes.core.utils.io.FileUtils
-import com.guliash.quizzes.game.di.GameScope
 import com.guliash.quizzes.game.model.Country
 import com.guliash.quizzes.game.model.Place
 import javax.inject.Inject
+import javax.inject.Singleton
 
-@GameScope
+@Singleton
 class AnswerGenerationStrategyImpl @Inject constructor(
         private val context: Context,
         private val fileUtils: FileUtils

@@ -2,23 +2,25 @@ package com.guliash.quizzes.question.presenter
 
 import android.content.Context
 import com.guliash.quizzes.R
-import com.guliash.quizzes.core.di.rx.IO
-import com.guliash.quizzes.core.di.rx.Main
+import com.guliash.quizzes.core.app.di.rx.IO
+import com.guliash.quizzes.core.app.di.rx.Main
 import com.guliash.quizzes.core.mvp.Presenter
+import com.guliash.quizzes.core.services.ConnectivityStatusProvider
 import com.guliash.quizzes.game.Game
 import com.guliash.quizzes.question.di.QuestionScope
 import com.guliash.quizzes.question.model.Question
 import com.guliash.quizzes.question.view.QuestionView
 import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable
 import io.reactivex.Scheduler
 import io.reactivex.Single
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @QuestionScope
 class QuestionPresenter @Inject constructor(private val whichQuestion: Int,
                                             private val game: Game,
                                             private val context: Context,
+                                            private val connectivityStatusProvider: ConnectivityStatusProvider,
                                             private @IO val workScheduler: Scheduler,
                                             private @Main val postScheduler: Scheduler) :
         Presenter<QuestionView>() {
@@ -49,7 +51,15 @@ class QuestionPresenter @Inject constructor(private val whichQuestion: Int,
                         }
                         .retryWhen { errors ->
                             errors.switchMap {
-                                view.retries().take(1).toFlowable(BackpressureStrategy.DROP)
+                                Flowable.merge(
+                                        view.retries()
+                                                .take(1)
+                                                .toFlowable(BackpressureStrategy.DROP),
+                                        connectivityStatusProvider.connectionStatus()
+                                                .filter { it == ConnectivityStatusProvider.ConnectionStatus.CONNECTED }
+                                                .toFlowable(BackpressureStrategy.DROP)
+                                )
+
                             }
                         }
                         .subscribe(),
@@ -68,5 +78,4 @@ class QuestionPresenter @Inject constructor(private val whichQuestion: Int,
                 .subscribeOn(workScheduler)
                 .observeOn(postScheduler);
     }
-
 }

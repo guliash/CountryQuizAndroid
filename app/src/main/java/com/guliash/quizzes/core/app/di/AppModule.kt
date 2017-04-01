@@ -1,4 +1,4 @@
-package com.guliash.quizzes.core.di
+package com.guliash.quizzes.core.app.di
 
 import android.content.Context
 import dagger.Module

@@ -3,15 +3,15 @@ package com.guliash.quizzes.game
 import com.guliash.quizzes.answer.model.Answer
 import com.guliash.quizzes.core.repository.Repository
 import com.guliash.quizzes.core.utils.collections.shuffle
-import com.guliash.quizzes.game.di.GameScope
 import com.guliash.quizzes.game.model.Place
 import com.guliash.quizzes.question.model.Question
 import com.guliash.quizzes.question.model.Verdict
 import io.reactivex.Observable
 import io.reactivex.Single
 import javax.inject.Inject
+import javax.inject.Singleton
 
-@GameScope
+@Singleton
 class GameImpl @Inject constructor(
         private val repository: Repository,
         private val answerGenerationStrategy: AnswerGenerationStrategy

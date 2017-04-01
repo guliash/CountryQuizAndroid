@@ -23,6 +23,7 @@ import com.guliash.quizzes.answer.di.ComponentProvider
 import com.guliash.quizzes.answer.model.Answer
 import com.guliash.quizzes.answer.presenter.ActionsDelegate
 import com.guliash.quizzes.answer.presenter.AnswerPresenter
+import com.guliash.quizzes.core.ui.dialog.BaseDialogFragment
 import com.guliash.quizzes.core.utils.collections.joinToString
 import com.guliash.quizzes.core.utils.ui.RxView
 import com.guliash.quizzes.core.view.CustomScrollView
@@ -46,7 +47,7 @@ fun createAnswerFragment(verdict: Verdict, questionId: String): DialogFragment {
     return fragment
 }
 
-class AnswerFragment : DialogFragment(), AnswerView, ActionsDelegate {
+class AnswerFragment : BaseDialogFragment(), AnswerView, ActionsDelegate {
 
     @BindView(R.id.title)
     lateinit var verdictTextView: TextView
