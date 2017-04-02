@@ -53,12 +53,11 @@ class QuestionPresenter @Inject constructor(private val whichQuestion: Int,
                             errors.switchMap {
                                 Flowable.merge(
                                         view.retries()
-                                                .take(1)
                                                 .toFlowable(BackpressureStrategy.LATEST),
                                         connectivityStatusProvider.connectionStatus()
                                                 .filter { it == ConnectivityStatusProvider.ConnectionStatus.CONNECTED }
                                                 .toFlowable(BackpressureStrategy.LATEST)
-                                )
+                                ).take(1)
 
                             }
                         }
