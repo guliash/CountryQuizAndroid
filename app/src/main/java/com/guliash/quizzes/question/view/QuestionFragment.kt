@@ -13,6 +13,7 @@ import butterknife.BindView
 import butterknife.BindViews
 import butterknife.ButterKnife
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.guliash.quizzes.R
 import com.guliash.quizzes.answer.di.AnswerModule
 import com.guliash.quizzes.answer.di.ComponentProvider
@@ -53,6 +54,9 @@ class QuestionFragment : BaseFragment(), QuestionView, ComponentProvider {
     @BindView(R.id.image)
     lateinit var questionImageView: ImageView
 
+    @BindView(R.id.imageBlock)
+    lateinit var imageBlockView: View
+
     @BindView(R.id.attribution)
     lateinit var attributionTextView: TextView
 
@@ -76,7 +80,6 @@ class QuestionFragment : BaseFragment(), QuestionView, ComponentProvider {
 
     lateinit var questionComponent: QuestionComponent
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         whichQuestion = arguments.getInt(WHICH_QUESTION_ARG)
 
@@ -86,8 +89,8 @@ class QuestionFragment : BaseFragment(), QuestionView, ComponentProvider {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.question, container, false);
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.question, container, false);
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -127,8 +130,8 @@ class QuestionFragment : BaseFragment(), QuestionView, ComponentProvider {
         Glide.with(this)
                 .load(question.place.image.url)
                 .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(questionImageView)
-
 
         for ((index, answer) in question.answers.withIndex()) {
             answerButtons[index].text = answer.text
@@ -160,5 +163,7 @@ class QuestionFragment : BaseFragment(), QuestionView, ComponentProvider {
     }
 
     override fun retries(): Observable<Unit> = RxView.clicks(errorButton)
+
+    override fun imageSelections(): Observable<Unit> = RxView.clicks(imageBlockView)
 
 }

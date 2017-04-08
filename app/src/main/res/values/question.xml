@@ -7,7 +7,8 @@
     <color name="question_answerDividerColor">@color/grey600</color>
     <color name="question_answerLinkColor">#448aff</color>
     <color name="question_answerBackgroundColor">@color/grey800</color>
-    <color name="question_answerAttributionBackgroundColor">@color/grey800alpha80</color>
+    <color name="question_answerAttributionBackgroundColor">@color/alpha80grey800</color>
+    <color name="question_imagePressedColor">@color/alpha50grey800</color>
 
     <string name="question_attribution" formatted="false">%s by %s is licensed under %s</string>
     <string name="question_attributionImageSourceLink">Photo</string>

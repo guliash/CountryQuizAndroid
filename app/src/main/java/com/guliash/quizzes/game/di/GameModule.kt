@@ -6,11 +6,13 @@ import com.guliash.quizzes.core.services.ConnectivityStatusProvider
 import com.guliash.quizzes.game.GameActivity
 import com.guliash.quizzes.game.Gamepad
 import com.guliash.quizzes.game.GamepadImpl
+import com.guliash.quizzes.question.presenter.QuestionPresenter
 import dagger.Module
 import dagger.Provides
 
 @Module
-class GameModule(private val activity: GameActivity) {
+class GameModule(private val activity: GameActivity,
+                 private val questionCommander: QuestionPresenter.Commander) {
 
     @Provides
     @GameScope
@@ -23,4 +25,8 @@ class GameModule(private val activity: GameActivity) {
     @Provides
     @GameScope
     fun connectivityStatusProvider(connectivityService: ConnectivityService): ConnectivityStatusProvider = connectivityService
+
+    @Provides
+    @GameScope
+    fun questionCommander() = questionCommander
 }

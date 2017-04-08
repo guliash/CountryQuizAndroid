@@ -24,4 +24,6 @@ interface QuestionView {
 
     fun retries(): Observable<Unit>
 
+    fun imageSelections(): Observable<Unit>
+
 }

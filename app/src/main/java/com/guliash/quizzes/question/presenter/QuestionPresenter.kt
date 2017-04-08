@@ -21,9 +21,14 @@ class QuestionPresenter @Inject constructor(private val whichQuestion: Int,
                                             private val game: Game,
                                             private val context: Context,
                                             private val connectivityStatusProvider: ConnectivityStatusProvider,
+                                            private val commander: Commander,
                                             private @IO val workScheduler: Scheduler,
                                             private @Main val postScheduler: Scheduler) :
         Presenter<QuestionView>() {
+
+    interface Commander {
+        fun onImageSelected(imageUrl: String)
+    }
 
     private lateinit var question: Question
 
@@ -68,7 +73,11 @@ class QuestionPresenter @Inject constructor(private val whichQuestion: Int,
                             game.answer(question, question.answers[whichAnswer]).toObservable()
                         })
                         .observeOn(postScheduler)
-                        .subscribe({ verdict -> view.showVerdict(verdict, question.place.id) })
+                        .subscribe({ verdict -> view.showVerdict(verdict, question.place.id) }),
+                view.imageSelections()
+                        .subscribe { ø ->
+                            commander.onImageSelected(question.place.image.url)
+                        }
         )
     }
 

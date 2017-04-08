@@ -25,8 +25,8 @@ class QuestionsPagerFragment : BaseFragment(), QuestionsPagerView {
     @Inject
     lateinit var presenter: QuestionsPagerPresenter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.questions_pager, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.questions_pager, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
