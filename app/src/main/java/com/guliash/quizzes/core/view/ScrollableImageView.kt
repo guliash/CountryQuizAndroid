@@ -17,6 +17,9 @@ class ScrollableImageView : ImageView, ScaleGestureDetector.OnScaleGestureListen
     private var prevPointerCount = 1
 
     private val transformMatrix = Matrix()
+    private val transformArray = FloatArray(9)
+
+    private val tempMatrix = Matrix()
 
     private lateinit var scaleDetector: ScaleGestureDetector
 
@@ -58,7 +61,35 @@ class ScrollableImageView : ImageView, ScaleGestureDetector.OnScaleGestureListen
         }
 
         if (action == MotionEvent.ACTION_MOVE && drawable != null && event.pointerCount == 1) {
-            transformMatrix.postTranslate(event.x - prevMoveX, event.y - prevMoveY)
+            transformMatrix.getValues(transformArray)
+            val scale = transformArray[Matrix.MSCALE_X]
+            val translateX = transformArray[Matrix.MTRANS_X]
+            val translateY = transformArray[Matrix.MTRANS_Y]
+            val diffX = event.x - prevMoveX
+            val diffY = event.y - prevMoveY
+            var newTranslateX = translateX + diffX
+            var newTranslateY = translateY + diffY
+
+            if (diffX >= 0) {
+                if (newTranslateX >= 0) {
+                    newTranslateX = 0f
+                }
+            } else if (newTranslateX + scale * drawable.intrinsicWidth <= width) {
+                newTranslateX = translateX
+            }
+
+            if (diffY >= 0) {
+                if (newTranslateY >= 0f) {
+                    newTranslateY = 0f
+                }
+            } else if (newTranslateY + scale * drawable.intrinsicHeight <= height) {
+                newTranslateY = translateY
+            }
+
+            transformArray[Matrix.MTRANS_X] = newTranslateX
+            transformArray[Matrix.MTRANS_Y] = newTranslateY
+            transformMatrix.setValues(transformArray)
+            transformMatrix.getValues(transformArray)
             invalidate()
         }
 
@@ -86,11 +117,13 @@ class ScrollableImageView : ImageView, ScaleGestureDetector.OnScaleGestureListen
         transformMatrix.setTranslate((width - drawableWidth) / 2f, (height - drawableHeight) / 2f)
 
         transformMatrix.postScale(
-                Math.min(scaleFactorX, scaleFactorY),
-                Math.min(scaleFactorX, scaleFactorY),
+                Math.max(scaleFactorX, scaleFactorY),
+                Math.max(scaleFactorX, scaleFactorY),
                 width / 2f,
                 height / 2f
         )
+
+        transformMatrix.getValues(transformArray)
 
         super.setImageDrawable(drawable)
     }
@@ -107,8 +140,26 @@ class ScrollableImageView : ImageView, ScaleGestureDetector.OnScaleGestureListen
     override fun onScaleBegin(detector: ScaleGestureDetector): Boolean = true
 
     override fun onScale(detector: ScaleGestureDetector): Boolean {
-        transformMatrix.postScale(detector.scaleFactor, detector.scaleFactor, detector.focusX, detector.focusY)
-        invalidate()
+        if (drawable != null) {
+            tempMatrix.set(transformMatrix)
+            tempMatrix.postScale(detector.scaleFactor, detector.scaleFactor, detector.focusX, detector.focusY)
+
+            tempMatrix.getValues(transformArray)
+            val drawableWidth = drawable.intrinsicWidth
+            val drawableHeight = drawable.intrinsicHeight
+
+            val sourceScale = Math.max(width.toFloat() / drawableWidth, height.toFloat() / drawableHeight)
+            val scale = transformArray[Matrix.MSCALE_X]
+
+            val canScale = scale * drawableWidth > sourceScale * drawableWidth ||
+                    scale * drawableHeight > sourceScale * drawableHeight
+
+            if (canScale) {
+                transformMatrix.set(tempMatrix)
+            }
+
+            invalidate()
+        }
         return true
 
 //        just for me (learned how to apply scale relative to point manually:)

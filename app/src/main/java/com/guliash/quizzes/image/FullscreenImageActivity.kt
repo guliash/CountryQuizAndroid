@@ -1,6 +1,7 @@
 package com.guliash.quizzes.image
 
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.ImageView
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -18,6 +19,10 @@ class FullscreenImageActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fullscreen_image_activity)
+
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
         ButterKnife.bind(this)
         Glide.with(this).load(intent.getStringExtra(IMAGE_URL_EXTRA)).into(imageView)

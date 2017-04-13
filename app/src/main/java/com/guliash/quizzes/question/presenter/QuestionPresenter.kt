@@ -76,7 +76,7 @@ class QuestionPresenter @Inject constructor(private val whichQuestion: Int,
                         .subscribe({ verdict -> view.showVerdict(verdict, question.place.id) }),
                 view.imageSelections()
                         .subscribe { ø ->
-                            commander.onImageSelected(question.place.image.url)
+                            //commander.onImageSelected(question.place.image.url)
                         }
         )
     }
