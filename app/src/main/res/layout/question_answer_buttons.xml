@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/horizontalAnswersDivider"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/question_answerDividerHeight"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:background="@color/question_answerDividerColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/verticalAnswersDivider"
+        android:layout_width="@dimen/question_answerDividerWidth"
+        android:layout_height="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:background="@color/question_answerDividerColor"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/verticalAnswersGuideline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/horizontalAnswersGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <Button
+        android:id="@+id/answer1"
+        style="@style/Question_AnswerButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/question_answerDividerHeight"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="@dimen/question_answerDividerWidth"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalAnswersGuideline"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/verticalAnswersGuideline"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Answer 1" />
+
+    <Button
+        android:id="@+id/answer2"
+        style="@style/Question_AnswerButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/question_answerDividerHeight"
+        android:layout_marginLeft="@dimen/question_answerDividerWidth"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalAnswersGuideline"
+        app:layout_constraintLeft_toLeftOf="@+id/verticalAnswersGuideline"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Answer 2" />
+
+    <Button
+        android:id="@+id/answer3"
+        style="@style/Question_AnswerButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="@dimen/question_answerDividerWidth"
+        android:layout_marginTop="@dimen/question_answerDividerHeight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/verticalAnswersGuideline"
+        app:layout_constraintTop_toTopOf="@+id/horizontalAnswersGuideline"
+        tools:text="Answer 3" />
+
+    <Button
+        android:id="@+id/answer4"
+        style="@style/Question_AnswerButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="@dimen/question_answerDividerWidth"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="@dimen/question_answerDividerHeight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/verticalAnswersGuideline"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/horizontalAnswersGuideline"
+        tools:text="Answer 4" />
+
+</android.support.constraint.ConstraintLayout>

@@ -23,10 +23,10 @@
         android:orientation="vertical">
 
         <FrameLayout
+            android:id="@+id/imageBlock"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:id="@+id/imageBlock">
+            android:layout_weight="0.8">
 
             <ImageView
                 android:id="@+id/image"
@@ -49,96 +49,17 @@
                 android:background="@color/question_answerDividerColor" />
         </FrameLayout>
 
-        <LinearLayout
+        <include
+            layout="@layout/question_answer_buttons"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/answer1"
-                    style="@style/Question_AnswerButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <View
-                    android:layout_width="@dimen/question_answerDividerWidth"
-                    android:layout_height="match_parent"
-                    android:background="@color/question_answerDividerColor" />
-
-                <Button
-                    android:id="@+id/answer2"
-                    style="@style/Question_AnswerButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/question_answerDividerHeight"
-                android:background="@color/question_answerDividerColor" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/answer3"
-                    style="@style/Question_AnswerButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <View
-                    android:layout_width="@dimen/question_answerDividerWidth"
-                    android:layout_height="match_parent"
-                    android:background="@color/question_answerDividerColor" />
-
-                <Button
-                    android:id="@+id/answer4"
-                    style="@style/Question_AnswerButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </LinearLayout>
-        </LinearLayout>
+            android:layout_height="0dp"
+            android:layout_weight="0.2" />
     </LinearLayout>
 
-    <FrameLayout
+    <include
         android:id="@+id/errorBlock"
+        layout="@layout/question_error_block"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="8dp">
-
-            <TextView
-                android:id="@+id/errorText"
-                style="@style/ErrorText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                tools:text="Error text" />
-
-            <Button
-                android:id="@+id/errorButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/errorText"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp"
-                android:minWidth="200dp"
-                android:text="@string/question_errorTryAgain" />
-        </RelativeLayout>
-    </FrameLayout>
 </android.support.v7.widget.CardView>
