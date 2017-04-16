@@ -12,7 +12,7 @@ class QuestionsPagerPresenter @Inject constructor(private val gamepad: Gamepad) 
     override fun bind(view: QuestionsPagerView) {
         super.bind(view)
 
-        subscribe(gamepad.nextNotifications().subscribe { ø -> view.showNextQuestion() })
+        subscribe(gamepad.nextNotifications().subscribe { view.showNextQuestion() })
     }
 
     override fun unbind() {

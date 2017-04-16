@@ -22,8 +22,8 @@ interface QuestionView {
 
     fun answers(): Observable<Int>
 
-    fun retries(): Observable<Unit>
+    fun retries(): Observable<Any>
 
-    fun imageSelections(): Observable<Unit>
+    fun imageSelections(): Observable<Any>
 
 }

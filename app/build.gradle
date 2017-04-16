@@ -21,9 +21,6 @@ android {
             storePassword PstorePassword
         }
     }
-    lintOptions {
-        abortOnError false
-    }
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
@@ -68,6 +65,7 @@ dependencies {
 
     compile "io.reactivex.rxjava2:rxjava:2.0.5"
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
 
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
@@ -88,12 +86,12 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     provided 'org.glassfish:javax.annotation:10.0-b28'
 
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.jetbrains.spek:spek-api:1.1.0-beta3'
-    testCompile 'org.jetbrains.spek:spek-junit-platform-engine:1.1.0-beta3'
-    testCompile 'org.junit.platform:junit-platform-runner:1.0.0-M3'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    testCompile 'junit:junit:4.12'
+    testCompile "org.mockito:mockito-core:2.7.22"
 }
+
 kapt {
     generateStubs = true
 }

@@ -38,7 +38,7 @@ class GameActivity : BaseActivity() {
 
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.game_activity)
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction().add(R.id.container, createQuestionsPager()).commit()

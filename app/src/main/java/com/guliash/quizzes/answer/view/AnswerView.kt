@@ -15,9 +15,9 @@ interface AnswerView {
 
     fun close()
 
-    fun tryAgain(): Observable<Unit>
+    fun tryAgain(): Observable<Any>
 
-    fun next(): Observable<Unit>
+    fun next(): Observable<Any>
 
-    fun showOnMap(): Observable<Unit>
+    fun showOnMap(): Observable<Any>
 }

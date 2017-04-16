@@ -19,7 +19,6 @@ import com.guliash.quizzes.answer.di.AnswerModule
 import com.guliash.quizzes.answer.di.ComponentProvider
 import com.guliash.quizzes.answer.view.createAnswerFragment
 import com.guliash.quizzes.core.ui.fragment.BaseFragment
-import com.guliash.quizzes.core.utils.ui.RxView
 import com.guliash.quizzes.game.GameActivity
 import com.guliash.quizzes.question.QuestionUtils
 import com.guliash.quizzes.question.di.QuestionComponent
@@ -27,6 +26,7 @@ import com.guliash.quizzes.question.di.QuestionModule
 import com.guliash.quizzes.question.model.Question
 import com.guliash.quizzes.question.model.Verdict
 import com.guliash.quizzes.question.presenter.QuestionPresenter
+import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.Observable
 import java.util.*
 import javax.inject.Inject
@@ -90,7 +90,7 @@ class QuestionFragment : BaseFragment(), QuestionView, ComponentProvider {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.question, container, false);
+        return inflater.inflate(R.layout.question_fragment, container, false);
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -114,7 +114,7 @@ class QuestionFragment : BaseFragment(), QuestionView, ComponentProvider {
         val clicks: MutableList<Observable<Int>> = ArrayList()
 
         for ((index, button) in answerButtons.withIndex()) {
-            clicks.add(RxView.clicks(button).map { ø -> index })
+            clicks.add(RxView.clicks(button).map { index })
         }
 
         return Observable.merge(clicks)
@@ -162,8 +162,8 @@ class QuestionFragment : BaseFragment(), QuestionView, ComponentProvider {
         errorBlock.visibility = View.GONE
     }
 
-    override fun retries(): Observable<Unit> = RxView.clicks(errorButton)
+    override fun retries(): Observable<Any> = RxView.clicks(errorButton)
 
-    override fun imageSelections(): Observable<Unit> = RxView.clicks(imageBlockView)
+    override fun imageSelections(): Observable<Any> = RxView.clicks(imageBlockView)
 
 }

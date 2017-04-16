@@ -40,12 +40,12 @@ class AnswerPresenter @Inject constructor(private @QuestionId val questionId: St
         }
 
         subscribe(
-                view.tryAgain().subscribe { ø -> view.close() },
-                view.next().subscribe { ø ->
+                view.tryAgain().subscribe { view.close() },
+                view.next().subscribe {
                     gamepad.needNext()
                     view.close()
                 },
-                view.showOnMap().switchMap { ø ->
+                view.showOnMap().switchMap {
                     game.place(questionId)
                             .subscribeOn(workScheduler)
                             .observeOn(postScheduler)

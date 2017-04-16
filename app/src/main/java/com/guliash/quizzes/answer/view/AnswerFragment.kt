@@ -25,13 +25,13 @@ import com.guliash.quizzes.answer.presenter.ActionsDelegate
 import com.guliash.quizzes.answer.presenter.AnswerPresenter
 import com.guliash.quizzes.core.ui.dialog.BaseDialogFragment
 import com.guliash.quizzes.core.utils.collections.joinToString
-import com.guliash.quizzes.core.utils.ui.RxView
 import com.guliash.quizzes.core.view.CustomScrollView
 import com.guliash.quizzes.game.model.Place
 import com.guliash.quizzes.map.model.Position
 import com.guliash.quizzes.map.view.MapActivity
 import com.guliash.quizzes.map.view.POSITION_EXTRA
 import com.guliash.quizzes.question.model.Verdict
+import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -95,7 +95,7 @@ class AnswerFragment : BaseDialogFragment(), AnswerView, ActionsDelegate {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.answer, container, false)
+            inflater.inflate(R.layout.answer_fragment, container, false)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -192,11 +192,11 @@ class AnswerFragment : BaseDialogFragment(), AnswerView, ActionsDelegate {
         }
     }
 
-    override fun tryAgain(): Observable<Unit> = RxView.clicks(tryAgainButton)
+    override fun tryAgain(): Observable<Any> = RxView.clicks(tryAgainButton)
 
-    override fun next(): Observable<Unit> = RxView.clicks(nextButton)
+    override fun next(): Observable<Any> = RxView.clicks(nextButton)
 
-    override fun showOnMap(): Observable<Unit> = RxView.clicks(showOnMapButton)
+    override fun showOnMap(): Observable<Any> = RxView.clicks(showOnMapButton)
 
     override fun close() = dismiss()
 }

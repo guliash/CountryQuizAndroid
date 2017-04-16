@@ -11,15 +11,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".game.GameActivity">
+        <activity android:name=".start.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".map.view.MapActivity"/>
-        <activity android:name=".image.FullscreenImageActivity"/>
+        <activity android:name=".game.GameActivity" />
+        <activity android:name=".map.view.MapActivity" />
+        <activity android:name=".image.FullscreenImageActivity" />
+
         <meta-data
             android:name="com.guliash.quizzes.core.glide.QuizzesGlideModule"
             android:value="GlideModule" />
@@ -28,7 +30,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/googleMapsApiKey"/>
+            android:value="@string/googleMapsApiKey" />
 
     </application>
 
