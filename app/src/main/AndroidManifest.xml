@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".game.GameActivity" />
+        <activity android:name=".game.questions.QuestionsGameActivity" />
         <activity android:name=".map.view.MapActivity" />
         <activity android:name=".image.FullscreenImageActivity" />
 

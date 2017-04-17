@@ -8,7 +8,7 @@ import butterknife.ButterKnife
 import com.guliash.quizzes.R
 import com.guliash.quizzes.core.QuizzesApplication
 import com.guliash.quizzes.core.ui.activity.BaseActivity
-import com.guliash.quizzes.game.GameActivity
+import com.guliash.quizzes.game.questions.QuestionsGameActivity
 import com.guliash.quizzes.start.di.StartModule
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.Observable
@@ -54,6 +54,6 @@ class StartActivity : BaseActivity(), StartView, ActionsDelegate {
     }
 
     override fun showPlay() {
-        startActivity(Intent(this, GameActivity::class.java))
+        startActivity(Intent(this, QuestionsGameActivity::class.java))
     }
 }
