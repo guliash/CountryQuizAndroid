@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="question_PageMargin">16dp</dimen>
-    <dimen name="question_answerDividerHeight">@dimen/CommonDividerHeight</dimen>
-    <dimen name="question_answerDividerWidth">@dimen/CommonDividerWidth</dimen>
+    <dimen name="question_answerDividerHeight">@dimen/commonDividerHeight</dimen>
+    <dimen name="question_answerDividerWidth">@dimen/commonDividerWidth</dimen>
 
     <color name="question_answerDividerColor">@color/grey600</color>
     <color name="question_answerLinkColor">#448aff</color>

@@ -6,5 +6,5 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(private val api: Api) : Repository {
-    override fun places(): Observable<Place> = api.places().flatMap { it -> Observable.fromIterable(it) }
+    override fun places(): List<Place> = api.places().blockingFirst()
 }

@@ -1,4 +1,6 @@
 <resources>
-    <dimen name="CommonDividerHeight">1dp</dimen>
-    <dimen name="CommonDividerWidth">1dp</dimen>
+    <dimen name="commonDividerHeight">1dp</dimen>
+    <dimen name="commonDividerWidth">1dp</dimen>
+    <dimen name="commonCardElevation">2dp</dimen>
+    <dimen name="commonCardCornerRadius">6dp</dimen>
 </resources>

@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".game.questions.QuestionsGameActivity" />
+        <activity android:name=".learn.LearnActivity"/>
         <activity android:name=".map.view.MapActivity" />
         <activity android:name=".image.FullscreenImageActivity" />
 

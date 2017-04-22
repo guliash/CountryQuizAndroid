@@ -6,8 +6,8 @@
     <color name="answer_correctAnswer">@color/greenA400</color>
     <color name="answer_wrongAnswer">@color/red500</color>
 
-    <dimen name="answer_dividerHeight">@dimen/CommonDividerHeight</dimen>
-    <dimen name="answer_dividerWidth">@dimen/CommonDividerWidth</dimen>
+    <dimen name="answer_dividerHeight">@dimen/commonDividerHeight</dimen>
+    <dimen name="answer_dividerWidth">@dimen/commonDividerWidth</dimen>
 
     <string name="answer_correctAnswer">Correct answer!</string>
     <string name="answer_wrongAnswer">Wrong answer :-(</string>

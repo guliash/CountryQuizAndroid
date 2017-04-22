@@ -18,12 +18,7 @@ class GameImpl @Inject constructor(
 ) : Game {
 
     private val places: List<Place> by lazy {
-        repository
-                .places()
-                .toList()
-                .blockingGet()
-                .toList()
-                .shuffle()
+        repository.places().shuffle()
     }
 
     private val questions: List<Question> by lazy {

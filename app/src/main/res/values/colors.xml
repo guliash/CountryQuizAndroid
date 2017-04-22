@@ -8,12 +8,13 @@
     <color name="grey800">#424242</color>
     <color name="alpha80grey800">#C8424242</color>
     <color name="alpha50grey800">#7F424242</color>
+    <color name="alpha80grey900">#C8212121</color>
     <color name="greenA400">#00e676</color>
     <color name="red500">#f44336</color>
 
     <color name="colorPrimaryDark">@color/black</color>
     <color name="colorPrimary">@color/grey900</color>
-    <color name="colorAccent">#ff4081</color>
+    <color name="colorAccent">#ff5252</color>
     <color name="windowBackground">#303030</color>
 
 </resources>

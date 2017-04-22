@@ -9,6 +9,7 @@ import com.guliash.quizzes.R
 import com.guliash.quizzes.core.QuizzesApplication
 import com.guliash.quizzes.core.ui.activity.BaseActivity
 import com.guliash.quizzes.game.questions.QuestionsGameActivity
+import com.guliash.quizzes.learn.LearnActivity
 import com.guliash.quizzes.start.di.StartModule
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.Observable
@@ -50,7 +51,7 @@ class StartActivity : BaseActivity(), StartView, ActionsDelegate {
     override fun plays(): Observable<Any> = RxView.clicks(gameButton)
 
     override fun showLearn() {
-
+        startActivity(Intent(this, LearnActivity::class.java))
     }
 
     override fun showPlay() {

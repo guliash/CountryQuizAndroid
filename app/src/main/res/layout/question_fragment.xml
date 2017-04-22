@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    card_view:cardCornerRadius="6dp"
-    card_view:cardElevation="2dp"
+    card_view:cardCornerRadius="@dimen/commonCardCornerRadius"
+    card_view:cardElevation="@dimen/commonCardElevation"
     card_view:cardPreventCornerOverlap="false"
     card_view:cardUseCompatPadding="true">
 
