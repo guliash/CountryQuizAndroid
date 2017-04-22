@@ -43,6 +43,7 @@ class MaterialFragment : BaseFragment(), MaterialView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        println(container)
         return inflater.inflate(R.layout.learn_material_fragment, container, false)
     }
 
@@ -61,9 +62,15 @@ class MaterialFragment : BaseFragment(), MaterialView {
     }
 
     override fun showMaterial(place: Place) {
-        Glide.with(this)
-                .load(place.image.url)
-                .centerCrop()
-                .into(imageView)
+        val which = arguments.getInt(WHICH_MATERIAL_ARG)
+        if(which == 0) {
+            imageView.background = null
+        } else {
+            imageView.setBackgroundColor(0x00e676)
+        }
+//        Glide.with(this)
+//                .load(place.image.url)
+//                .centerCrop()
+//                .into(imageView)
     }
 }

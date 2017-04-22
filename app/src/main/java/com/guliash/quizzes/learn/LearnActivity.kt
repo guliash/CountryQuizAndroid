@@ -14,6 +14,8 @@ import com.guliash.quizzes.learn.di.MaterialComponentProvider
 import com.guliash.quizzes.learn.di.MaterialModule
 import com.guliash.quizzes.learn.view.createMaterialFragment
 
+private val SCALE_THRESHOLD = 0.5f
+
 class LearnActivity : BaseActivity(), MaterialComponentProvider {
 
     @BindView(R.id.pager)
@@ -29,8 +31,24 @@ class LearnActivity : BaseActivity(), MaterialComponentProvider {
         setContentView(R.layout.learn_activity)
         ButterKnife.bind(this)
 
-        pager.pageMargin = resources.getDimension(R.dimen.learn_material_pageMargin).toInt()
+        val pageMargin = resources.getDimension(R.dimen.learn_material_pageMargin)
+        //pager.pageMargin = pageMargin.toInt()
         pager.adapter = Adapter(supportFragmentManager)
+
+        pager.setPageTransformer(true, { page, position ->
+            println(position)
+
+            println("scrollx ${pager.scrollX}")
+            if (position in (0f..1f)) {
+                println("ff ${pager.width} ${page.width} ${page.paddingLeft} ${page.x}")
+                val scale = SCALE_THRESHOLD + (1 - SCALE_THRESHOLD) * (1 - position)
+                page.translationX = (-(pager.width) / 2 - page.width * scale / 2) * position
+
+                page.scaleX = scale
+                page.scaleY = scale
+                println("scale $scale translation ${page.translationX} ${page.width * scale} ${page.left} ${page.x}")
+            }
+        })
     }
 
     override fun createComponent(module: MaterialModule) = component.createComponent(module)
@@ -38,7 +56,7 @@ class LearnActivity : BaseActivity(), MaterialComponentProvider {
     class Adapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         override fun getItem(position: Int) = createMaterialFragment(position)
 
-        override fun getCount() = Int.MAX_VALUE
+        override fun getCount() = 2
 
     }
 
