@@ -31,22 +31,20 @@ class LearnActivity : BaseActivity(), MaterialComponentProvider {
         setContentView(R.layout.learn_activity)
         ButterKnife.bind(this)
 
-        val pageMargin = resources.getDimension(R.dimen.learn_material_pageMargin)
-        //pager.pageMargin = pageMargin.toInt()
         pager.adapter = Adapter(supportFragmentManager)
 
         pager.setPageTransformer(true, { page, position ->
-            println(position)
-
-            println("scrollx ${pager.scrollX}")
-            if (position in (0f..1f)) {
-                println("ff ${pager.width} ${page.width} ${page.paddingLeft} ${page.x}")
-                val scale = SCALE_THRESHOLD + (1 - SCALE_THRESHOLD) * (1 - position)
-                page.translationX = (-(pager.width) / 2 - page.width * scale / 2) * position
-
+            if (position > 0f && position <= 1f) {
+                val scale = 1 - position + SCALE_THRESHOLD * position
+                page.pivotX = 0f
                 page.scaleX = scale
                 page.scaleY = scale
-                println("scale $scale translation ${page.translationX} ${page.width * scale} ${page.left} ${page.x}")
+                page.translationX = -(pager.width + page.width * scale) * position / 2
+            } else if (position > 1f) {
+                page.pivotX = 0f
+                page.scaleX = 1f
+                page.scaleY = 1f
+                page.translationX = 0f
             }
         })
     }
@@ -56,7 +54,7 @@ class LearnActivity : BaseActivity(), MaterialComponentProvider {
     class Adapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         override fun getItem(position: Int) = createMaterialFragment(position)
 
-        override fun getCount() = 2
+        override fun getCount() = Int.MAX_VALUE
 
     }
 

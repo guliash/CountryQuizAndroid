@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="learn_material_pageMargin">16dp</dimen>
-
     <color name="learn_material_imageForegroundColor">@color/alpha80grey900</color>
 </resources>

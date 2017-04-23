@@ -7,6 +7,7 @@ import com.guliash.quizzes.learn.di.WhichMaterial
 import com.guliash.quizzes.learn.service.MaterialsProvider
 import com.guliash.quizzes.learn.view.MaterialView
 import io.reactivex.Scheduler
+import timber.log.Timber
 import javax.inject.Inject
 
 class MaterialPresenter @Inject constructor(private val materialsProvider: MaterialsProvider,
@@ -22,7 +23,10 @@ class MaterialPresenter @Inject constructor(private val materialsProvider: Mater
                 materialsProvider.material(whichMaterial)
                         .subscribeOn(workScheduler)
                         .observeOn(postScheduler)
-                        .subscribe { place -> view.showMaterial(place) }
+                        .subscribe(
+                                { place -> view.showMaterial(place) },
+                                { error -> Timber.d(error, "Error getting material") }
+                        )
         )
     }
 
