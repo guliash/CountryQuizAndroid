@@ -14,6 +14,8 @@ import com.guliash.quizzes.core.ui.fragment.BaseFragment
 import com.guliash.quizzes.learn.preview.PreviewComponentProvider
 import com.guliash.quizzes.learn.preview.PreviewModule
 import com.guliash.quizzes.learn.preview.presenter.PreviewPresenter
+import com.jakewharton.rxbinding2.view.RxView
+import io.reactivex.Observable
 import javax.inject.Inject
 
 val WHICH_MATERIAL_ARG = "which_material_arg"
@@ -27,6 +29,9 @@ fun createMaterialFragment(which: Int): PreviewFragment {
 }
 
 class PreviewFragment : BaseFragment(), PreviewView {
+
+    @BindView(R.id.root)
+    lateinit var rootView: View
 
     @BindView(R.id.image)
     lateinit var imageView: ImageView
@@ -43,7 +48,7 @@ class PreviewFragment : BaseFragment(), PreviewView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.learn_material_fragment, container, false)
+        return inflater.inflate(R.layout.learn_preview_fragment, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -66,4 +71,6 @@ class PreviewFragment : BaseFragment(), PreviewView {
                 .centerCrop()
                 .into(imageView)
     }
+
+    override fun selections(): Observable<Any> = RxView.clicks(rootView)
 }

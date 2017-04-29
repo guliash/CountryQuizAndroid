@@ -15,9 +15,14 @@ import javax.inject.Named
 @PreviewScope
 class PreviewPresenter @Inject constructor(private val materialsProvider: MaterialsProvider,
                                            @Named(WHICH_MATERIAL) private val whichMaterial: Int,
+                                           private val commander: Commander,
                                            @Main private val postScheduler: Scheduler,
                                            @IO private val workScheduler: Scheduler) :
         Presenter<PreviewView>() {
+
+    interface Commander {
+        fun onPreviewSelected(whichMaterial: Int)
+    }
 
     override fun bind(view: PreviewView) {
         super.bind(view)
@@ -29,7 +34,8 @@ class PreviewPresenter @Inject constructor(private val materialsProvider: Materi
                         .subscribe(
                                 { place -> view.showMaterial(place) },
                                 { error -> Timber.d(error, "Error getting material") }
-                        )
+                        ),
+                view.selections().subscribe({ commander.onPreviewSelected(whichMaterial) })
         )
     }
 

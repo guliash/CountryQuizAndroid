@@ -1,10 +1,6 @@
 package com.guliash.quizzes.learn
 
 import android.os.Bundle
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
-import android.support.v4.view.ViewPager
-import butterknife.BindView
 import butterknife.ButterKnife
 import com.guliash.quizzes.R
 import com.guliash.quizzes.core.QuizzesApplication
@@ -12,55 +8,44 @@ import com.guliash.quizzes.core.ui.activity.BaseActivity
 import com.guliash.quizzes.learn.details.DetailsComponent
 import com.guliash.quizzes.learn.details.DetailsComponentProvider
 import com.guliash.quizzes.learn.details.DetailsModule
+import com.guliash.quizzes.learn.details.view.createDetailsFragment
 import com.guliash.quizzes.learn.preview.PreviewComponentProvider
 import com.guliash.quizzes.learn.preview.PreviewModule
-import com.guliash.quizzes.learn.preview.view.createMaterialFragment
-
-private val SCALE_THRESHOLD = 0.5f
+import com.guliash.quizzes.learn.preview.presenter.PreviewPresenter
 
 class LearnActivity : BaseActivity(), PreviewComponentProvider, DetailsComponentProvider {
 
-    @BindView(R.id.pager)
-    lateinit var pager: ViewPager
-
     lateinit var component: LearnComponent
 
+    val previewCommander = object : PreviewPresenter.Commander {
+        override fun onPreviewSelected(whichMaterial: Int) {
+            supportFragmentManager.beginTransaction()
+                    .hide(supportFragmentManager.findFragmentByTag(TAG))
+                    .add(R.id.container, createDetailsFragment(whichMaterial))
+                    .addToBackStack(null)
+                    .commit()
+        }
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        component = QuizzesApplication.application(this).appComponent.plus()
+        component = QuizzesApplication.application(this).appComponent.plus(LearnModule(previewCommander))
 
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.learn_activity)
         ButterKnife.bind(this)
 
-        pager.adapter = Adapter(supportFragmentManager)
-
-        pager.setPageTransformer(true, { page, position ->
-            if (position > 0f && position <= 1f) {
-                val scale = 1 - position + SCALE_THRESHOLD * position
-                page.pivotX = 0f
-                page.scaleX = scale
-                page.scaleY = scale
-                page.translationX = -(pager.width + page.width * scale) * position / 2
-            } else if (position > 1f) {
-                page.pivotX = 0f
-                page.scaleX = 1f
-                page.scaleY = 1f
-                page.translationX = 0f
-            }
-        })
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.container, createLearnPagerFragment(), TAG)
+                    .commit()
+        }
     }
 
     override fun createComponent(module: PreviewModule) = component.createComponent(module)
 
     override fun createComponent(module: DetailsModule): DetailsComponent =
             component.createComponent(module)
-
-    class Adapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
-        override fun getItem(position: Int) = createMaterialFragment(position)
-
-        override fun getCount() = Int.MAX_VALUE
-
-    }
 
 }

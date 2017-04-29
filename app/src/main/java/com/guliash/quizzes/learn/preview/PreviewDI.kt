@@ -5,7 +5,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
 import javax.inject.Named
-import javax.inject.Qualifier
 import javax.inject.Scope
 
 const val WHICH_MATERIAL = "preview_which_material"

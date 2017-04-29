@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true"
-            android:foreground="@drawable/learn_material_image_foreground">
+            android:foreground="@drawable/learn_material_image_foreground"
+            android:id="@+id/root">
 
             <ImageView
                 android:id="@+id/image"
