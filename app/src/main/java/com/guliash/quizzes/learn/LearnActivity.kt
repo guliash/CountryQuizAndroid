@@ -9,13 +9,16 @@ import butterknife.ButterKnife
 import com.guliash.quizzes.R
 import com.guliash.quizzes.core.QuizzesApplication
 import com.guliash.quizzes.core.ui.activity.BaseActivity
+import com.guliash.quizzes.learn.details.DetailsComponent
+import com.guliash.quizzes.learn.details.DetailsComponentProvider
+import com.guliash.quizzes.learn.details.DetailsModule
 import com.guliash.quizzes.learn.preview.PreviewComponentProvider
 import com.guliash.quizzes.learn.preview.PreviewModule
 import com.guliash.quizzes.learn.preview.view.createMaterialFragment
 
 private val SCALE_THRESHOLD = 0.5f
 
-class LearnActivity : BaseActivity(), PreviewComponentProvider {
+class LearnActivity : BaseActivity(), PreviewComponentProvider, DetailsComponentProvider {
 
     @BindView(R.id.pager)
     lateinit var pager: ViewPager
@@ -49,6 +52,9 @@ class LearnActivity : BaseActivity(), PreviewComponentProvider {
     }
 
     override fun createComponent(module: PreviewModule) = component.createComponent(module)
+
+    override fun createComponent(module: DetailsModule): DetailsComponent =
+            component.createComponent(module)
 
     class Adapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         override fun getItem(position: Int) = createMaterialFragment(position)

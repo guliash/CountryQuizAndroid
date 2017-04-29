@@ -4,14 +4,17 @@ import com.guliash.quizzes.learn.preview.view.PreviewFragment
 import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
+import javax.inject.Named
 import javax.inject.Qualifier
 import javax.inject.Scope
 
+const val WHICH_MATERIAL = "preview_which_material"
+
 @Scope
 @Retention(AnnotationRetention.RUNTIME)
-annotation class MaterialScope
+annotation class PreviewScope
 
-@MaterialScope
+@PreviewScope
 @Subcomponent(modules = arrayOf(PreviewModule::class))
 interface PreviewComponent {
 
@@ -19,15 +22,11 @@ interface PreviewComponent {
 
 }
 
-@Qualifier
-@Retention(AnnotationRetention.RUNTIME)
-annotation class WhichMaterial
-
 @Module
 class PreviewModule(private val whichMaterial: Int) {
 
     @Provides
-    @WhichMaterial
+    @Named(WHICH_MATERIAL)
     fun whichMaterial() = whichMaterial
 
 }
