@@ -1,22 +1,22 @@
-package com.guliash.quizzes.learn.presenter
+package com.guliash.quizzes.learn.preview.presenter
 
 import com.guliash.quizzes.core.app.di.rx.IO
 import com.guliash.quizzes.core.app.di.rx.Main
 import com.guliash.quizzes.core.mvp.Presenter
-import com.guliash.quizzes.learn.di.WhichMaterial
+import com.guliash.quizzes.learn.preview.WhichMaterial
+import com.guliash.quizzes.learn.preview.view.PreviewView
 import com.guliash.quizzes.learn.service.MaterialsProvider
-import com.guliash.quizzes.learn.view.MaterialView
 import io.reactivex.Scheduler
 import timber.log.Timber
 import javax.inject.Inject
 
-class MaterialPresenter @Inject constructor(private val materialsProvider: MaterialsProvider,
-                                            @WhichMaterial private val whichMaterial: Int,
-                                            @Main private val postScheduler: Scheduler,
-                                            @IO private val workScheduler: Scheduler) :
-        Presenter<MaterialView>() {
+class PreviewPresenter @Inject constructor(private val materialsProvider: MaterialsProvider,
+                                           @WhichMaterial private val whichMaterial: Int,
+                                           @Main private val postScheduler: Scheduler,
+                                           @IO private val workScheduler: Scheduler) :
+        Presenter<PreviewView>() {
 
-    override fun bind(view: MaterialView) {
+    override fun bind(view: PreviewView) {
         super.bind(view)
 
         subscribe(

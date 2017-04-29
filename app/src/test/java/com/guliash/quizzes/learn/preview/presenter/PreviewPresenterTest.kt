@@ -1,7 +1,8 @@
-package com.guliash.quizzes.learn.presenter
+package com.guliash.quizzes.learn.preview.presenter
 
+import com.guliash.quizzes.learn.preview.presenter.PreviewPresenter
 import com.guliash.quizzes.learn.service.MaterialsProvider
-import com.guliash.quizzes.learn.view.MaterialView
+import com.guliash.quizzes.learn.preview.view.PreviewView
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.schedulers.TestScheduler
@@ -14,7 +15,7 @@ import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import java.util.concurrent.TimeUnit
 
-class LearnMaterialPresenterTest {
+class PreviewPresenterTest {
 
     @Mock
     lateinit var materialsProvider: MaterialsProvider
@@ -23,15 +24,15 @@ class LearnMaterialPresenterTest {
     private val workScheduler = TestScheduler()
 
     @Mock
-    lateinit var view: MaterialView
+    lateinit var view: PreviewView
 
-    private lateinit var presenter: MaterialPresenter
+    private lateinit var presenter: PreviewPresenter
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
 
-        presenter = MaterialPresenter(materialsProvider, 0, postScheduler, workScheduler)
+        presenter = PreviewPresenter(materialsProvider, 0, postScheduler, workScheduler)
     }
 
     @Test

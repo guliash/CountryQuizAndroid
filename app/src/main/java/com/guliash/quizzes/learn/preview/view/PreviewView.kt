@@ -1,8 +1,8 @@
-package com.guliash.quizzes.learn.view
+package com.guliash.quizzes.learn.preview.view
 
 import com.guliash.quizzes.core.app.models.Place
 
-interface MaterialView {
+interface PreviewView {
 
     fun showMaterial(place: Place)
 

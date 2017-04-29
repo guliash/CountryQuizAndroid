@@ -1,4 +1,4 @@
-package com.guliash.quizzes.learn.view
+package com.guliash.quizzes.learn.preview.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,32 +11,32 @@ import com.bumptech.glide.Glide
 import com.guliash.quizzes.R
 import com.guliash.quizzes.core.app.models.Place
 import com.guliash.quizzes.core.ui.fragment.BaseFragment
-import com.guliash.quizzes.learn.di.MaterialComponentProvider
-import com.guliash.quizzes.learn.di.MaterialModule
-import com.guliash.quizzes.learn.presenter.MaterialPresenter
+import com.guliash.quizzes.learn.preview.PreviewComponentProvider
+import com.guliash.quizzes.learn.preview.PreviewModule
+import com.guliash.quizzes.learn.preview.presenter.PreviewPresenter
 import javax.inject.Inject
 
 val WHICH_MATERIAL_ARG = "which_material_arg"
 
-fun createMaterialFragment(which: Int): MaterialFragment {
-    val fragment = MaterialFragment()
+fun createMaterialFragment(which: Int): PreviewFragment {
+    val fragment = PreviewFragment()
     val bundle = Bundle()
     bundle.putInt(WHICH_MATERIAL_ARG, which)
     fragment.arguments = bundle
     return fragment
 }
 
-class MaterialFragment : BaseFragment(), MaterialView {
+class PreviewFragment : BaseFragment(), PreviewView {
 
     @BindView(R.id.image)
     lateinit var imageView: ImageView
 
     @Inject
-    lateinit var presenter: MaterialPresenter
+    lateinit var presenter: PreviewPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (activity as? MaterialComponentProvider)?.
-                createComponent(MaterialModule(arguments.getInt(WHICH_MATERIAL_ARG)))
+        (activity as? PreviewComponentProvider)?.
+                createComponent(PreviewModule(arguments.getInt(WHICH_MATERIAL_ARG)))
                 ?.inject(this)
 
         super.onCreate(savedInstanceState)

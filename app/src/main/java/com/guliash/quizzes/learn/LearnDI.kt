@@ -1,6 +1,6 @@
-package com.guliash.quizzes.learn.di
+package com.guliash.quizzes.learn
 
-import com.guliash.quizzes.learn.LearnActivity
+import com.guliash.quizzes.learn.preview.PreviewComponentProvider
 import com.guliash.quizzes.learn.service.MaterialsProvider
 import com.guliash.quizzes.learn.service.MaterialsProviderImpl
 import dagger.Binds
@@ -14,7 +14,7 @@ annotation class LearnScope
 
 @LearnScope
 @Subcomponent(modules = arrayOf(LearnModule::class))
-interface LearnComponent : MaterialComponentProvider {
+interface LearnComponent : PreviewComponentProvider {
 
     fun inject(activity: LearnActivity)
 

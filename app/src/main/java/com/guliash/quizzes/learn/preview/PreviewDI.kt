@@ -1,6 +1,6 @@
-package com.guliash.quizzes.learn.di
+package com.guliash.quizzes.learn.preview
 
-import com.guliash.quizzes.learn.view.MaterialFragment
+import com.guliash.quizzes.learn.preview.view.PreviewFragment
 import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
@@ -12,10 +12,10 @@ import javax.inject.Scope
 annotation class MaterialScope
 
 @MaterialScope
-@Subcomponent(modules = arrayOf(MaterialModule::class))
-interface MaterialComponent {
+@Subcomponent(modules = arrayOf(PreviewModule::class))
+interface PreviewComponent {
 
-    fun inject(fragment: MaterialFragment)
+    fun inject(fragment: PreviewFragment)
 
 }
 
@@ -24,7 +24,7 @@ interface MaterialComponent {
 annotation class WhichMaterial
 
 @Module
-class MaterialModule(private val whichMaterial: Int) {
+class PreviewModule(private val whichMaterial: Int) {
 
     @Provides
     @WhichMaterial
@@ -32,6 +32,6 @@ class MaterialModule(private val whichMaterial: Int) {
 
 }
 
-interface MaterialComponentProvider {
-    fun createComponent(module: MaterialModule): MaterialComponent
+interface PreviewComponentProvider {
+    fun createComponent(module: PreviewModule): PreviewComponent
 }
