@@ -20,4 +20,8 @@ class MaterialsProviderImpl @Inject constructor(private val repository: Reposito
     override fun material(which: Int): Single<Place> {
         return Single.defer { Single.just(places[which % places.size]) }
     }
+
+    override fun material(id: String): Single<Place> {
+        return Single.defer { Single.just(places.first { it.id == id }) }
+    }
 }

@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="learn_material_imageForegroundColor">@color/alpha80grey900</color>
+
+    <string name="learn_details">Details</string>
+
+    <style name="Details_Name" parent="Text.Large">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
 </resources>

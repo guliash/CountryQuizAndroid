@@ -3,4 +3,6 @@
     <dimen name="commonDividerWidth">1dp</dimen>
     <dimen name="commonCardElevation">2dp</dimen>
     <dimen name="commonCardCornerRadius">6dp</dimen>
+
+    <dimen name="toolbarHeight">56dp</dimen>
 </resources>

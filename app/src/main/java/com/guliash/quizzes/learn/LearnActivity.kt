@@ -18,10 +18,10 @@ class LearnActivity : BaseActivity(), PreviewComponentProvider, DetailsComponent
     lateinit var component: LearnComponent
 
     val previewCommander = object : PreviewPresenter.Commander {
-        override fun onPreviewSelected(whichMaterial: Int) {
+        override fun onPreviewSelected(materialId: String) {
             supportFragmentManager.beginTransaction()
                     .hide(supportFragmentManager.findFragmentByTag(TAG))
-                    .add(R.id.container, createDetailsFragment(whichMaterial))
+                    .add(R.id.container, createDetailsFragment(materialId))
                     .addToBackStack(null)
                     .commit()
         }

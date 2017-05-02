@@ -10,4 +10,6 @@ interface MaterialsProvider {
 
     fun material(which: Int): Single<Place>
 
+    fun material(id: String): Single<Place>
+
 }

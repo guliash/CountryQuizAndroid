@@ -7,7 +7,7 @@ import dagger.Subcomponent
 import javax.inject.Named
 import javax.inject.Scope
 
-const val WHICH_MATERIAL = "details_which_material"
+const val MATERIAL_ID = "details_material_id"
 
 @DetailsScope
 @Subcomponent(modules = arrayOf(DetailsModule::class))
@@ -20,11 +20,12 @@ interface DetailsComponent {
 annotation class DetailsScope
 
 @Module
-class DetailsModule(private val whichMaterial: Int) {
+class DetailsModule(private val materialId: String) {
 
     @Provides
-    @Named(WHICH_MATERIAL)
-    fun whichMaterial() = whichMaterial
+    @Named(MATERIAL_ID)
+    @DetailsScope
+    fun whichMaterial() = materialId
 
 }
 

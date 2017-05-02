@@ -30,4 +30,10 @@
         <item name="android:textStyle">italic</item>
         <item name="android:lineSpacingExtra">2dp</item>
     </style>
+
+    <style name="Answer_ControlButton">
+        <item name="android:background">@drawable/answer_control_button_background</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
 </resources>

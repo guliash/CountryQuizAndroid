@@ -19,4 +19,9 @@
 
     </style>
 
+
+    <style name="Question_AnswerButton">
+        <item name="android:background">@drawable/question_answer_button_background</item>
+    </style>
+
 </resources>

@@ -10,19 +10,14 @@
         <item name="android:dialogTheme">@style/DialogTheme</item>
     </style>
 
-    <style name="Question_AnswerButton">
-        <item name="android:background">@drawable/question_answer_button_background</item>
+    <style name="ToolbarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="navigationIcon">?attr/homeAsUpIndicator</item>
     </style>
 
     <style name="DialogTheme" parent="Theme.AppCompat.Dialog">
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowBackground">@color/answer_backgroundColor</item>
-    </style>
-
-    <style name="Answer_ControlButton">
-        <item name="android:background">@drawable/answer_control_button_background</item>
-        <item name="android:padding">8dp</item>
     </style>
 
     <style name="Text" />
@@ -34,6 +29,5 @@
     <style name="Text.Large">
         <item name="android:textSize">22sp</item>
     </style>
-
 
 </resources>

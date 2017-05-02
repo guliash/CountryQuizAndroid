@@ -2,6 +2,7 @@ package com.guliash.quizzes.learn.preview.presenter
 
 import com.guliash.quizzes.core.app.di.rx.IO
 import com.guliash.quizzes.core.app.di.rx.Main
+import com.guliash.quizzes.core.app.models.Place
 import com.guliash.quizzes.core.mvp.Presenter
 import com.guliash.quizzes.learn.preview.PreviewScope
 import com.guliash.quizzes.learn.preview.WHICH_MATERIAL
@@ -21,8 +22,10 @@ class PreviewPresenter @Inject constructor(private val materialsProvider: Materi
         Presenter<PreviewView>() {
 
     interface Commander {
-        fun onPreviewSelected(whichMaterial: Int)
+        fun onPreviewSelected(materialId: String)
     }
+
+    private var place: Place? = null
 
     override fun bind(view: PreviewView) {
         super.bind(view)
@@ -31,11 +34,16 @@ class PreviewPresenter @Inject constructor(private val materialsProvider: Materi
                 materialsProvider.material(whichMaterial)
                         .subscribeOn(workScheduler)
                         .observeOn(postScheduler)
-                        .subscribe(
-                                { place -> view.showMaterial(place) },
-                                { error -> Timber.d(error, "Error getting material") }
+                        .doOnSuccess { place ->
+                            this.place = place
+                        }
+                        .subscribe({ place ->
+                            view.showMaterial(place)
+                        }, { error ->
+                            Timber.d(error, "Error getting material")
+                        }
                         ),
-                view.selections().subscribe({ commander.onPreviewSelected(whichMaterial) })
+                view.selections().subscribe({ place?.apply { commander.onPreviewSelected(id) } })
         )
     }
 
