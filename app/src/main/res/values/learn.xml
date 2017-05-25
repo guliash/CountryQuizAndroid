@@ -4,8 +4,12 @@
 
     <string name="learn_details">Details</string>
 
-    <style name="Details_Name" parent="Text.Large">
+    <style name="Details_Name" parent="Text">
         <item name="android:textSize">30sp</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="Details_Description" parent="Text.Medium">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 </resources>

@@ -8,6 +8,7 @@ data class Place(
         @SerializedName("name") val name: String,
         @SerializedName("country") val country: String,
         @SerializedName("href") val href: String,
+        @SerializedName("description") val description: String,
         @SerializedName("facts") val facts: List<String>,
         @SerializedName("position") val position: Position,
         @SerializedName("image") val image: Image

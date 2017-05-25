@@ -45,6 +45,9 @@ class DetailsFragment : BaseFragment(), DetailsView {
     @BindView(R.id.name)
     lateinit var nameTextView: TextView
 
+    @BindView(R.id.description)
+    lateinit var descriptionTextView: TextView
+
     @Inject
     lateinit var presenter: DetailsPresenter
 
@@ -82,5 +85,6 @@ class DetailsFragment : BaseFragment(), DetailsView {
                 .into(imageView)
 
         nameTextView.text = place.name
+        descriptionTextView.text = place.description
     }
 }
